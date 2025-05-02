@@ -21,19 +21,41 @@ const ContactSection = () => {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate form submission
-    setTimeout(() => {
-      toast({
-        title: "Message sent!",
-        description: "Thank you for reaching out. I'll get back to you soon.",
+    try {
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+        }),
       });
-      setFormData({ name: "", email: "", message: "" });
+
+      if (response.ok) {
+        toast({
+          title: "Message sent!",
+          description: "Thank you for reaching out. I'll get back to you soon.",
+        });
+        setFormData({ name: "", email: "", message: "" });
+      } else {
+        throw new Error('Failed to send message');
+      }
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to send your message. Please try again later.",
+        variant: "destructive",
+      });
+    } finally {
       setIsSubmitting(false);
-    }, 1000);
+    }
   };
 
   return (
@@ -42,7 +64,7 @@ const ContactSection = () => {
       
       <div className="grid md:grid-cols-2 gap-10 mt-8">
         {/* Contact Form */}
-        <div className="animate-fade-in opacity-0" style={{ animationDelay: "0.2s" }}>
+        <div className="animate-fade-in opacity-0 hover:shadow-lg p-6 rounded-lg transition-all duration-300" style={{ animationDelay: "0.2s" }}>
           <h3 className="text-xl font-semibold mb-4">Get In Touch</h3>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
@@ -52,6 +74,7 @@ const ContactSection = () => {
                 value={formData.name}
                 onChange={handleChange}
                 required
+                className="transition-all duration-300 focus:ring-2 focus:ring-secondary"
               />
             </div>
             <div>
@@ -62,19 +85,24 @@ const ContactSection = () => {
                 value={formData.email}
                 onChange={handleChange}
                 required
+                className="transition-all duration-300 focus:ring-2 focus:ring-secondary"
               />
             </div>
             <div>
               <Textarea 
                 placeholder="Your Message" 
-                className="min-h-[120px]"
+                className="min-h-[120px] transition-all duration-300 focus:ring-2 focus:ring-secondary"
                 name="message"
                 value={formData.message}
                 onChange={handleChange}
                 required
               />
             </div>
-            <Button type="submit" className="w-full" disabled={isSubmitting}>
+            <Button 
+              type="submit" 
+              className="w-full transition-all duration-300 hover:scale-105" 
+              disabled={isSubmitting}
+            >
               {isSubmitting ? "Sending..." : "Send Message"}
             </Button>
           </form>
@@ -84,7 +112,7 @@ const ContactSection = () => {
         <div className="animate-fade-in opacity-0" style={{ animationDelay: "0.4s" }}>
           <h3 className="text-xl font-semibold mb-4">Contact Information</h3>
           <div className="space-y-6">
-            <div className="flex items-start gap-4">
+            <div className="flex items-start gap-4 hover:transform hover:translate-x-2 transition-all duration-300">
               <div className="p-3 rounded-full bg-primary/10 text-primary">
                 <Mail className="h-5 w-5" />
               </div>
@@ -99,7 +127,7 @@ const ContactSection = () => {
               </div>
             </div>
             
-            <div className="flex items-start gap-4">
+            <div className="flex items-start gap-4 hover:transform hover:translate-x-2 transition-all duration-300">
               <div className="p-3 rounded-full bg-primary/10 text-primary">
                 <Phone className="h-5 w-5" />
               </div>
@@ -114,7 +142,7 @@ const ContactSection = () => {
               </div>
             </div>
             
-            <div className="flex items-start gap-4">
+            <div className="flex items-start gap-4 hover:transform hover:translate-x-2 transition-all duration-300">
               <div className="p-3 rounded-full bg-primary/10 text-primary">
                 <Linkedin className="h-5 w-5" />
               </div>

@@ -1,0 +1,52 @@
+
+import { Resend } from 'resend';
+
+const resend = new Resend('re_EqHN8VRP_AiC7g2nkU4T4UykYKdLPvcHV');
+
+export async function POST(request: Request) {
+  try {
+    const body = await request.json();
+    const { name, email, message } = body;
+
+    const { data, error } = await resend.emails.send({
+      from: 'Portfolio Contact <onboarding@resend.dev>',
+      to: ['mannmaheshwari2003@gmail.com'],
+      subject: `Portfolio Contact from ${name}`,
+      reply_to: email,
+      text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
+      html: `
+        <div>
+          <h1>New Contact Form Submission</h1>
+          <p><strong>Name:</strong> ${name}</p>
+          <p><strong>Email:</strong> ${email}</p>
+          <p><strong>Message:</strong> ${message}</p>
+        </div>
+      `,
+    });
+
+    if (error) {
+      console.error('Error sending email:', error);
+      return new Response(JSON.stringify({ error: error.message }), {
+        status: 500,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+    }
+
+    return new Response(JSON.stringify({ success: true, data }), {
+      status: 200,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+  } catch (error: any) {
+    console.error('Error processing request:', error);
+    return new Response(JSON.stringify({ error: error.message }), {
+      status: 500,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+  }
+}

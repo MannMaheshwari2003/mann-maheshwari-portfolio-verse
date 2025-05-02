@@ -26,27 +26,27 @@ const Navbar = () => {
     <header className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-background/80 backdrop-blur-md shadow-md' : 'bg-transparent'}`}>
       <div className="container mx-auto py-4 px-4 md:px-6 flex items-center justify-between">
         <a href="#hero" className="text-lg md:text-xl font-bold text-primary">
-          Mann<span className="text-secondary">Maheshwari</span>
+          Mann <span className="text-secondary">Maheshwari</span>
         </a>
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-8">
-          <a href="#about" className="text-sm font-medium hover:text-secondary transition-colors">
+          <a href="#about" className="text-sm font-medium hover:text-secondary transition-colors hover:scale-105 transition-transform">
             About
           </a>
-          <a href="#education" className="text-sm font-medium hover:text-secondary transition-colors">
+          <a href="#education" className="text-sm font-medium hover:text-secondary transition-colors hover:scale-105 transition-transform">
             Education
           </a>
-          <a href="#experience" className="text-sm font-medium hover:text-secondary transition-colors">
+          <a href="#experience" className="text-sm font-medium hover:text-secondary transition-colors hover:scale-105 transition-transform">
             Experience
           </a>
-          <a href="#projects" className="text-sm font-medium hover:text-secondary transition-colors">
+          <a href="#projects" className="text-sm font-medium hover:text-secondary transition-colors hover:scale-105 transition-transform">
             Projects
           </a>
-          <a href="#skills" className="text-sm font-medium hover:text-secondary transition-colors">
+          <a href="#skills" className="text-sm font-medium hover:text-secondary transition-colors hover:scale-105 transition-transform">
             Skills
           </a>
-          <a href="#contact" className="text-sm font-medium hover:text-secondary transition-colors">
+          <a href="#contact" className="text-sm font-medium hover:text-secondary transition-colors hover:scale-105 transition-transform">
             Contact
           </a>
           <ThemeToggle />

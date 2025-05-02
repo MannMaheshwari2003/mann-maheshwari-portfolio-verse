@@ -2,9 +2,21 @@
 import { Moon, Sun } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "./theme-provider";
+import { useEffect } from "react";
 
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme();
+
+  useEffect(() => {
+    // Set theme based on time of day
+    const hour = new Date().getHours();
+    // Dark mode from 6 PM to 6 AM
+    if ((hour >= 18 || hour < 6) && theme !== "dark") {
+      setTheme("dark");
+    } else if (hour >= 6 && hour < 18 && theme !== "light") {
+      setTheme("light");
+    }
+  }, []);
 
   return (
     <Button
