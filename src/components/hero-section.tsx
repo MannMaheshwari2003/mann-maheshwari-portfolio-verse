@@ -130,10 +130,13 @@ const HeroSection = () => {
                 transition={{ duration: 30, ease: "linear", repeat: Infinity }}
               />
               
-              <Avatar className="w-40 h-40 md:w-52 md:h-52 border-4 border-card glass shadow-xl shadow-primary/10 hover:scale-105 transition-all duration-300">
-                <AvatarImage src="/profile.jpg" alt="Mann Maheshwari" />
-                <AvatarFallback className="bg-primary/10 text-4xl font-heading font-bold">MM</AvatarFallback>
-              </Avatar>
+              <div className="w-40 h-40 md:w-64 md:h-64 rounded-full overflow-hidden border-4 border-card glass shadow-xl shadow-primary/10 hover:scale-105 transition-all duration-300">
+                <img 
+                  src="/lovable-uploads/331208d5-833a-4bdd-85f2-97e0ab0aabb1.png" 
+                  alt="Mann Maheshwari" 
+                  className="w-full h-full object-cover"
+                />
+              </div>
               
               {/* Floating badges */}
               <motion.div 
