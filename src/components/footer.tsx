@@ -1,5 +1,5 @@
 
-import { ThemeToggle } from "./theme-provider";
+import { ThemeToggle } from "./theme-toggle";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();

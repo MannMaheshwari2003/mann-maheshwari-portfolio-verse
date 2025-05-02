@@ -6,6 +6,7 @@ import { useToast } from "@/components/ui/use-toast";
 import Section from "./section";
 import { Mail, Phone, Linkedin } from "lucide-react";
 import { useState } from "react";
+import { sendContactEmail } from "@/api/trpc";
 
 const ContactSection = () => {
   const { toast } = useToast();
@@ -26,31 +27,22 @@ const ContactSection = () => {
     setIsSubmitting(true);
     
     try {
-      const response = await fetch('/api/send-email', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          message: formData.message,
-        }),
+      await sendContactEmail({
+        name: formData.name,
+        email: formData.email,
+        message: formData.message,
       });
-
-      if (response.ok) {
-        toast({
-          title: "Message sent!",
-          description: "Thank you for reaching out. I'll get back to you soon.",
-        });
-        setFormData({ name: "", email: "", message: "" });
-      } else {
-        throw new Error('Failed to send message');
-      }
-    } catch (error) {
+      
+      toast({
+        title: "Message sent!",
+        description: "Thank you for reaching out. I'll get back to you soon.",
+      });
+      
+      setFormData({ name: "", email: "", message: "" });
+    } catch (error: any) {
       toast({
         title: "Error",
-        description: "Failed to send your message. Please try again later.",
+        description: error.message || "Failed to send your message. Please try again later.",
         variant: "destructive",
       });
     } finally {

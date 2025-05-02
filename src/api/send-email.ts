@@ -12,7 +12,7 @@ export async function POST(request: Request) {
       from: 'Portfolio Contact <onboarding@resend.dev>',
       to: ['mannmaheshwari2003@gmail.com'],
       subject: `Portfolio Contact from ${name}`,
-      reply_to: email,
+      replyTo: email,
       text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
       html: `
         <div>

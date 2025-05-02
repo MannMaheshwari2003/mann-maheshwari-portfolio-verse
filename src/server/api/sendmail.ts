@@ -10,7 +10,7 @@ export async function sendContactEmail(name: string, email: string, message: str
       from: 'Portfolio Contact <onboarding@resend.dev>',
       to: ['mannmaheshwari2003@gmail.com'],
       subject: `Portfolio Contact from ${name}`,
-      reply_to: email,
+      replyTo: email,
       html: `
         <div>
           <h1>New Contact Form Submission</h1>
