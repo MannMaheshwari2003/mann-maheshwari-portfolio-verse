@@ -1,6 +1,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Progress } from "@/components/ui/progress";
+import { motion } from "framer-motion";
 
 interface SkillProgressProps {
   name: string;
@@ -9,54 +10,38 @@ interface SkillProgressProps {
 }
 
 const SkillProgress = ({ name, level, index }: SkillProgressProps) => {
-  const [show, setShow] = useState(false);
   const [progress, setProgress] = useState(0);
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setShow(true);
-          observer.unobserve(entry.target);
-        }
-      },
-      {
-        threshold: 0.1,
-      }
-    );
-
-    if (ref.current) {
-      observer.observe(ref.current);
-    }
-
-    return () => {
-      if (ref.current) {
-        observer.unobserve(ref.current);
-      }
-    };
-  }, []);
-
-  useEffect(() => {
-    if (show) {
-      setTimeout(() => {
-        setProgress(level);
-      }, index * 100);
-    }
-  }, [show, level, index]);
+    const timer = setTimeout(() => {
+      setProgress(level);
+    }, index * 100);
+    
+    return () => clearTimeout(timer);
+  }, [level, index]);
 
   return (
-    <div 
+    <motion.div 
       ref={ref}
-      className={`opacity-0 ${show ? "animate-fade-in" : ""}`}
-      style={{ animationDelay: `${index * 0.1}s` }}
+      initial={{ opacity: 0, x: -20 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ delay: index * 0.1, duration: 0.5 }}
+      className="glass p-4 rounded-xl hover:shadow-lg hover:shadow-primary/5 transition-all duration-300"
     >
-      <div className="flex justify-between mb-1">
+      <div className="flex justify-between mb-2 items-center">
         <span className="font-medium">{name}</span>
-        <span className="text-sm text-muted-foreground">{level}%</span>
+        <div className="glass text-sm font-bold py-1 px-2 rounded-md min-w-[40px] text-center">
+          {progress}%
+        </div>
       </div>
-      <Progress value={progress} className="h-2" />
-    </div>
+      <Progress 
+        value={progress} 
+        className="h-2 bg-muted/30" 
+        indicatorClassName="bg-gradient-to-r from-primary to-secondary"
+      />
+    </motion.div>
   );
 };
 

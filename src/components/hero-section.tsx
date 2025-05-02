@@ -1,62 +1,184 @@
 
 import { Button } from "@/components/ui/button";
-import { Download, Mail } from "lucide-react";
+import { Download, Mail, ArrowDown, ExternalLink } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { motion } from "framer-motion";
 
 const HeroSection = () => {
+  const fadeIn = {
+    hidden: { opacity: 0, y: 20 },
+    visible: (custom: number) => ({
+      opacity: 1,
+      y: 0,
+      transition: { delay: custom * 0.2, duration: 0.7, ease: "easeOut" }
+    })
+  };
+
+  const staggerItems = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2
+      }
+    }
+  };
+
   return (
-    <section id="hero" className="min-h-screen flex items-center justify-center bg-gradient-to-b from-background to-muted pt-16">
-      <div className="container px-4 md:px-6 text-center">
-        <div className="space-y-8 max-w-3xl mx-auto">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-heading animate-fade-in opacity-0" style={{ animationDelay: "0.2s" }}>
-            Mann Maheshwari
-          </h1>
-          <p className="text-xl md:text-2xl text-muted-foreground animate-fade-in opacity-0" style={{ animationDelay: "0.4s" }}>
-            Aspiring Web Developer | Tech Enthusiast
-          </p>
-          
-          <div className="flex justify-center animate-fade-in opacity-0" style={{ animationDelay: "0.5s" }}>
-            <Avatar className="w-32 h-32 border-4 border-secondary shadow-xl hover:scale-105 transition-all duration-300">
-              <AvatarImage src="/profile.jpg" alt="Mann Maheshwari" />
-              <AvatarFallback>MM</AvatarFallback>
-            </Avatar>
-          </div>
-          
-          <div className="flex flex-wrap justify-center gap-4 animate-fade-in opacity-0" style={{ animationDelay: "0.6s" }}>
-            <Button size="lg" className="px-6 hover:scale-105 transition-transform">
-              <Download className="mr-2 h-4 w-4" />
-              Download Resume
-            </Button>
-            <Button variant="outline" size="lg" className="px-6 hover:scale-105 transition-transform" asChild>
-              <a href="#contact">
-                <Mail className="mr-2 h-4 w-4" />
-                Contact Me
-              </a>
-            </Button>
-          </div>
-          <div className="animate-bounce mt-16 opacity-0 animate-fade-in" style={{ animationDelay: "0.8s" }}>
-            <a 
-              href="#about" 
-              className="inline-flex items-center justify-center w-12 h-12 rounded-full border border-primary/20 text-primary hover:bg-primary/5 hover:scale-110 transition-all duration-300"
+    <section id="hero" className="min-h-screen flex items-center justify-center relative overflow-hidden">
+      {/* Background grid */}
+      <div className="absolute inset-0 grid-bg opacity-20"></div>
+      
+      {/* Background gradient */}
+      <div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent"></div>
+      
+      {/* Animated circle */}
+      <motion.div 
+        className="absolute w-[500px] h-[500px] rounded-full border border-primary/20 opacity-30"
+        style={{ top: '50%', left: '50%', x: '-50%', y: '-50%' }}
+        animate={{ 
+          scale: [1, 1.1, 1],
+          opacity: [0.2, 0.3, 0.2]
+        }}
+        transition={{ 
+          duration: 8, 
+          ease: "easeInOut", 
+          repeat: Infinity,
+        }}
+      />
+      
+      <motion.div 
+        className="absolute w-[700px] h-[700px] rounded-full border border-secondary/20 opacity-20"
+        style={{ top: '50%', left: '50%', x: '-50%', y: '-50%' }}
+        animate={{ 
+          scale: [1, 1.15, 1],
+          opacity: [0.15, 0.25, 0.15]
+        }}
+        transition={{ 
+          duration: 12, 
+          ease: "easeInOut", 
+          repeat: Infinity,
+          delay: 1
+        }}
+      />
+
+      <div className="container px-4 md:px-6 relative z-10">
+        <motion.div 
+          className="flex flex-col lg:flex-row items-center justify-between gap-12"
+          variants={staggerItems}
+          initial="hidden"
+          animate="visible"
+        >
+          <div className="text-center lg:text-left max-w-2xl">
+            <motion.span 
+              className="inline-block py-1 px-3 rounded-full text-sm font-medium bg-primary/10 text-primary mb-6"
+              variants={fadeIn}
+              custom={0}
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="m6 9 6 6 6-6" />
-              </svg>
-              <span className="sr-only">Scroll down</span>
-            </a>
+              Web Developer | Future Tech Leader
+            </motion.span>
+            
+            <motion.h1 
+              className="text-4xl md:text-6xl lg:text-7xl font-bold font-heading mb-6 leading-tight"
+              variants={fadeIn}
+              custom={1}
+            >
+              Mann <span className="text-gradient">Maheshwari</span>
+            </motion.h1>
+            
+            <motion.p 
+              className="text-lg md:text-xl text-foreground/80 mb-8 max-w-lg mx-auto lg:mx-0"
+              variants={fadeIn}
+              custom={2}
+            >
+              Creating elegant and performant web experiences with modern technologies and innovative solutions.
+            </motion.p>
+            
+            <motion.div 
+              className="flex flex-wrap justify-center lg:justify-start gap-4"
+              variants={fadeIn}
+              custom={3}
+            >
+              <Button size="lg" className="btn-gradient hover:shadow-lg hover:shadow-primary/20 group">
+                <Download className="mr-2 h-4 w-4 transition-transform group-hover:translate-y-1" />
+                Download Resume
+              </Button>
+              <Button variant="outline" size="lg" className="hover:shadow-lg border border-primary/50 group" asChild>
+                <a href="#contact">
+                  <Mail className="mr-2 h-4 w-4 transition-transform group-hover:scale-110" />
+                  Contact Me
+                </a>
+              </Button>
+            </motion.div>
           </div>
-        </div>
+          
+          <motion.div
+            className="relative"
+            variants={fadeIn}
+            custom={4}
+          >
+            {/* Avatar with decorative ring */}
+            <div className="relative">
+              <motion.div 
+                className="absolute -inset-4 rounded-full border-2 border-dashed border-primary/30"
+                animate={{ rotate: 360 }}
+                transition={{ duration: 20, ease: "linear", repeat: Infinity }}
+              />
+              <motion.div 
+                className="absolute -inset-8 rounded-full border-2 border-dashed border-secondary/20"
+                animate={{ rotate: -360 }}
+                transition={{ duration: 30, ease: "linear", repeat: Infinity }}
+              />
+              
+              <Avatar className="w-40 h-40 md:w-52 md:h-52 border-4 border-card glass shadow-xl shadow-primary/10 hover:scale-105 transition-all duration-300">
+                <AvatarImage src="/profile.jpg" alt="Mann Maheshwari" />
+                <AvatarFallback className="bg-primary/10 text-4xl font-heading font-bold">MM</AvatarFallback>
+              </Avatar>
+              
+              {/* Floating badges */}
+              <motion.div 
+                className="absolute -right-4 top-1/4 glass py-1 px-3 rounded-full text-xs font-medium shadow-lg"
+                animate={{ y: [0, -10, 0] }}
+                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+              >
+                React
+              </motion.div>
+              
+              <motion.div 
+                className="absolute -left-8 bottom-1/4 glass py-1 px-3 rounded-full text-xs font-medium shadow-lg"
+                animate={{ y: [0, 10, 0] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+              >
+                JavaScript
+              </motion.div>
+              
+              <motion.div 
+                className="absolute -bottom-2 right-1/4 glass py-1 px-3 rounded-full text-xs font-medium shadow-lg"
+                animate={{ y: [0, -8, 0] }}
+                transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+              >
+                UI/UX
+              </motion.div>
+            </div>
+          </motion.div>
+        </motion.div>
       </div>
+      
+      <motion.div 
+        className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 2, duration: 0.5 }}
+      >
+        <span className="text-sm text-foreground/60 mb-2">Scroll to explore</span>
+        <motion.div
+          className="glass p-2 rounded-full"
+          animate={{ y: [0, 6, 0] }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <ArrowDown className="w-5 h-5 text-primary" />
+        </motion.div>
+      </motion.div>
     </section>
   );
 };

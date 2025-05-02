@@ -2,6 +2,7 @@
 import { useState } from "react";
 import Section from "./section";
 import ProjectCard from "./project-card";
+import { motion } from "framer-motion";
 
 const projectsData = [
   {
@@ -47,19 +48,32 @@ const projectsData = [
 
 const ProjectsSection = () => {
   return (
-    <Section id="projects" className="bg-muted/30">
-      <h2 className="section-title">Projects</h2>
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
-        {projectsData.map((project, index) => (
-          <div 
-            key={index} 
-            className="animate-fade-in opacity-0" 
-            style={{ animationDelay: `${index * 0.2}s` }}
-          >
-            <ProjectCard {...project} />
-          </div>
-        ))}
-      </div>
+    <Section id="projects" className="bg-card/30 relative overflow-hidden">
+      {/* Decorative elements */}
+      <div className="absolute top-40 right-0 w-80 h-80 rounded-full bg-primary/5 filter blur-3xl"></div>
+      <div className="absolute bottom-20 left-10 w-60 h-60 rounded-full bg-secondary/5 filter blur-3xl"></div>
+      
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+      >
+        <motion.h2 
+          className="section-title mb-16 text-center"
+          variants={{
+            hidden: { opacity: 0, y: 20 },
+            visible: { opacity: 1, y: 0 }
+          }}
+        >
+          Featured Projects
+        </motion.h2>
+        
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {projectsData.map((project, index) => (
+            <ProjectCard key={index} {...project} index={index} />
+          ))}
+        </div>
+      </motion.div>
     </Section>
   );
 };

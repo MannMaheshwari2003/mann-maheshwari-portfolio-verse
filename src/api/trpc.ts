@@ -2,7 +2,7 @@
 import { z } from 'zod';
 import { Resend } from 'resend';
 
-const resend = new Resend('re_EqHN8VRP_AiC7g2nkU4T4UykYKdLPvcHV');
+const resend = new Resend('re_pkpYKUeY_FsQ3MUwzdZiJ4GCB9swbnoMn');
 
 // A simple function to handle email sending
 export const sendContactEmail = async (input: { 
