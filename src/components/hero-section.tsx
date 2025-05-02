@@ -99,9 +99,11 @@ const HeroSection = () => {
               variants={fadeIn}
               custom={3}
             >
-              <Button size="lg" className="btn-gradient hover:shadow-lg hover:shadow-primary/20 group">
-                <Download className="mr-2 h-4 w-4 transition-transform group-hover:translate-y-1" />
-                Download Resume
+              <Button size="lg" className="btn-gradient hover:shadow-lg hover:shadow-primary/20 group" asChild>
+                <a href="/resume-mann-maheshwari.pdf" download>
+                  <Download className="mr-2 h-4 w-4 transition-transform group-hover:translate-y-1" />
+                  Download Resume
+                </a>
               </Button>
               <Button variant="outline" size="lg" className="hover:shadow-lg border border-primary/50 group" asChild>
                 <a href="#contact">

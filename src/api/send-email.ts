@@ -8,6 +8,16 @@ export async function POST(request: Request) {
     const body = await request.json();
     const { name, email, message } = body;
 
+    // Validate input
+    if (!name || !email || !message) {
+      return new Response(JSON.stringify({ error: 'Name, email, and message are required' }), {
+        status: 400,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+    }
+
     const { data, error } = await resend.emails.send({
       from: 'Portfolio Contact <onboarding@resend.dev>',
       to: ['mannmaheshwari2003@gmail.com'],

@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { useToast } from "@/components/ui/use-toast";
+import { useToast } from "@/hooks/use-toast";
 import Section from "./section";
 import { Mail, Phone, Linkedin, Send, Loader2 } from "lucide-react";
 import { useState } from "react";
@@ -28,11 +28,24 @@ const ContactSection = () => {
     setIsSubmitting(true);
     
     try {
-      await sendContactEmail({
-        name: formData.name,
-        email: formData.email,
-        message: formData.message,
+      // Use the fetch API directly to call the endpoint
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+        }),
       });
+      
+      const data = await response.json();
+      
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to send message');
+      }
       
       toast({
         title: "Message sent!",
@@ -41,6 +54,7 @@ const ContactSection = () => {
       
       setFormData({ name: "", email: "", message: "" });
     } catch (error: any) {
+      console.error('Contact form submission error:', error);
       toast({
         title: "Error",
         description: error.message || "Failed to send your message. Please try again later.",
