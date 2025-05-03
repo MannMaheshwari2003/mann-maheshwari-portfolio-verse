@@ -26,24 +26,34 @@ const ContactSection = () => {
     setIsSubmitting(true);
     
     try {
-      // Use the fetch API directly to call the endpoint
+      console.log('Sending form data:', formData);
+      
       const response = await fetch('/api/send-email', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Accept': 'application/json',
         },
         body: JSON.stringify(formData),
       });
 
+      console.log('Response status:', response.status);
+      console.log('Response headers:', response.headers);
+
+      const contentType = response.headers.get('content-type');
+      if (!contentType || !contentType.includes('application/json')) {
+        throw new Error('Server did not return JSON response');
+      }
+
+      const data = await response.json();
+      console.log('Response data:', data);
+
       if (!response.ok) {
-        const errorData = await response.json().catch(() => ({ error: 'Failed to parse response' }));
-        throw new Error(errorData.error || `Request failed with status ${response.status}`);
+        throw new Error(data.error || `Request failed with status ${response.status}`);
       }
       
-      const data = await response.json().catch(() => ({ success: true }));
-      
       toast({
-        title: "Message sent!",
+        title: "Message sent successfully!",
         description: "Thank you for reaching out. I'll get back to you soon.",
       });
       
