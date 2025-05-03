@@ -5,6 +5,7 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 // This function needs to be the default export to work as a proper API endpoint
 export default async function handler(req: any, res: any) {
+  console.log('API handler called. Method:', req.method, 'Body:', req.body);
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Accept');
@@ -17,7 +18,21 @@ export default async function handler(req: any, res: any) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { name, email, message } = req.body;
+  let body = req.body;
+  // If body is a string (as in Vercel serverless), parse it
+  if (typeof body === 'string') {
+    try {
+      body = JSON.parse(body);
+    } catch (e) {
+      return res.status(400).json({ error: 'Invalid JSON in request body.' });
+    }
+  }
+
+  if (!body) {
+    return res.status(400).json({ error: 'No body received. Make sure your frontend is sending JSON.' });
+  }
+
+  const { name, email, message } = body;
 
   if (!name || !email || !message) {
     return res.status(400).json({ error: 'Name, email, and message are required' });
