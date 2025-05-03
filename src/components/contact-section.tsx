@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -6,7 +5,6 @@ import { useToast } from "@/hooks/use-toast";
 import Section from "./section";
 import { Mail, Phone, Linkedin, Send, Loader2 } from "lucide-react";
 import { useState } from "react";
-import { sendContactEmail } from "@/api/trpc";
 import { motion } from "framer-motion";
 
 const ContactSection = () => {
@@ -34,18 +32,15 @@ const ContactSection = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          message: formData.message,
-        }),
+        body: JSON.stringify(formData),
       });
-      
-      const data = await response.json();
-      
+
       if (!response.ok) {
-        throw new Error(data.error || 'Failed to send message');
+        const errorData = await response.json().catch(() => ({ error: 'Failed to parse response' }));
+        throw new Error(errorData.error || `Request failed with status ${response.status}`);
       }
+      
+      const data = await response.json().catch(() => ({ success: true }));
       
       toast({
         title: "Message sent!",

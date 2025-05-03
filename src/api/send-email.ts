@@ -3,7 +3,8 @@ import { Resend } from 'resend';
 
 const resend = new Resend('re_pkpYKUeY_FsQ3MUwzdZiJ4GCB9swbnoMn');
 
-export async function POST(request: Request) {
+// This function needs to be the default export to work as a proper API endpoint
+export default async function handler(request: Request) {
   try {
     const body = await request.json();
     const { name, email, message } = body;
