@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Download, Mail, ArrowDown, ExternalLink } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -115,24 +114,24 @@ const HeroSection = () => {
           </div>
           
           <motion.div
-            className="relative"
+            className="relative lg:ml-[-2rem]"
             variants={fadeIn}
             custom={4}
           >
             {/* Avatar with decorative ring */}
             <div className="relative">
               <motion.div 
-                className="absolute -inset-4 rounded-full border-2 border-dashed border-primary/30"
+                className="absolute -inset-10 rounded-full border-2 border-dashed border-primary/30"
                 animate={{ rotate: 360 }}
                 transition={{ duration: 20, ease: "linear", repeat: Infinity }}
               />
               <motion.div 
-                className="absolute -inset-8 rounded-full border-2 border-dashed border-secondary/20"
+                className="absolute -inset-14 rounded-full border-2 border-dashed border-secondary/20"
                 animate={{ rotate: -360 }}
                 transition={{ duration: 30, ease: "linear", repeat: Infinity }}
               />
               
-              <div className="w-40 h-40 md:w-64 md:h-64 rounded-full overflow-hidden border-4 border-card glass shadow-xl shadow-primary/10 hover:scale-105 transition-all duration-300">
+              <div className="w-64 h-64 md:w-[28rem] md:h-[28rem] rounded-full overflow-hidden border-4 border-card glass shadow-xl shadow-primary/10 hover:scale-105 transition-all duration-300">
                 <img 
                   src="/lovable-uploads/331208d5-833a-4bdd-85f2-97e0ab0aabb1.png" 
                   alt="Mann Maheshwari" 
@@ -142,7 +141,7 @@ const HeroSection = () => {
               
               {/* Floating badges */}
               <motion.div 
-                className="absolute -right-4 top-1/4 glass py-1 px-3 rounded-full text-xs font-medium shadow-lg"
+                className="absolute -right-10 top-1/4 glass py-1 px-3 rounded-full text-xs font-medium shadow-lg"
                 animate={{ y: [0, -10, 0] }}
                 transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
               >
@@ -150,7 +149,7 @@ const HeroSection = () => {
               </motion.div>
               
               <motion.div 
-                className="absolute -left-8 bottom-1/4 glass py-1 px-3 rounded-full text-xs font-medium shadow-lg"
+                className="absolute -left-14 bottom-1/4 glass py-1 px-3 rounded-full text-xs font-medium shadow-lg"
                 animate={{ y: [0, 10, 0] }}
                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
               >
@@ -158,7 +157,7 @@ const HeroSection = () => {
               </motion.div>
               
               <motion.div 
-                className="absolute -bottom-2 right-1/4 glass py-1 px-3 rounded-full text-xs font-medium shadow-lg"
+                className="absolute -bottom-6 right-1/4 glass py-1 px-3 rounded-full text-xs font-medium shadow-lg"
                 animate={{ y: [0, -8, 0] }}
                 transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
               >

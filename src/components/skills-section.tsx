@@ -1,4 +1,3 @@
-
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent } from "@/components/ui/card";
 import Section from "./section";
@@ -15,6 +14,8 @@ const technicalSkills = [
   { name: "SQL", level: 85 },
   { name: "Python", level: 65 },
   { name: "MS Office", level: 95 },
+  { name: "Automation with AI", level: 75 },
+  { name: "React", level: 85 },
 ];
 
 const softSkills = [
