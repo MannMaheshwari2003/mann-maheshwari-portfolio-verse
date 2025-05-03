@@ -1,19 +1,17 @@
 import { Resend } from 'resend';
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 
-// The API key will be set in Vercel environment variables
-const RESEND_API_KEY = process.env.RESEND_API_KEY || 're_pkpYKUeY_FsQ3MUwzdZiJ4GCB9swbnoMn';
-
-// This function handles both Vercel serverless environment and local development
+// This is the correct format for Vercel serverless functions
 export default async function handler(req: VercelRequest, res: VercelResponse) {
-  // Set CORS headers
+  // Enable CORS
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Accept');
+  res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
+  res.setHeader('Access-Control-Allow-Headers', 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version');
 
-  // Handle preflight requests
+  // Handle OPTIONS request (preflight)
   if (req.method === 'OPTIONS') {
-    return res.status(204).end();
+    return res.status(200).end();
   }
 
   // Only allow POST requests
@@ -22,17 +20,29 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   try {
+    // Access API key from environment variables
+    const apiKey = process.env.RESEND_API_KEY;
+    
+    if (!apiKey) {
+      console.error('Missing Resend API key');
+      return res.status(500).json({ 
+        error: 'Email service configuration error. API key is missing.' 
+      });
+    }
+    
     const { name, email, message } = req.body;
 
-    // Validate request body
+    // Validate request
     if (!name || !email || !message) {
       return res.status(400).json({ error: 'Name, email, and message are required' });
     }
 
-    // Initialize Resend
-    const resend = new Resend(RESEND_API_KEY);
-
-    // Send the email
+    // Initialize Resend with API key
+    const resend = new Resend(apiKey);
+    
+    // Send email
+    console.log(`Sending email from ${email} with API key ${apiKey.substring(0, 5)}...`);
+    
     const { data, error } = await resend.emails.send({
       from: 'Portfolio Contact <onboarding@resend.dev>',
       to: ['mannmaheshwari2003@gmail.com'],
@@ -50,8 +60,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(200).json({ success: true, data });
   } catch (err: any) {
     console.error('Email sending error:', err);
-    const errorMsg = err?.message || JSON.stringify(err);
-    return res.status(500).json({ error: errorMsg });
+    return res.status(500).json({ 
+      error: err?.message || 'Unknown server error',
+      stack: process.env.NODE_ENV === 'development' ? err?.stack : undefined
+    });
   }
 }
 
@@ -64,7 +76,7 @@ export async function sendEmail(reqBody: any) {
       return { status: 400, body: { error: 'Name, email, and message are required' } };
     }
 
-    const resend = new Resend(RESEND_API_KEY);
+    const resend = new Resend(process.env.RESEND_API_KEY || 're_pkpYKUeY_FsQ3MUwzdZiJ4GCB9swbnoMn');
     
     const { data, error } = await resend.emails.send({
       from: 'Portfolio Contact <onboarding@resend.dev>',
