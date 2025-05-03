@@ -1,44 +1,20 @@
 import { Resend } from 'resend';
 
-// Initialize Resend with your API key
-const resend = new Resend(process.env.RESEND_API_KEY);
+// Server-side only code - this file is never imported by the client
+const RESEND_API_KEY = 're_pkpYKUeY_FsQ3MUwzdZiJ4GCB9swbnoMn';
 
-// This function needs to be the default export to work as a proper API endpoint
-export default async function handler(req: any, res: any) {
-  console.log('API handler called. Method:', req.method, 'Body:', req.body);
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Accept');
-
-  if (req.method === 'OPTIONS') {
-    return res.status(204).end();
-  }
-
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
-  }
-
-  let body = req.body;
-  // If body is a string (as in Vercel serverless), parse it
-  if (typeof body === 'string') {
-    try {
-      body = JSON.parse(body);
-    } catch (e) {
-      return res.status(400).json({ error: 'Invalid JSON in request body.' });
-    }
-  }
-
-  if (!body) {
-    return res.status(400).json({ error: 'No body received. Make sure your frontend is sending JSON.' });
-  }
-
-  const { name, email, message } = body;
-
-  if (!name || !email || !message) {
-    return res.status(400).json({ error: 'Name, email, and message are required' });
-  }
-
+// Export the function to be used by your server file
+export async function sendEmail(reqBody: any) {
   try {
+    // Use the hardcoded API key
+    const resend = new Resend(RESEND_API_KEY);
+    
+    const { name, email, message } = reqBody;
+
+    if (!name || !email || !message) {
+      return { status: 400, body: { error: 'Name, email, and message are required' } };
+    }
+
     const { data, error } = await resend.emails.send({
       from: 'Portfolio Contact <onboarding@resend.dev>',
       to: ['mannmaheshwari2003@gmail.com'],
@@ -47,11 +23,16 @@ export default async function handler(req: any, res: any) {
       text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
       html: `<div><b>Name:</b> ${name}<br/><b>Email:</b> ${email}<br/><b>Message:</b><br/>${message.replace(/\n/g, '<br/>')}</div>`,
     });
+
     if (error) {
-      return res.status(500).json({ error: error.message });
+      console.error('Resend API error:', error);
+      return { status: 500, body: { error: error.message || JSON.stringify(error) } };
     }
-    res.status(200).json({ success: true, data });
+    
+    return { status: 200, body: { success: true, data } };
   } catch (err: any) {
-    res.status(500).json({ error: err.message });
+    console.error('Email sending error:', err);
+    const errorMsg = err?.message || JSON.stringify(err);
+    return { status: 500, body: { error: errorMsg } };
   }
 }

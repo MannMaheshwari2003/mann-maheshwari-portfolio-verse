@@ -38,18 +38,25 @@ const ContactSection = () => {
       });
 
       console.log('Response status:', response.status);
-      console.log('Response headers:', response.headers);
-
-      const contentType = response.headers.get('content-type');
-      if (!contentType || !contentType.includes('application/json')) {
-        throw new Error('Server did not return JSON response');
+      
+      // Attempt to get JSON even if there's an error
+      let data;
+      try {
+        data = await response.json();
+        console.log('Response data:', data);
+      } catch (jsonError) {
+        console.error('Error parsing JSON:', jsonError);
+        throw new Error('Unable to parse server response');
       }
 
-      const data = await response.json();
-      console.log('Response data:', data);
-
       if (!response.ok) {
-        throw new Error(data.error || `Request failed with status ${response.status}`);
+        // Extract error message properly, handling object errors
+        const errorMessage = data && typeof data.error === 'string' 
+          ? data.error 
+          : data && data.error 
+            ? JSON.stringify(data.error) 
+            : `Request failed with status ${response.status}`;
+        throw new Error(errorMessage);
       }
       
       toast({
