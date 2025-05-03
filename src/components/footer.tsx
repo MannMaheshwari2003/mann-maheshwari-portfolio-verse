@@ -1,6 +1,5 @@
-
 import { ThemeToggle } from "./theme-toggle";
-import { Github, Twitter, Linkedin, Heart } from "lucide-react";
+import { Github, Instagram, Linkedin, Heart } from "lucide-react";
 import { motion } from "framer-motion";
 
 const Footer = () => {
@@ -8,8 +7,8 @@ const Footer = () => {
   
   const socialLinks = [
     { icon: <Linkedin className="h-5 w-5" />, href: "https://www.linkedin.com/in/mann-maheshwari-3714b82a1/", label: "LinkedIn" },
-    { icon: <Github className="h-5 w-5" />, href: "#", label: "GitHub" },
-    { icon: <Twitter className="h-5 w-5" />, href: "#", label: "Twitter" }
+    { icon: <Github className="h-5 w-5" />, href: "https://github.com/MannMaheshwari2003", label: "GitHub" },
+    { icon: <Instagram className="h-5 w-5" />, href: "https://www.instagram.com/_mannkmaheshwari_/", label: "Instagram" }
   ];
   
   return (
