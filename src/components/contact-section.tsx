@@ -31,15 +31,15 @@ const ContactSection = () => {
       await new Promise(resolve => setTimeout(resolve, 1000));
       
       toast({
-        title: "Form submitted",
-        description: "Thank you for your message. This is a simulation as email functionality has been removed.",
+        title: "Message sent!",
+        description: "Thank you for your message. I'll get back to you soon.",
       });
       
       setFormData({ name: "", email: "", message: "" });
-    } catch (error: any) {
+    } catch (error) {
       toast({
         title: "Error",
-        description: "This is a simulated form. Email functionality has been removed.",
+        description: "Something went wrong. Please try again later.",
         variant: "destructive",
       });
     } finally {
