@@ -1,3 +1,4 @@
+
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 
 export default function handler(req: VercelRequest, res: VercelResponse) {
@@ -10,15 +11,10 @@ export default function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method === 'OPTIONS') {
     return res.status(200).end();
   }
-
-  // Check if Resend API key is set
-  const apiKeyExists = !!process.env.RESEND_API_KEY;
   
   return res.status(200).json({
     message: 'API is working!',
     env: {
-      apiKeyExists,
-      apiKeyPrefix: apiKeyExists ? process.env.RESEND_API_KEY?.substring(0, 5) + '...' : null,
       nodeEnv: process.env.NODE_ENV
     },
     timestamp: new Date().toISOString()

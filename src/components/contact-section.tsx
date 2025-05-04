@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -26,50 +27,19 @@ const ContactSection = () => {
     setIsSubmitting(true);
     
     try {
-      console.log('Sending form data:', formData);
-      
-      const response = await fetch('/api/send-email', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-
-      console.log('Response status:', response.status);
-      
-      // Attempt to get JSON even if there's an error
-      let data;
-      try {
-        data = await response.json();
-        console.log('Response data:', data);
-      } catch (jsonError) {
-        console.error('Error parsing JSON:', jsonError);
-        throw new Error('Unable to parse server response');
-      }
-
-      if (!response.ok) {
-        // Extract error message properly, handling object errors
-        const errorMessage = data && typeof data.error === 'string' 
-          ? data.error 
-          : data && data.error 
-            ? JSON.stringify(data.error) 
-            : `Request failed with status ${response.status}`;
-        throw new Error(errorMessage);
-      }
+      // Simulate form submission
+      await new Promise(resolve => setTimeout(resolve, 1000));
       
       toast({
-        title: "Message sent successfully!",
-        description: "Thank you for reaching out. I'll get back to you soon.",
+        title: "Form submitted",
+        description: "Thank you for your message. This is a simulation as email functionality has been removed.",
       });
       
       setFormData({ name: "", email: "", message: "" });
     } catch (error: any) {
-      console.error('Contact form submission error:', error);
       toast({
         title: "Error",
-        description: error.message || "Failed to send your message. Please try again later.",
+        description: "This is a simulated form. Email functionality has been removed.",
         variant: "destructive",
       });
     } finally {
