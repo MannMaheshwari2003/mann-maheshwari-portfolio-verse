@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -7,6 +6,7 @@ import Section from "./section";
 import { Mail, Phone, Linkedin, Send, Loader2 } from "lucide-react";
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { supabase } from "@/integrations/supabase/client";
 
 const ContactSection = () => {
   const { toast } = useToast();
@@ -27,8 +27,18 @@ const ContactSection = () => {
     setIsSubmitting(true);
     
     try {
-      // Simulate form submission
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      console.log("Submitting form data:", formData);
+      
+      const { data, error } = await supabase.functions.invoke('send-contact-email', {
+        body: formData
+      });
+
+      if (error) {
+        console.error("Supabase function error:", error);
+        throw error;
+      }
+
+      console.log("Email sent successfully:", data);
       
       toast({
         title: "Message sent!",
@@ -36,7 +46,8 @@ const ContactSection = () => {
       });
       
       setFormData({ name: "", email: "", message: "" });
-    } catch (error) {
+    } catch (error: any) {
+      console.error("Error sending message:", error);
       toast({
         title: "Error",
         description: "Something went wrong. Please try again later.",
