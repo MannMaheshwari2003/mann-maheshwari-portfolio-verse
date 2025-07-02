@@ -1,9 +1,35 @@
+
 import { Button } from "@/components/ui/button";
 import { Download, Mail, ArrowDown, ExternalLink } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { motion } from "framer-motion";
+import { supabase } from "@/integrations/supabase/client";
+import { useState, useEffect } from "react";
 
 const HeroSection = () => {
+  const [resumeUrl, setResumeUrl] = useState<string | null>(null);
+
+  useEffect(() => {
+    const getResumeUrl = async () => {
+      try {
+        const { data, error } = await supabase.storage
+          .from('portfolio')
+          .createSignedUrl('resume-mann-maheshwari.pdf', 60 * 60); // 1 hour expiry
+
+        if (error) {
+          console.error('Error getting resume URL:', error);
+          return;
+        }
+
+        setResumeUrl(data.signedUrl);
+      } catch (error) {
+        console.error('Error fetching resume:', error);
+      }
+    };
+
+    getResumeUrl();
+  }, []);
+
   const fadeIn = {
     hidden: { opacity: 0, y: 20 },
     visible: (custom: number) => ({
@@ -98,11 +124,23 @@ const HeroSection = () => {
               variants={fadeIn}
               custom={3}
             >
-              <Button size="lg" className="btn-gradient hover:shadow-lg hover:shadow-primary/20 group" asChild>
-                <a href="/resume-mann-maheshwari.pdf" download>
-                  <Download className="mr-2 h-4 w-4 transition-transform group-hover:translate-y-1" />
-                  Download Resume
-                </a>
+              <Button 
+                size="lg" 
+                className="btn-gradient hover:shadow-lg hover:shadow-primary/20 group" 
+                asChild={!!resumeUrl}
+                disabled={!resumeUrl}
+              >
+                {resumeUrl ? (
+                  <a href={resumeUrl} target="_blank" rel="noopener noreferrer">
+                    <Download className="mr-2 h-4 w-4 transition-transform group-hover:translate-y-1" />
+                    Download Resume
+                  </a>
+                ) : (
+                  <>
+                    <Download className="mr-2 h-4 w-4" />
+                    Loading Resume...
+                  </>
+                )}
               </Button>
               <Button variant="outline" size="lg" className="hover:shadow-lg border border-primary/50 group" asChild>
                 <a href="#contact">
