@@ -24,33 +24,56 @@ const ContactSection = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Validate form data
+    if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
+      toast({
+        title: "Validation Error",
+        description: "Please fill in all fields.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setIsSubmitting(true);
     
     try {
-      console.log("Submitting form data:", formData);
+      console.log("Submitting contact form with data:", formData);
       
       const { data, error } = await supabase.functions.invoke('send-contact-email', {
-        body: formData
+        body: {
+          name: formData.name.trim(),
+          email: formData.email.trim(),
+          message: formData.message.trim()
+        }
       });
+
+      console.log("Supabase function response:", { data, error });
 
       if (error) {
         console.error("Supabase function error:", error);
-        throw error;
+        throw new Error(error.message || "Failed to send message");
       }
 
-      console.log("Email sent successfully:", data);
+      if (data && !data.success) {
+        console.error("Email service error:", data.error);
+        throw new Error(data.error || "Failed to send email");
+      }
+
+      console.log("Message sent successfully:", data);
       
       toast({
         title: "Message sent!",
         description: "Thank you for your message. I'll get back to you soon.",
       });
       
+      // Reset form
       setFormData({ name: "", email: "", message: "" });
     } catch (error: any) {
       console.error("Error sending message:", error);
       toast({
         title: "Error",
-        description: "Something went wrong. Please try again later.",
+        description: error.message || "Something went wrong. Please try again later.",
         variant: "destructive",
       });
     } finally {
