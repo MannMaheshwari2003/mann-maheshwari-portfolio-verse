@@ -67,9 +67,8 @@ const Footer = () => {
           
           <div className="flex items-center mt-4 md:mt-0">
             <span className="flex items-center">
-              Made with 
-              <Heart className="h-4 w-4 mx-1 text-red-500" /> 
-              and modern web technologies
+              Made by Mann Maheshwari
+              <Heart className="h-4 w-4 mx-1 text-red-500" />
             </span>
           </div>
         </motion.div>
