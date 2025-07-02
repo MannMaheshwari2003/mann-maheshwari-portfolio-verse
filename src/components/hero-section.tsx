@@ -14,7 +14,7 @@ const HeroSection = () => {
       try {
         const { data, error } = await supabase.storage
           .from('portfolio')
-          .createSignedUrl('resume-mann-maheshwari.pdf', 60 * 60); // 1 hour expiry
+          .createSignedUrl('Mann_Maheshwari_Resume.pdf', 60 * 60); // 1 hour expiry
 
         if (error) {
           console.error('Error getting resume URL:', error);
