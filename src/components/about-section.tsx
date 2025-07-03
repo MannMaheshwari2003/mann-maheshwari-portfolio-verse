@@ -20,22 +20,22 @@ const AboutSection = () => {
     {
       icon: <Code className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />,
       title: "Technical Expertise",
-      description: "Strong foundation in both frontend and backend development with a focus on clean, maintainable code."
+      description: "Proficient in full-stack web development with strong foundation in modern technologies and frameworks."
     },
     {
       icon: <Users className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />,
-      title: "Team Leadership",
-      description: "Experienced in leading development teams and coordinating project efforts to meet deadlines."
+      title: "Leadership & Coordination",
+      description: "Experienced in leading teams and coordinating events, with proven track record in organizing technical fests."
     },
     {
       icon: <Lightbulb className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />,
-      title: "Creative Problem Solver",
-      description: "Approaching challenges with innovative solutions and a keen eye for detail."
+      title: "Problem Solving",
+      description: "Strong analytical and problem-solving abilities with focus on creating scalable, user-friendly solutions."
     },
     {
       icon: <CheckCircle className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />,
-      title: "Continuous Learner",
-      description: "Passionate about staying current with emerging technologies and industry best practices."
+      title: "Continuous Learning",
+      description: "Passionate about staying current with emerging technologies and contributing to open-source projects."
     }
   ];
 
@@ -67,15 +67,15 @@ const AboutSection = () => {
           >
             <div className="space-y-4 sm:space-y-6 text-base sm:text-lg px-4 sm:px-0">
               <p className="leading-relaxed">
-                I'm Mann Maheshwari, a passionate and adaptable web developer with a strong foundation in both frontend and backend technologies. Throughout my academic and professional journey, I've cultivated strong technical skills while also developing exceptional leadership abilities.
+                I'm Mann Maheshwari, a motivated and detail-oriented MCA student with a strong foundation in full-stack web development. Currently honing skills in the MERN stack, I'm experienced in contributing to open-source projects and working on modern technologies like React, Node.js, and implementing emerging problem-solving abilities through various technical projects.
               </p>
               
               <p className="leading-relaxed">
-                My approach to web development combines technical expertise with creative problem-solving. I'm driven by a desire to create intuitive, responsive, and accessible web applications that deliver exceptional user experiences. I thrive in collaborative environments and am always eager to take on new challenges that push me to expand my skills and knowledge.
+                Passionate about building scalable, user-friendly web solutions and continuously exploring emerging tech trends. I have hands-on experience with modern development tools and frameworks, coupled with strong leadership abilities demonstrated through coordinating major technical events.
               </p>
               
               <p className="leading-relaxed">
-                Beyond coding, I have a passion for technology trends and constantly explore new tools and frameworks to stay at the forefront of web development. I believe in continuous learning and am committed to growing both as a developer and as a team leader.
+                My approach combines technical expertise with effective communication and teamwork skills. I believe in continuous learning and staying updated with the latest industry practices while contributing meaningfully to collaborative projects and team success.
               </p>
             </div>
           </motion.div>

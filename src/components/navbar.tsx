@@ -54,7 +54,7 @@ const Navbar = () => {
       animate={{ y: 0 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
       className={`fixed w-full z-50 transition-all duration-300 ${
-        isScrolled ? 'glass backdrop-blur-xl py-3' : 'bg-transparent py-6'
+        isScrolled ? 'glass backdrop-blur-xl py-2 sm:py-3' : 'bg-transparent py-3 sm:py-4 lg:py-6'
       }`}
     >
       <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
@@ -70,7 +70,7 @@ const Navbar = () => {
         </motion.a>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center space-x-8">
+        <nav className="hidden md:flex items-center space-x-6 lg:space-x-8">
           {navLinks.map((link, index) => (
             <motion.a
               key={link.href}
@@ -98,19 +98,19 @@ const Navbar = () => {
         </nav>
 
         {/* Mobile Navigation */}
-        <div className="md:hidden flex items-center space-x-4">
+        <div className="md:hidden flex items-center space-x-3 sm:space-x-4">
           <ThemeToggle />
           <Button 
             variant="ghost" 
             size="sm" 
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="p-1"
+            className="p-1.5 sm:p-2"
             aria-label="Toggle menu"
           >
-            <div className="w-6 h-5 relative flex flex-col justify-between">
+            <div className="w-5 h-4 sm:w-6 sm:h-5 relative flex flex-col justify-between">
               <span 
                 className={`w-full h-0.5 bg-foreground transition-all duration-300 ${
-                  isMenuOpen ? 'rotate-45 translate-y-2' : ''
+                  isMenuOpen ? 'rotate-45 translate-y-1.5 sm:translate-y-2' : ''
                 }`}
               />
               <span 
@@ -120,7 +120,7 @@ const Navbar = () => {
               />
               <span 
                 className={`w-full h-0.5 bg-foreground transition-all duration-300 ${
-                  isMenuOpen ? '-rotate-45 -translate-y-2' : ''
+                  isMenuOpen ? '-rotate-45 -translate-y-1.5 sm:-translate-y-2' : ''
                 }`}
               />
             </div>
@@ -132,13 +132,14 @@ const Navbar = () => {
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div 
-            className="md:hidden glass-card shadow-lg fixed top-[60px] left-0 right-0 border-t border-border/50"
+            className="md:hidden glass-card shadow-lg fixed left-0 right-0 border-t border-border/50"
+            style={{ top: isScrolled ? '56px' : '64px' }}
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.3 }}
           >
-            <div className="container mx-auto py-4 px-4 flex flex-col space-y-4">
+            <div className="container mx-auto py-4 px-4 flex flex-col space-y-2">
               {navLinks.map((link, index) => (
                 <motion.a
                   key={link.href}

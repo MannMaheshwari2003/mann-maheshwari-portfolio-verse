@@ -13,13 +13,13 @@ const Footer = () => {
   ];
   
   return (
-    <footer className="relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-background to-card"></div>
+    <footer className="relative overflow-hidden border-t border-border/20">
+      <div className="absolute inset-0 bg-gradient-to-b from-background to-card/50"></div>
       
       <div className="container mx-auto py-8 sm:py-12 px-4 relative z-10">
-        <div className="flex flex-col lg:flex-row justify-between items-center">
+        <div className="flex flex-col lg:flex-row justify-between items-center space-y-6 lg:space-y-0">
           <motion.div 
-            className="mb-6 sm:mb-8 lg:mb-0 text-center lg:text-left"
+            className="text-center lg:text-left"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
@@ -28,7 +28,7 @@ const Footer = () => {
               <span className="text-gradient">Mann</span> Maheshwari
             </h3>
             <p className="text-xs sm:text-sm text-foreground/60 max-w-md mx-auto lg:mx-0">
-              Creating innovative web solutions with passion and precision. Let's build something amazing together.
+              Full Stack Developer passionate about creating innovative web solutions with modern technologies and clean code.
             </p>
           </motion.div>
           
@@ -40,18 +40,22 @@ const Footer = () => {
           >
             <div className="flex items-center space-x-3 sm:space-x-4">
               {socialLinks.map((link, index) => (
-                <a 
+                <motion.a 
                   key={index}
                   href={link.href} 
                   target="_blank"
                   rel="noreferrer"
                   aria-label={link.label}
-                  className="glass p-2 rounded-full hover:bg-primary/10 hover-scale text-foreground/70 hover:text-primary"
+                  className="glass p-2.5 sm:p-3 rounded-full hover:bg-primary/10 hover-scale text-foreground/70 hover:text-primary transition-all duration-300"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
                 >
                   {link.icon}
-                </a>
+                </motion.a>
               ))}
-              <ThemeToggle />
+              <div className="ml-2">
+                <ThemeToggle />
+              </div>
             </div>
           </motion.div>
         </div>
@@ -68,8 +72,9 @@ const Footer = () => {
           
           <div className="flex items-center">
             <span className="flex items-center">
-              Made by Mann Maheshwari 
-              <Heart className="h-3 w-3 sm:h-4 sm:w-4 mx-1 text-red-500" /> 
+              Made with 
+              <Heart className="h-3 w-3 sm:h-4 sm:w-4 mx-1.5 text-red-500 animate-pulse" /> 
+              by Mann Maheshwari
             </span>
           </div>
         </motion.div>
