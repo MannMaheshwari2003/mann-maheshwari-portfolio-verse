@@ -18,22 +18,22 @@ const AboutSection = () => {
 
   const features = [
     {
-      icon: <Code className="h-6 w-6 text-primary" />,
+      icon: <Code className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />,
       title: "Technical Expertise",
       description: "Strong foundation in both frontend and backend development with a focus on clean, maintainable code."
     },
     {
-      icon: <Users className="h-6 w-6 text-primary" />,
+      icon: <Users className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />,
       title: "Team Leadership",
       description: "Experienced in leading development teams and coordinating project efforts to meet deadlines."
     },
     {
-      icon: <Lightbulb className="h-6 w-6 text-primary" />,
+      icon: <Lightbulb className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />,
       title: "Creative Problem Solver",
       description: "Approaching challenges with innovative solutions and a keen eye for detail."
     },
     {
-      icon: <CheckCircle className="h-6 w-6 text-primary" />,
+      icon: <CheckCircle className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />,
       title: "Continuous Learner",
       description: "Passionate about staying current with emerging technologies and industry best practices."
     }
@@ -52,20 +52,20 @@ const AboutSection = () => {
         className="relative z-10"
       >
         <motion.h2 
-          className="section-title mb-12"
+          className="section-title mb-8 sm:mb-12 text-center"
           variants={fadeIn}
           custom={0}
         >
           About Me
         </motion.h2>
         
-        <div className="grid md:grid-cols-3 gap-12">
+        <div className="grid lg:grid-cols-3 gap-8 sm:gap-12">
           <motion.div 
-            className="md:col-span-2"
+            className="lg:col-span-2 order-2 lg:order-1"
             variants={fadeIn}
             custom={1}
           >
-            <div className="space-y-6 text-lg">
+            <div className="space-y-4 sm:space-y-6 text-base sm:text-lg px-4 sm:px-0">
               <p className="leading-relaxed">
                 I'm Mann Maheshwari, a passionate and adaptable web developer with a strong foundation in both frontend and backend technologies. Throughout my academic and professional journey, I've cultivated strong technical skills while also developing exceptional leadership abilities.
               </p>
@@ -83,23 +83,23 @@ const AboutSection = () => {
           <motion.div
             variants={fadeIn}
             custom={2}
-            className="space-y-6"
+            className="space-y-4 sm:space-y-6 order-1 lg:order-2"
           >
-            <div className="grid gap-6">
+            <div className="grid gap-4 sm:gap-6 px-4 sm:px-0">
               {features.map((feature, index) => (
                 <motion.div 
                   key={index}
-                  className="glass p-5 rounded-xl hover:shadow-lg hover:shadow-primary/5 transition-all duration-300"
+                  className="glass p-4 sm:p-5 rounded-xl hover:shadow-lg hover:shadow-primary/5 transition-all duration-300"
                   variants={fadeIn}
                   custom={index + 3}
                 >
-                  <div className="flex items-start gap-4">
-                    <div className="p-2 rounded-lg bg-primary/10">
+                  <div className="flex items-start gap-3 sm:gap-4">
+                    <div className="p-2 rounded-lg bg-primary/10 flex-shrink-0">
                       {feature.icon}
                     </div>
                     <div>
-                      <h3 className="font-medium text-lg mb-1">{feature.title}</h3>
-                      <p className="text-sm text-foreground/70">{feature.description}</p>
+                      <h3 className="font-medium text-base sm:text-lg mb-1">{feature.title}</h3>
+                      <p className="text-xs sm:text-sm text-foreground/70">{feature.description}</p>
                     </div>
                   </div>
                 </motion.div>

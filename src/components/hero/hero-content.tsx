@@ -17,7 +17,7 @@ const HeroContent = () => {
   return (
     <div className="text-center lg:text-left max-w-2xl">
       <motion.span 
-        className="inline-block py-1 px-3 rounded-full text-sm font-medium bg-primary/10 text-primary mb-6"
+        className="inline-block py-2 px-4 rounded-full text-xs sm:text-sm font-medium bg-primary/10 text-primary mb-4 sm:mb-6"
         variants={fadeIn}
         custom={0}
       >
@@ -25,7 +25,7 @@ const HeroContent = () => {
       </motion.span>
       
       <motion.h1 
-        className="text-4xl md:text-6xl lg:text-7xl font-bold font-heading mb-6 leading-tight"
+        className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold font-heading mb-4 sm:mb-6 leading-tight"
         variants={fadeIn}
         custom={1}
       >
@@ -33,7 +33,7 @@ const HeroContent = () => {
       </motion.h1>
       
       <motion.p 
-        className="text-lg md:text-xl text-foreground/80 mb-8 max-w-lg mx-auto lg:mx-0"
+        className="text-base sm:text-lg md:text-xl text-foreground/80 mb-6 sm:mb-8 max-w-lg mx-auto lg:mx-0 px-4 sm:px-0"
         variants={fadeIn}
         custom={2}
       >
@@ -41,12 +41,12 @@ const HeroContent = () => {
       </motion.p>
       
       <motion.div 
-        className="flex flex-wrap justify-center lg:justify-start gap-4"
+        className="flex flex-col sm:flex-row justify-center lg:justify-start gap-3 sm:gap-4 px-4 sm:px-0"
         variants={fadeIn}
         custom={3}
       >
         <ResumeDownloadButton />
-        <Button variant="outline" size="lg" className="hover:shadow-lg border border-primary/50 group" asChild>
+        <Button variant="outline" size="lg" className="hover:shadow-lg border border-primary/50 group w-full sm:w-auto" asChild>
           <a href="#contact">
             <Mail className="mr-2 h-4 w-4 transition-transform group-hover:scale-110" />
             Contact Me

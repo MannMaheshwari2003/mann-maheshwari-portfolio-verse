@@ -50,8 +50,8 @@ const SkillsSection = () => {
     <Section id="skills" className="bg-background relative overflow-hidden">
       {/* Decorative blob */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute top-20 left-0 w-72 h-72 bg-primary/5 rounded-full filter blur-3xl"></div>
-        <div className="absolute bottom-20 right-0 w-80 h-80 bg-secondary/5 rounded-full filter blur-3xl"></div>
+        <div className="absolute top-20 left-0 w-48 sm:w-72 h-48 sm:h-72 bg-primary/5 rounded-full filter blur-3xl"></div>
+        <div className="absolute bottom-20 right-0 w-56 sm:w-80 h-56 sm:h-80 bg-secondary/5 rounded-full filter blur-3xl"></div>
       </div>
       
       <motion.div
@@ -61,41 +61,43 @@ const SkillsSection = () => {
         className="relative z-10"
       >
         <motion.h2 
-          className="section-title mb-16 text-center"
+          className="section-title mb-12 sm:mb-16 text-center"
           variants={fadeIn}
         >
           My Skills
         </motion.h2>
         
         <motion.div variants={fadeIn}>
-          <Tabs defaultValue="technical" className="w-full max-w-4xl mx-auto">
-            <div className="flex justify-center mb-10">
-              <TabsList className="glass p-1 h-auto">
+          <Tabs defaultValue="technical" className="w-full max-w-6xl mx-auto">
+            <div className="flex justify-center mb-8 sm:mb-10 px-4">
+              <TabsList className="glass p-1 h-auto grid w-full max-w-md grid-cols-2 sm:flex sm:w-auto">
                 <TabsTrigger 
                   value="technical" 
-                  className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground py-2 px-4 flex items-center gap-2"
+                  className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground py-2 px-3 sm:px-4 flex items-center gap-2 text-xs sm:text-sm"
                 >
-                  <Code className="h-4 w-4" />
-                  <span>Technical Skills</span>
+                  <Code className="h-3 w-3 sm:h-4 sm:w-4" />
+                  <span className="hidden sm:inline">Technical Skills</span>
+                  <span className="sm:hidden">Technical</span>
                 </TabsTrigger>
                 <TabsTrigger 
                   value="soft" 
-                  className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground py-2 px-4 flex items-center gap-2"
+                  className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground py-2 px-3 sm:px-4 flex items-center gap-2 text-xs sm:text-sm"
                 >
-                  <BrainCircuit className="h-4 w-4" />
-                  <span>Soft Skills</span>
+                  <BrainCircuit className="h-3 w-3 sm:h-4 sm:w-4" />
+                  <span className="hidden sm:inline">Soft Skills</span>
+                  <span className="sm:hidden">Soft</span>
                 </TabsTrigger>
               </TabsList>
             </div>
             
             <TabsContent value="technical" className="mt-0">
-              <div className="mb-6 text-center">
-                <div className="inline-flex items-center glass px-4 py-2 rounded-full">
-                  <FileCode className="h-5 w-5 mr-2 text-primary" />
-                  <span className="text-sm font-medium">Development & Technical Proficiency</span>
+              <div className="mb-4 sm:mb-6 text-center px-4">
+                <div className="inline-flex items-center glass px-3 sm:px-4 py-2 rounded-full">
+                  <FileCode className="h-4 w-4 sm:h-5 sm:w-5 mr-2 text-primary" />
+                  <span className="text-xs sm:text-sm font-medium">Development & Technical Proficiency</span>
                 </div>
               </div>
-              <div className="grid sm:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 px-4 sm:px-0">
                 {technicalSkills.map((skill, index) => (
                   <SkillProgress
                     key={skill.name}
@@ -108,13 +110,13 @@ const SkillsSection = () => {
             </TabsContent>
             
             <TabsContent value="soft" className="mt-0">
-              <div className="mb-6 text-center">
-                <div className="inline-flex items-center glass px-4 py-2 rounded-full">
-                  <Languages className="h-5 w-5 mr-2 text-primary" />
-                  <span className="text-sm font-medium">Personal & Professional Attributes</span>
+              <div className="mb-4 sm:mb-6 text-center px-4">
+                <div className="inline-flex items-center glass px-3 sm:px-4 py-2 rounded-full">
+                  <Languages className="h-4 w-4 sm:h-5 sm:w-5 mr-2 text-primary" />
+                  <span className="text-xs sm:text-sm font-medium">Personal & Professional Attributes</span>
                 </div>
               </div>
-              <div className="grid sm:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 px-4 sm:px-0">
                 {softSkills.map((skill, index) => (
                   <SkillProgress
                     key={skill.name}

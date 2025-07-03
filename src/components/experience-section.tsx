@@ -35,8 +35,8 @@ const ExperienceSection = () => {
   return (
     <Section id="experience" className="bg-background relative overflow-hidden">
       {/* Decorative elements */}
-      <div className="absolute top-40 right-20 w-40 h-40 rounded-full bg-gradient-to-tr from-primary/10 to-transparent blur-3xl"></div>
-      <div className="absolute bottom-20 left-20 w-60 h-60 rounded-full bg-gradient-to-br from-secondary/10 to-transparent blur-3xl"></div>
+      <div className="absolute top-40 right-10 sm:right-20 w-24 sm:w-40 h-24 sm:h-40 rounded-full bg-gradient-to-tr from-primary/10 to-transparent blur-3xl"></div>
+      <div className="absolute bottom-20 left-10 sm:left-20 w-32 sm:w-60 h-32 sm:h-60 rounded-full bg-gradient-to-br from-secondary/10 to-transparent blur-3xl"></div>
       
       <motion.div
         initial="hidden"
@@ -45,7 +45,7 @@ const ExperienceSection = () => {
         className="relative z-10"
       >
         <motion.h2 
-          className="section-title mb-16 text-center"
+          className="section-title mb-12 sm:mb-16 text-center"
           variants={{
             hidden: { opacity: 0, y: 20 },
             visible: { opacity: 1, y: 0 }
@@ -54,40 +54,40 @@ const ExperienceSection = () => {
           Work Experience
         </motion.h2>
         
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-5xl mx-auto px-4 sm:px-0">
           {experiences.map((exp, index) => (
             <motion.div 
               key={index}
-              className="mb-12 last:mb-0"
+              className="mb-8 sm:mb-12 last:mb-0"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ delay: index * 0.2, duration: 0.5 }}
             >
               <Card className="glass-card overflow-hidden border-primary/10 hover:border-primary/30 transition-all duration-300">
-                <CardHeader className="pb-2 pt-6 relative">
+                <CardHeader className="pb-2 pt-4 sm:pt-6 relative">
                   <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-primary via-secondary to-accent"></div>
                   
-                  <div className="ml-3">
-                    <div className="flex flex-wrap justify-between items-start gap-4">
-                      <div>
+                  <div className="ml-3 sm:ml-3">
+                    <div className="flex flex-col sm:flex-row justify-between items-start gap-4">
+                      <div className="flex-1">
                         <div className="mb-1 flex items-center">
                           <div className="p-2 rounded-md bg-primary/10 mr-3">
-                            <Briefcase className="h-5 w-5 text-primary" />
+                            <Briefcase className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
                           </div>
-                          <h3 className="text-xl font-heading font-semibold">{exp.title}</h3>
+                          <h3 className="text-lg sm:text-xl font-heading font-semibold">{exp.title}</h3>
                         </div>
-                        <p className="text-lg text-gradient font-medium">{exp.company}</p>
+                        <p className="text-base sm:text-lg text-gradient font-medium ml-11">{exp.company}</p>
                       </div>
                       
-                      <div className="flex flex-col gap-2 text-sm text-muted-foreground">
-                        <div className="flex items-center glass py-1 px-3 rounded-full">
-                          <CalendarIcon className="h-3.5 w-3.5 mr-1.5 text-primary" />
-                          <span>{exp.period}</span>
+                      <div className="flex flex-col sm:flex-row gap-2 text-sm text-muted-foreground ml-11 sm:ml-0">
+                        <div className="flex items-center glass py-1 px-2 sm:px-3 rounded-full">
+                          <CalendarIcon className="h-3 w-3 sm:h-3.5 sm:w-3.5 mr-1.5 text-primary" />
+                          <span className="text-xs sm:text-sm">{exp.period}</span>
                         </div>
-                        <div className="flex items-center glass py-1 px-3 rounded-full">
-                          <MapPinIcon className="h-3.5 w-3.5 mr-1.5 text-primary" />
-                          <span>{exp.location}</span>
+                        <div className="flex items-center glass py-1 px-2 sm:px-3 rounded-full">
+                          <MapPinIcon className="h-3 w-3 sm:h-3.5 sm:w-3.5 mr-1.5 text-primary" />
+                          <span className="text-xs sm:text-sm">{exp.location}</span>
                         </div>
                       </div>
                     </div>
@@ -95,11 +95,11 @@ const ExperienceSection = () => {
                 </CardHeader>
                 
                 <CardContent className="pt-4">
-                  <ul className="space-y-3 ml-3">
+                  <ul className="space-y-2 sm:space-y-3 ml-3 sm:ml-3">
                     {exp.description.map((item, i) => (
                       <li key={i} className="flex items-start gap-3">
-                        <span className="inline-block h-1.5 w-1.5 rounded-full bg-primary mt-2"></span>
-                        <span>{item}</span>
+                        <span className="inline-block h-1.5 w-1.5 rounded-full bg-primary mt-2 flex-shrink-0"></span>
+                        <span className="text-sm sm:text-base">{item}</span>
                       </li>
                     ))}
                   </ul>
