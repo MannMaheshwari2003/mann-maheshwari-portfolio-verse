@@ -1,4 +1,3 @@
-
 import Section from "./section";
 import { Award, Calendar, Star } from "lucide-react";
 import { motion } from "framer-motion";
@@ -13,6 +12,11 @@ const achievements = [
     title: "Core Coordinator",
     event: "TECHSPAN 2k24",
     description: "Played a key role in planning and implementing the annual tech symposium, coordinating with multiple department heads."
+  },
+  {
+    title: "Technology Job Simulation",
+    event: "Deloitte - Australia (Forage)",
+    description: "Completed a job simulation involving development and coding. Wrote a proposal for creating a dashboard."
   }
 ];
 
