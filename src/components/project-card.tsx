@@ -1,10 +1,9 @@
-
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { motion } from "framer-motion";
-import { Eye, Code, ExternalLink, Github } from "lucide-react";
+import { Eye, Code, ExternalLink } from "lucide-react";
 
 interface Technology {
   name: string;
@@ -121,17 +120,6 @@ const ProjectCard = ({ title, description, technologies, longDescription, featur
                         </Badge>
                       ))}
                     </div>
-                  </div>
-                  
-                  <div className="flex justify-end gap-3 mt-6">
-                    <Button variant="outline" size="sm" className="gap-2" disabled>
-                      <Github className="h-4 w-4" />
-                      <span>Repository</span>
-                    </Button>
-                    <Button size="sm" className="gap-2 btn-gradient" disabled>
-                      <ExternalLink className="h-4 w-4" />
-                      <span>Live Demo</span>
-                    </Button>
                   </div>
                 </div>
               </DialogDescription>

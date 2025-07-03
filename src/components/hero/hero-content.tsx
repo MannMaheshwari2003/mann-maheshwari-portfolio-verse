@@ -21,7 +21,7 @@ const HeroContent = () => {
         variants={fadeIn}
         custom={0}
       >
-        Web Developer | Future Tech Leader
+        Full Stack Developer | Future Tech Leader
       </motion.span>
       
       <motion.h1 

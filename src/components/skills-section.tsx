@@ -1,3 +1,4 @@
+
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent } from "@/components/ui/card";
 import Section from "./section";
@@ -9,24 +10,30 @@ const technicalSkills = [
   { name: "HTML", level: 90 },
   { name: "CSS", level: 85 },
   { name: "JavaScript", level: 80 },
-  { name: "PHP", level: 75 },
   { name: "Java", level: 70 },
+  { name: "PHP", level: 75 },
   { name: "SQL", level: 85 },
   { name: "Python", level: 65 },
-  { name: "MS Office", level: 95 },
-  { name: "Automation with AI", level: 75 },
-  { name: "React", level: 85 },
+  { name: "MS Word", level: 95 },
+  { name: "PowerPoint", level: 95 },
+  { name: "Google Sheets", level: 90 },
+  { name: "AI Tools/Automation", level: 75 },
+  { name: "Data Structures", level: 70 },
+  { name: "Programming", level: 80 },
+  { name: "Supabase", level: 75 },
+  { name: "Node.js", level: 70 },
+  { name: "React.js", level: 85 },
 ];
 
 const softSkills = [
-  { name: "Leadership", level: 90 },
   { name: "Teamwork", level: 95 },
-  { name: "Communication", level: 85 },
-  { name: "Adaptability", level: 90 },
+  { name: "Leadership", level: 90 },
   { name: "Problem Solving", level: 85 },
-  { name: "Time Management", level: 80 },
-  { name: "Creativity", level: 75 },
-  { name: "Critical Thinking", level: 80 },
+  { name: "Adaptability", level: 90 },
+  { name: "Communication", level: 85 },
+  { name: "Formal Communication", level: 80 },
+  { name: "Planning", level: 85 },
+  { name: "Software Development Processes", level: 80 },
 ];
 
 const SkillsSection = () => {
