@@ -2,7 +2,6 @@
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import Section from "./section";
 import { CalendarIcon, MapPinIcon, Briefcase } from "lucide-react";
-import { motion } from "framer-motion";
 
 const experiences = [
   {
@@ -38,31 +37,17 @@ const ExperienceSection = () => {
       <div className="absolute top-40 right-10 sm:right-20 w-24 sm:w-40 h-24 sm:h-40 rounded-full bg-gradient-to-tr from-primary/10 to-transparent blur-3xl"></div>
       <div className="absolute bottom-20 left-10 sm:left-20 w-32 sm:w-60 h-32 sm:h-60 rounded-full bg-gradient-to-br from-secondary/10 to-transparent blur-3xl"></div>
       
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-        className="relative z-10"
-      >
-        <motion.h2 
-          className="section-title mb-12 sm:mb-16 text-center"
-          variants={{
-            hidden: { opacity: 0, y: 20 },
-            visible: { opacity: 1, y: 0 }
-          }}
-        >
+      <div className="relative z-10">
+        <h2 className="section-title mb-12 sm:mb-16 text-center">
           Work Experience
-        </motion.h2>
+        </h2>
         
         <div className="max-w-5xl mx-auto px-4 sm:px-0">
           {experiences.map((exp, index) => (
-            <motion.div 
+            <div 
               key={index}
-              className="mb-8 sm:mb-12 last:mb-0"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ delay: index * 0.2, duration: 0.5 }}
+              className="mb-8 sm:mb-12 last:mb-0 animate-fade-in"
+              style={{ animationDelay: `${index * 0.2}s` }}
             >
               <Card className="glass-card overflow-hidden border-primary/10 hover:border-primary/30 transition-all duration-300">
                 <CardHeader className="pb-2 pt-4 sm:pt-6 relative">
@@ -105,10 +90,10 @@ const ExperienceSection = () => {
                   </ul>
                 </CardContent>
               </Card>
-            </motion.div>
+            </div>
           ))}
         </div>
-      </motion.div>
+      </div>
     </Section>
   );
 };
