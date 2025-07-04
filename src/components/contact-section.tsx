@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -5,7 +6,6 @@ import { useToast } from "@/hooks/use-toast";
 import Section from "./section";
 import { Mail, Phone, Linkedin, Send, Loader2 } from "lucide-react";
 import { useState } from "react";
-import { motion } from "framer-motion";
 import { supabase } from "@/integrations/supabase/client";
 
 const ContactSection = () => {
@@ -102,45 +102,20 @@ const ContactSection = () => {
     }
   ];
 
-  const fadeIn = {
-    hidden: { opacity: 0, y: 20 },
-    visible: (custom: number) => ({
-      opacity: 1,
-      y: 0,
-      transition: { 
-        delay: custom * 0.1,
-        duration: 0.5
-      }
-    })
-  };
-
   return (
     <Section id="contact" className="bg-background relative overflow-hidden">
       {/* Decorative elements */}
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/5 rounded-full filter blur-3xl"></div>
       <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-secondary/5 rounded-full filter blur-3xl"></div>
       
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-        className="relative z-10"
-      >
-        <motion.h2 
-          className="section-title mb-16 text-center"
-          variants={fadeIn}
-          custom={0}
-        >
+      <div className="relative z-10">
+        <h2 className="section-title mb-16 text-center">
           Get In Touch
-        </motion.h2>
+        </h2>
         
         <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
           {/* Contact Form */}
-          <motion.div
-            variants={fadeIn}
-            custom={1}
-            className="relative"
-          >
+          <div className="relative">
             <div className="glass-card rounded-2xl p-8 border border-primary/10">
               <h3 className="text-2xl font-heading mb-6 text-gradient">Send a Message</h3>
               
@@ -204,13 +179,10 @@ const ContactSection = () => {
                 </Button>
               </form>
             </div>
-          </motion.div>
+          </div>
           
           {/* Contact Information */}
-          <motion.div
-            variants={fadeIn}
-            custom={2}
-          >
+          <div>
             <div className="h-full flex flex-col justify-between">
               <div className="mb-8">
                 <h3 className="text-2xl font-heading mb-2 text-gradient">Contact Information</h3>
@@ -221,10 +193,8 @@ const ContactSection = () => {
               
               <div className="space-y-8">
                 {contactDetails.map((item, index) => (
-                  <motion.div
+                  <div
                     key={index}
-                    variants={fadeIn}
-                    custom={index + 3}
                     className="glass rounded-xl p-6 hover-translate"
                   >
                     <div className="flex items-start gap-4">
@@ -244,7 +214,7 @@ const ContactSection = () => {
                         </a>
                       </div>
                     </div>
-                  </motion.div>
+                  </div>
                 ))}
               </div>
               
@@ -256,9 +226,9 @@ const ContactSection = () => {
                 </div>
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
-      </motion.div>
+      </div>
     </Section>
   );
 };
