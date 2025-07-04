@@ -1,6 +1,6 @@
 
 import { useEffect, useState } from "react";
-import { useInView } from "react-intersection-observer";
+import useInView from "react-intersection-observer";
 
 interface AnimatedCounterProps {
   end: number;
@@ -11,7 +11,7 @@ interface AnimatedCounterProps {
 
 const AnimatedCounter = ({ end, duration = 2000, suffix = "", className }: AnimatedCounterProps) => {
   const [count, setCount] = useState(0);
-  const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.3 });
+  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.3 });
 
   useEffect(() => {
     if (!inView) return;
