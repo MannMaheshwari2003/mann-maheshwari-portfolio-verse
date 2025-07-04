@@ -9,6 +9,7 @@ import HeroSection from "@/components/hero-section";
 import Navbar from "@/components/navbar";
 import ProjectsSection from "@/components/projects-section";
 import SkillsSection from "@/components/skills-section";
+import FloatingOrbs from "@/components/floating-orbs";
 import { ThemeProvider } from "@/components/theme-provider";
 
 const Index = () => {
@@ -18,9 +19,10 @@ const Index = () => {
 
   return (
     <ThemeProvider defaultTheme={initialTheme}>
-      <div className="flex flex-col min-h-screen transition-colors duration-300">
+      <div className="flex flex-col min-h-screen transition-colors duration-300 relative">
+        <FloatingOrbs />
         <Navbar />
-        <main className="flex flex-col flex-grow">
+        <main className="flex flex-col flex-grow relative z-10">
           <HeroSection />
           <AboutSection />
           <EducationSection />
