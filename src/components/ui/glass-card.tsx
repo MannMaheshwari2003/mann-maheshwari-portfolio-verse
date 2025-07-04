@@ -1,15 +1,16 @@
 
 import { cn } from "@/lib/utils";
-import { ReactNode } from "react";
+import { ReactNode, CSSProperties } from "react";
 
 interface GlassCardProps {
   children: ReactNode;
   className?: string;
   variant?: "default" | "primary" | "secondary" | "accent";
   hover?: boolean;
+  style?: CSSProperties;
 }
 
-const GlassCard = ({ children, className, variant = "default", hover = true }: GlassCardProps) => {
+const GlassCard = ({ children, className, variant = "default", hover = true, style }: GlassCardProps) => {
   const variants = {
     default: "bg-card/80 border-white/10",
     primary: "bg-primary/10 border-primary/20",
@@ -25,6 +26,7 @@ const GlassCard = ({ children, className, variant = "default", hover = true }: G
         hover && "hover:shadow-xl hover:-translate-y-1 hover:border-opacity-30",
         className
       )}
+      style={style}
     >
       {children}
     </div>
