@@ -3,7 +3,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent } from "@/components/ui/card";
 import Section from "./section";
 import SkillProgress from "./skill-progress";
-import { motion } from "framer-motion";
 import { Code, BrainCircuit, Languages, FileCode } from "lucide-react";
 
 const technicalSkills = [
@@ -37,15 +36,6 @@ const softSkills = [
 ];
 
 const SkillsSection = () => {
-  const fadeIn = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.5 }
-    }
-  };
-
   return (
     <Section id="skills" className="bg-background relative overflow-hidden">
       {/* Decorative blob */}
@@ -54,20 +44,12 @@ const SkillsSection = () => {
         <div className="absolute bottom-20 right-0 w-56 sm:w-80 h-56 sm:h-80 bg-secondary/5 rounded-full filter blur-3xl"></div>
       </div>
       
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-        className="relative z-10"
-      >
-        <motion.h2 
-          className="section-title mb-12 sm:mb-16 text-center"
-          variants={fadeIn}
-        >
+      <div className="relative z-10 animate-fade-in">
+        <h2 className="section-title mb-12 sm:mb-16 text-center">
           My Skills
-        </motion.h2>
+        </h2>
         
-        <motion.div variants={fadeIn}>
+        <div className="animate-fade-in" style={{ animationDelay: '0.2s' }}>
           <Tabs defaultValue="technical" className="w-full max-w-6xl mx-auto">
             <div className="flex justify-center mb-8 sm:mb-10 px-4">
               <TabsList className="glass p-1 h-auto grid w-full max-w-md grid-cols-2 sm:flex sm:w-auto">
@@ -128,8 +110,8 @@ const SkillsSection = () => {
               </div>
             </TabsContent>
           </Tabs>
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
     </Section>
   );
 };
