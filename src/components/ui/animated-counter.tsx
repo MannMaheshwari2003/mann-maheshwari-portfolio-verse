@@ -1,6 +1,5 @@
 
-import { useEffect, useState } from "react";
-import { useInView } from "react-intersection-observer";
+import { useEffect, useState, useRef } from "react";
 
 interface AnimatedCounterProps {
   end: number;
@@ -11,7 +10,26 @@ interface AnimatedCounterProps {
 
 const AnimatedCounter = ({ end, duration = 2000, suffix = "", className }: AnimatedCounterProps) => {
   const [count, setCount] = useState(0);
-  const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.3 });
+  const [inView, setInView] = useState(false);
+  const ref = useRef<HTMLSpanElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setInView(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     if (!inView) return;
