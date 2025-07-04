@@ -1,8 +1,8 @@
+
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { motion } from "framer-motion";
 import { Eye, Code, ExternalLink } from "lucide-react";
 
 interface Technology {
@@ -20,20 +20,9 @@ interface ProjectCardProps {
 
 const ProjectCard = ({ title, description, technologies, longDescription, features, index = 0 }: ProjectCardProps) => {
   return (
-    <motion.div
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, margin: "-50px" }}
-      variants={{
-        hidden: { opacity: 0, y: 20 },
-        visible: { 
-          opacity: 1, 
-          y: 0,
-          transition: { delay: index * 0.1, duration: 0.5 }
-        }
-      }}
-      whileHover={{ y: -5 }}
-      className="h-full"
+    <div
+      className="h-full animate-fade-in hover-scale"
+      style={{ animationDelay: `${index * 0.1}s` }}
     >
       <Card className="overflow-hidden h-full bg-card/70 backdrop-blur-sm border-primary/5 hover:border-primary/20 transition-all duration-300 flex flex-col">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-60 pointer-events-none"></div>
@@ -127,7 +116,7 @@ const ProjectCard = ({ title, description, technologies, longDescription, featur
           </Dialog>
         </CardFooter>
       </Card>
-    </motion.div>
+    </div>
   );
 };
 
