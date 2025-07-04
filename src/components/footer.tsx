@@ -1,7 +1,6 @@
 
 import { ThemeToggle } from "./theme-toggle";
 import { Github, Instagram, Linkedin, Heart } from "lucide-react";
-import { motion } from "framer-motion";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -18,11 +17,9 @@ const Footer = () => {
       
       <div className="container mx-auto py-8 sm:py-12 px-4 relative z-10">
         <div className="flex flex-col lg:flex-row justify-between items-center space-y-6 lg:space-y-0">
-          <motion.div 
-            className="text-center lg:text-left"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
+          <div 
+            className="text-center lg:text-left animate-fade-in"
+            style={{ animationDelay: '0.2s' }}
           >
             <h3 className="text-xl sm:text-2xl font-bold font-heading mb-2">
               <span className="text-gradient">Mann</span> Maheshwari
@@ -30,41 +27,35 @@ const Footer = () => {
             <p className="text-xs sm:text-sm text-foreground/60 max-w-md mx-auto lg:mx-0">
               Full Stack Developer passionate about creating innovative web solutions with modern technologies and clean code.
             </p>
-          </motion.div>
+          </div>
           
-          <motion.div 
-            className="flex flex-col items-center lg:items-end space-y-4 sm:space-y-6"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
+          <div 
+            className="flex flex-col items-center lg:items-end space-y-4 sm:space-y-6 animate-fade-in"
+            style={{ animationDelay: '0.4s' }}
           >
             <div className="flex items-center space-x-3 sm:space-x-4">
               {socialLinks.map((link, index) => (
-                <motion.a 
+                <a 
                   key={index}
                   href={link.href} 
                   target="_blank"
                   rel="noreferrer"
                   aria-label={link.label}
                   className="glass p-2.5 sm:p-3 rounded-full hover:bg-primary/10 hover-scale text-foreground/70 hover:text-primary transition-all duration-300"
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
                 >
                   {link.icon}
-                </motion.a>
+                </a>
               ))}
               <div className="ml-2">
                 <ThemeToggle />
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
         
-        <motion.div 
-          className="border-t border-border/30 mt-6 sm:mt-8 pt-6 sm:pt-8 flex flex-col sm:flex-row justify-between items-center text-xs sm:text-sm text-foreground/60 space-y-4 sm:space-y-0"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.6 }}
+        <div 
+          className="border-t border-border/30 mt-6 sm:mt-8 pt-6 sm:pt-8 flex flex-col sm:flex-row justify-between items-center text-xs sm:text-sm text-foreground/60 space-y-4 sm:space-y-0 animate-fade-in"
+          style={{ animationDelay: '0.6s' }}
         >
           <p className="text-center sm:text-left">
             &copy; {currentYear} Mann Maheshwari. All rights reserved.
@@ -77,7 +68,7 @@ const Footer = () => {
               by Mann Maheshwari
             </span>
           </div>
-        </motion.div>
+        </div>
       </div>
     </footer>
   );
