@@ -1,6 +1,6 @@
 
 import { useEffect, useState } from "react";
-import { useInView } from "react-intersection-observer";
+import useInView from "react-intersection-observer";
 
 interface AnimatedCounterProps {
   end: number;
