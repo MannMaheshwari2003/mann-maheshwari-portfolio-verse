@@ -2,7 +2,6 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "./theme-toggle";
-import { motion, AnimatePresence } from "framer-motion";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -49,52 +48,45 @@ const Navbar = () => {
   ];
 
   return (
-    <motion.header 
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.5, ease: "easeOut" }}
-      className={`fixed w-full z-50 transition-all duration-300 ${
+    <header 
+      className={`fixed w-full z-50 transition-all duration-300 animate-fade-in ${
         isScrolled ? 'glass backdrop-blur-xl py-2 sm:py-3' : 'bg-transparent py-3 sm:py-4 lg:py-6'
       }`}
+      style={{ animationDelay: '0s' }}
     >
       <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
-        <motion.a 
+        <a 
           href="#hero" 
-          className="text-lg md:text-xl font-bold font-heading"
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
+          className="text-lg md:text-xl font-bold font-heading animate-fade-in"
+          style={{ animationDelay: '0.2s' }}
         >
           <span className="text-gradient">Mann</span>
           <span className="mx-2">Maheshwari</span>
-        </motion.a>
+        </a>
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-6 lg:space-x-8">
           {navLinks.map((link, index) => (
-            <motion.a
+            <a
               key={link.href}
               href={link.href}
-              className={`text-sm font-medium transition-all duration-300 animated-underline ${
+              className={`text-sm font-medium transition-all duration-300 animated-underline animate-fade-in ${
                 activeSection === link.href.substring(1) 
                   ? 'text-primary font-semibold' 
                   : 'text-foreground/80 hover:text-foreground'
               }`}
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3, delay: 0.1 + index * 0.1 }}
+              style={{ animationDelay: `${0.1 + index * 0.1}s` }}
             >
               {link.label}
-            </motion.a>
+            </a>
           ))}
           
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.3, delay: 0.7 }}
+          <div
+            className="animate-fade-in"
+            style={{ animationDelay: '0.7s' }}
           >
             <ThemeToggle />
-          </motion.div>
+          </div>
         </nav>
 
         {/* Mobile Navigation */}
@@ -129,39 +121,31 @@ const Navbar = () => {
       </div>
 
       {/* Mobile Menu */}
-      <AnimatePresence>
-        {isMenuOpen && (
-          <motion.div 
-            className="md:hidden glass-card shadow-lg fixed left-0 right-0 border-t border-border/50"
-            style={{ top: isScrolled ? '56px' : '64px' }}
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.3 }}
-          >
-            <div className="container mx-auto py-4 px-4 flex flex-col space-y-2">
-              {navLinks.map((link, index) => (
-                <motion.a
-                  key={link.href}
-                  href={link.href}
-                  className={`text-base font-medium py-3 px-4 rounded-md transition-all duration-300 ${
-                    activeSection === link.href.substring(1)
-                      ? 'bg-primary/10 text-primary font-semibold' 
-                      : 'hover:bg-foreground/5'
-                  }`}
-                  onClick={() => setIsMenuOpen(false)}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.3, delay: 0.1 + index * 0.05 }}
-                >
-                  {link.label}
-                </motion.a>
-              ))}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.header>
+      {isMenuOpen && (
+        <div 
+          className="md:hidden glass-card shadow-lg fixed left-0 right-0 border-t border-border/50 animate-fade-in"
+          style={{ top: isScrolled ? '56px' : '64px' }}
+        >
+          <div className="container mx-auto py-4 px-4 flex flex-col space-y-2">
+            {navLinks.map((link, index) => (
+              <a
+                key={link.href}
+                href={link.href}
+                className={`text-base font-medium py-3 px-4 rounded-md transition-all duration-300 animate-fade-in ${
+                  activeSection === link.href.substring(1)
+                    ? 'bg-primary/10 text-primary font-semibold' 
+                    : 'hover:bg-foreground/5'
+                }`}
+                onClick={() => setIsMenuOpen(false)}
+                style={{ animationDelay: `${0.1 + index * 0.05}s` }}
+              >
+                {link.label}
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
+    </header>
   );
 };
 
