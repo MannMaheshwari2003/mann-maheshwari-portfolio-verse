@@ -7,6 +7,7 @@ import Section from "./section";
 import { Mail, Phone, Linkedin, Send, Loader2 } from "lucide-react";
 import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { useScrollAnimation } from "@/hooks/use-scroll-animation";
 
 const ContactSection = () => {
   const { toast } = useToast();
@@ -16,6 +17,10 @@ const ContactSection = () => {
     message: ""
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const { ref: titleRef, inView: titleInView } = useScrollAnimation();
+  const { ref: formRef, inView: formInView } = useScrollAnimation({ delay: 200 });
+  const { ref: infoRef, inView: infoInView } = useScrollAnimation({ delay: 400 });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -83,19 +88,19 @@ const ContactSection = () => {
 
   const contactDetails = [
     { 
-      icon: <Mail className="h-5 w-5" />,
+      icon: <Mail className="h-4 w-4 sm:h-5 sm:w-5" />,
       title: "Email",
       value: "mannmaheshwari2003@gmail.com",
       link: "mailto:mannmaheshwari2003@gmail.com" 
     },
     { 
-      icon: <Phone className="h-5 w-5" />,
+      icon: <Phone className="h-4 w-4 sm:h-5 sm:w-5" />,
       title: "Phone",
       value: "+91 82872 98398",
       link: "tel:+918287298398" 
     },
     { 
-      icon: <Linkedin className="h-5 w-5" />,
+      icon: <Linkedin className="h-4 w-4 sm:h-5 sm:w-5" />,
       title: "LinkedIn",
       value: "linkedin.com/in/mann-maheshwari",
       link: "https://www.linkedin.com/in/mann-maheshwari-3714b82a1/" 
@@ -104,24 +109,46 @@ const ContactSection = () => {
 
   return (
     <Section id="contact" className="bg-background relative overflow-hidden">
-      {/* Decorative elements */}
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/5 rounded-full filter blur-3xl"></div>
-      <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-secondary/5 rounded-full filter blur-3xl"></div>
+      {/* Enhanced decorative elements */}
+      <div className="absolute top-0 left-1/4 w-72 sm:w-96 h-72 sm:h-96 bg-primary/5 rounded-full filter blur-3xl animate-pulse-glow"></div>
+      <div className="absolute bottom-0 right-1/4 w-48 sm:w-64 h-48 sm:h-64 bg-secondary/5 rounded-full filter blur-3xl animate-float"></div>
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 sm:w-40 h-32 sm:h-40 bg-accent/3 rounded-full filter blur-3xl animate-breathe"></div>
       
-      <div className="relative z-10">
-        <h2 className="section-title mb-16 text-center">
-          Get In Touch
-        </h2>
+      <div className="relative z-10 px-4 sm:px-6 lg:px-8">
+        <div 
+          ref={titleRef}
+          className={`transition-all duration-1000 ease-out ${
+            titleInView 
+              ? 'opacity-100 translate-y-0' 
+              : 'opacity-0 translate-y-10'
+          }`}
+        >
+          <h2 className="section-title mb-8 sm:mb-12 lg:mb-16 text-center">
+            Get In Touch
+          </h2>
+        </div>
         
-        <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+        <div className="grid lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-12 max-w-7xl mx-auto">
           {/* Contact Form */}
-          <div className="relative">
-            <div className="glass-card rounded-2xl p-8 border border-primary/10">
-              <h3 className="text-2xl font-heading mb-6 text-gradient">Send a Message</h3>
+          <div 
+            ref={formRef}
+            className={`relative order-2 lg:order-1 transition-all duration-1000 ease-out ${
+              formInView 
+                ? 'opacity-100 translate-x-0' 
+                : 'opacity-0 -translate-x-10'
+            }`}
+          >
+            <div className="glass-card rounded-xl sm:rounded-2xl p-6 sm:p-8 border border-primary/10 hover:border-primary/20 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/5">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="p-2 rounded-lg bg-gradient-to-r from-primary/20 to-secondary/20">
+                  <Send className="h-5 w-5 text-primary" />
+                </div>
+                <h3 className="text-xl sm:text-2xl font-heading text-gradient">Send a Message</h3>
+              </div>
               
-              <form onSubmit={handleSubmit} className="space-y-5">
-                <div className="space-y-1">
-                  <label htmlFor="name" className="text-sm font-medium">Your Name</label>
+              <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
+                <div className="space-y-2">
+                  <label htmlFor="name" className="text-sm font-medium block">Your Name</label>
                   <Input 
                     id="name"
                     placeholder="Enter your name" 
@@ -129,12 +156,12 @@ const ContactSection = () => {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="bg-card/50 border-primary/10 focus:border-primary focus-visible:ring-primary/20 transition-all"
+                    className="bg-card/50 border-primary/10 focus:border-primary focus-visible:ring-primary/20 transition-all duration-300 hover:border-primary/20 h-11 sm:h-12"
                   />
                 </div>
                 
-                <div className="space-y-1">
-                  <label htmlFor="email" className="text-sm font-medium">Email Address</label>
+                <div className="space-y-2">
+                  <label htmlFor="email" className="text-sm font-medium block">Email Address</label>
                   <Input 
                     id="email"
                     type="email" 
@@ -143,16 +170,16 @@ const ContactSection = () => {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="bg-card/50 border-primary/10 focus:border-primary focus-visible:ring-primary/20"
+                    className="bg-card/50 border-primary/10 focus:border-primary focus-visible:ring-primary/20 transition-all duration-300 hover:border-primary/20 h-11 sm:h-12"
                   />
                 </div>
                 
-                <div className="space-y-1">
-                  <label htmlFor="message" className="text-sm font-medium">Your Message</label>
+                <div className="space-y-2">
+                  <label htmlFor="message" className="text-sm font-medium block">Your Message</label>
                   <Textarea 
                     id="message"
                     placeholder="Type your message here..." 
-                    className="min-h-[120px] bg-card/50 border-primary/10 focus:border-primary focus-visible:ring-primary/20 resize-none"
+                    className="min-h-[120px] sm:min-h-[140px] bg-card/50 border-primary/10 focus:border-primary focus-visible:ring-primary/20 resize-none transition-all duration-300 hover:border-primary/20"
                     name="message"
                     value={formData.message}
                     onChange={handleChange}
@@ -162,7 +189,7 @@ const ContactSection = () => {
                 
                 <Button 
                   type="submit" 
-                  className="w-full btn-gradient"
+                  className="w-full btn-gradient h-11 sm:h-12 text-sm sm:text-base font-medium hover:scale-[1.02] transition-all duration-300"
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? (
@@ -182,35 +209,53 @@ const ContactSection = () => {
           </div>
           
           {/* Contact Information */}
-          <div>
-            <div className="h-full flex flex-col justify-between">
-              <div className="mb-8">
-                <h3 className="text-2xl font-heading mb-2 text-gradient">Contact Information</h3>
-                <p className="text-muted-foreground">
+          <div 
+            ref={infoRef}
+            className={`order-1 lg:order-2 transition-all duration-1000 ease-out ${
+              infoInView 
+                ? 'opacity-100 translate-x-0' 
+                : 'opacity-0 translate-x-10'
+            }`}
+          >
+            <div className="h-full flex flex-col">
+              <div className="mb-6 sm:mb-8">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="p-2 rounded-lg bg-gradient-to-r from-secondary/20 to-accent/20">
+                    <Mail className="h-5 w-5 text-secondary" />
+                  </div>
+                  <h3 className="text-xl sm:text-2xl font-heading text-gradient-2">Contact Information</h3>
+                </div>
+                <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
                   Feel free to reach out through any of these channels. I'm always eager to connect, collaborate, or simply chat about exciting opportunities.
                 </p>
               </div>
               
-              <div className="space-y-8">
+              <div className="space-y-4 sm:space-y-6 flex-1">
                 {contactDetails.map((item, index) => (
                   <div
                     key={index}
-                    className="glass rounded-xl p-6 hover-translate"
+                    className="glass rounded-xl p-4 sm:p-6 hover-translate border border-white/5 hover:border-primary/20 transition-all duration-500 hover:shadow-xl hover:shadow-primary/5 group"
+                    style={{ 
+                      animationDelay: `${index * 100}ms`,
+                      transform: infoInView ? 'none' : 'translateY(20px)',
+                      opacity: infoInView ? 1 : 0,
+                      transition: `all 0.6s ease-out ${index * 100}ms`
+                    }}
                   >
-                    <div className="flex items-start gap-4">
-                      <div className="p-3 rounded-lg bg-primary/10 text-primary">
+                    <div className="flex items-start gap-3 sm:gap-4">
+                      <div className="p-2 sm:p-3 rounded-lg bg-primary/10 text-primary group-hover:bg-primary/20 transition-all duration-300 group-hover:scale-110">
                         {item.icon}
                       </div>
-                      <div>
-                        <h4 className="font-medium text-lg">{item.title}</h4>
+                      <div className="flex-1 min-w-0">
+                        <h4 className="font-medium text-base sm:text-lg mb-1">{item.title}</h4>
                         <a 
                           href={item.link} 
                           target={item.title === "LinkedIn" ? "_blank" : undefined}
                           rel={item.title === "LinkedIn" ? "noreferrer" : undefined}
-                          className="text-primary hover:underline group flex items-center"
+                          className="text-primary hover:underline group/link flex items-center text-sm sm:text-base break-all sm:break-normal"
                         >
-                          {item.value}
-                          <span className="inline-block transition-transform group-hover:translate-x-1 ml-1">→</span>
+                          <span className="truncate sm:whitespace-normal">{item.value}</span>
+                          <span className="inline-block transition-transform group-hover/link:translate-x-1 ml-2 flex-shrink-0">→</span>
                         </a>
                       </div>
                     </div>
@@ -218,9 +263,9 @@ const ContactSection = () => {
                 ))}
               </div>
               
-              <div className="mt-12">
-                <div className="glass-card rounded-xl p-6 border border-primary/10">
-                  <p className="text-sm text-center">
+              <div className="mt-8 sm:mt-12">
+                <div className="glass-card rounded-xl p-4 sm:p-6 border border-primary/10 text-center hover:border-accent/30 transition-all duration-500 hover:shadow-lg hover:shadow-accent/5">
+                  <p className="text-xs sm:text-sm text-muted-foreground">
                     Interested in working together? Let's turn your ideas into reality!
                   </p>
                 </div>

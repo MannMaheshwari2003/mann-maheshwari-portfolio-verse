@@ -105,10 +105,11 @@
   .section-title::after {
     content: "";
     @apply absolute -bottom-2 left-0 w-1/3 h-1 bg-accent rounded;
+    animation: slideIn 0.8s ease-out 0.5s both;
   }
 }
 
-/* Optimized animations */
+/* Enhanced animations */
 @keyframes breathe {
   0%, 100% {
     transform: scale(1);
@@ -156,6 +157,37 @@
   }
 }
 
+@keyframes slideIn {
+  from {
+    transform: scaleX(0);
+    opacity: 0;
+  }
+  to {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
 .animate-breathe {
   animation: breathe 8s ease-in-out infinite;
 }
@@ -170,6 +202,16 @@
 
 .animate-pulse-shadow {
   animation: pulse 2s infinite;
+}
+
+.animate-fade-in-scale {
+  animation: fadeInScale 0.6s ease-out both;
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
 }
 
 .text-gradient {
@@ -188,6 +230,30 @@
 
 .btn-gradient:hover {
   background-position: 100% 0;
+  transform: translateY(-1px);
+  box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
+}
+
+.glass-card {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.glass-card:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(59, 130, 246, 0.3);
+  transform: translateY(-2px);
+}
+
+.hover-translate {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hover-translate:hover {
+  transform: translateY(-4px);
 }
 
 /* Reduced motion support */
@@ -195,8 +261,15 @@
   body::before,
   .animate-breathe,
   .animate-float-orb,
-  .animate-float {
+  .animate-float,
+  .animate-shimmer {
     animation: none !important;
+  }
+  
+  .hover-translate:hover,
+  .glass-card:hover,
+  .btn-gradient:hover {
+    transform: none !important;
   }
 }
 
@@ -211,6 +284,7 @@
 ::-webkit-scrollbar-thumb {
   background: hsl(var(--primary) / 0.5);
   border-radius: 4px;
+  transition: background 0.3s ease;
 }
 
 ::-webkit-scrollbar-thumb:hover {
