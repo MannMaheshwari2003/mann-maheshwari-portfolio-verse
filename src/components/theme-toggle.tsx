@@ -3,7 +3,6 @@ import { Moon, Sun } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "./theme-provider";
 import { useEffect } from "react";
-import { motion } from "framer-motion";
 
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme();
@@ -20,10 +19,7 @@ export function ThemeToggle() {
   }, []);
 
   return (
-    <motion.div
-      whileHover={{ scale: 1.1 }}
-      whileTap={{ scale: 0.95 }}
-    >
+    <div className="hover:scale-110 active:scale-95 transition-transform duration-200">
       <Button
         variant="ghost"
         size="icon"
@@ -31,20 +27,19 @@ export function ThemeToggle() {
         className="rounded-full w-9 h-9 bg-card hover:bg-primary/10"
         aria-label="Toggle theme"
       >
-        <motion.div
-          initial={{ rotate: 0 }}
-          animate={{ rotate: theme === 'dark' ? 180 : 0 }}
-          transition={{ duration: 0.5 }}
-          className="w-full h-full flex items-center justify-center"
+        <div
+          className={`w-full h-full flex items-center justify-center transition-transform duration-500 ${
+            theme === 'dark' ? 'rotate-180' : 'rotate-0'
+          }`}
         >
           {theme === "dark" ? (
             <Moon className="h-[1.2rem] w-[1.2rem] text-primary" />
           ) : (
             <Sun className="h-[1.2rem] w-[1.2rem] text-primary" />
           )}
-        </motion.div>
+        </div>
         <span className="sr-only">Toggle theme</span>
       </Button>
-    </motion.div>
+    </div>
   );
 }
