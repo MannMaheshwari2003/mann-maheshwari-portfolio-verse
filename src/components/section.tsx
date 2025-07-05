@@ -1,6 +1,5 @@
 
 import { cn } from "@/lib/utils";
-import { motion } from "framer-motion";
 import { ReactNode } from "react";
 
 interface SectionProps {
