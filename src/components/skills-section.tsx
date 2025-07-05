@@ -37,21 +37,21 @@ const softSkills = [
 
 const SkillsSection = () => {
   return (
-    <Section id="skills" className="bg-background relative overflow-hidden">
+    <Section id="skills" className="bg-background relative overflow-hidden" compact>
       {/* Decorative blob */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute top-20 left-0 w-48 sm:w-72 h-48 sm:h-72 bg-primary/5 rounded-full filter blur-3xl"></div>
-        <div className="absolute bottom-20 right-0 w-56 sm:w-80 h-56 sm:h-80 bg-secondary/5 rounded-full filter blur-3xl"></div>
+        <div className="absolute top-10 left-0 w-48 sm:w-60 h-48 sm:h-60 bg-primary/5 rounded-full filter blur-3xl"></div>
+        <div className="absolute bottom-10 right-0 w-56 sm:w-72 h-56 sm:h-72 bg-secondary/5 rounded-full filter blur-3xl"></div>
       </div>
       
       <div className="relative z-10 animate-fade-in">
-        <h2 className="section-title mb-12 sm:mb-16 text-center">
+        <h2 className="section-title mb-8 sm:mb-10 text-center">
           My Skills
         </h2>
         
         <div className="animate-fade-in" style={{ animationDelay: '0.2s' }}>
           <Tabs defaultValue="technical" className="w-full max-w-6xl mx-auto">
-            <div className="flex justify-center mb-8 sm:mb-10 px-4">
+            <div className="flex justify-center mb-6 sm:mb-8 px-4">
               <TabsList className="glass p-1 h-auto grid w-full max-w-md grid-cols-2 sm:flex sm:w-auto">
                 <TabsTrigger 
                   value="technical" 
@@ -73,13 +73,13 @@ const SkillsSection = () => {
             </div>
             
             <TabsContent value="technical" className="mt-0">
-              <div className="mb-4 sm:mb-6 text-center px-4">
+              <div className="mb-4 text-center px-4">
                 <div className="inline-flex items-center glass px-3 sm:px-4 py-2 rounded-full">
                   <FileCode className="h-4 w-4 sm:h-5 sm:w-5 mr-2 text-primary" />
                   <span className="text-xs sm:text-sm font-medium">Development & Technical Proficiency</span>
                 </div>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 px-4 sm:px-0">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 px-4 sm:px-0">
                 {technicalSkills.map((skill, index) => (
                   <SkillProgress
                     key={skill.name}
@@ -92,13 +92,13 @@ const SkillsSection = () => {
             </TabsContent>
             
             <TabsContent value="soft" className="mt-0">
-              <div className="mb-4 sm:mb-6 text-center px-4">
+              <div className="mb-4 text-center px-4">
                 <div className="inline-flex items-center glass px-3 sm:px-4 py-2 rounded-full">
                   <Languages className="h-4 w-4 sm:h-5 sm:w-5 mr-2 text-primary" />
                   <span className="text-xs sm:text-sm font-medium">Personal & Professional Attributes</span>
                 </div>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 px-4 sm:px-0">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 px-4 sm:px-0">
                 {softSkills.map((skill, index) => (
                   <SkillProgress
                     key={skill.name}

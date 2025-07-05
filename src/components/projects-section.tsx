@@ -47,20 +47,20 @@ const projectsData = [
 
 const ProjectsSection = () => {
   return (
-    <Section id="projects" className="bg-card/30 relative overflow-hidden">
+    <Section id="projects" className="bg-card/30 relative overflow-hidden" compact>
       {/* Decorative elements */}
-      <div className="absolute top-40 right-0 w-80 h-80 rounded-full bg-primary/5 filter blur-3xl"></div>
-      <div className="absolute bottom-20 left-10 w-60 h-60 rounded-full bg-secondary/5 filter blur-3xl"></div>
+      <div className="absolute top-20 right-0 w-60 h-60 rounded-full bg-primary/5 filter blur-3xl"></div>
+      <div className="absolute bottom-10 left-10 w-48 h-48 rounded-full bg-secondary/5 filter blur-3xl"></div>
       
       <div className="animate-fade-in">
         <h2 
-          className="section-title mb-16 text-center animate-fade-in"
+          className="section-title mb-10 text-center animate-fade-in"
           style={{ animationDelay: '0.2s' }}
         >
           Featured Projects
         </h2>
         
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {projectsData.map((project, index) => (
             <ProjectCard key={index} {...project} index={index} />
           ))}

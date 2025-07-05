@@ -7,14 +7,16 @@ interface SectionProps {
   id: string;
   className?: string;
   children: ReactNode;
+  compact?: boolean;
 }
 
-const Section = ({ id, className, children }: SectionProps) => {
+const Section = ({ id, className, children, compact = false }: SectionProps) => {
   return (
     <section
       id={id}
       className={cn(
-        "py-20 md:py-32 px-4 md:px-8 scroll-mt-24 relative",
+        compact ? "py-12 md:py-16" : "py-16 md:py-20",
+        "px-4 md:px-8 scroll-mt-20 relative",
         className
       )}
     >

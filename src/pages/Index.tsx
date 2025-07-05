@@ -22,7 +22,7 @@ const Index = () => {
       <div className="flex flex-col min-h-screen transition-colors duration-300 relative">
         <FloatingOrbs />
         <Navbar />
-        <main className="flex flex-col flex-grow relative z-10">
+        <main className="flex flex-col flex-grow relative z-10 space-y-0">
           <HeroSection />
           <AboutSection />
           <EducationSection />
