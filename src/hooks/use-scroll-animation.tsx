@@ -1,5 +1,4 @@
-
-import useInView from 'react-intersection-observer';
+import { useInView } from 'react-intersection-observer';
 
 interface UseScrollAnimationProps {
   threshold?: number;
