@@ -19,6 +19,12 @@ const achievements = [
     type: "leadership"
   },
   {
+    title: "Software Engineering Job Simulation",
+    event: "Accenture Nordics (Forage)",
+    description: "Completed Accenture software engineering solution involving development and coding, following agile methods, debugging.",
+    type: "certification"
+  },
+  {
     title: "Technology Job Simulation",
     event: "Deloitte - Australia (Forage)",
     description: "Completed a job simulation involving development and coding. Wrote a proposal for creating a dashboard.",
@@ -74,40 +80,67 @@ const AchievementsSection = () => {
             ))}
           </div>
 
-          {/* Featured achievement centered */}
-          <div className="flex justify-center">
-            <div className="max-w-2xl w-full">
-              <GlassCard variant="accent" className="p-6 sm:p-8 relative overflow-hidden">
-                <div className="absolute top-4 right-4">
-                  <InteractiveBadge variant="accent" size="sm">
-                    <Star className="h-3 w-3" />
-                    Featured
-                  </InteractiveBadge>
-                </div>
-                
-                <div className="absolute inset-0 bg-gradient-to-r from-accent/10 to-primary/10 rounded-xl animate-breathe"></div>
-                
-                <div className="relative z-10">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="p-2 rounded-lg bg-gradient-to-br from-accent/20 to-primary/20">
-                      <Award className="h-5 w-5 text-accent" />
-                    </div>
-                    <h3 className="text-lg sm:text-xl font-semibold text-accent">
-                      {achievements[2].title}
-                    </h3>
+          {/* Second row with certifications */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 mb-8">
+            {/* Accenture certification */}
+            <GlassCard variant="secondary" className="p-6 sm:p-8 relative overflow-hidden">
+              <div className="absolute top-4 right-4">
+                <InteractiveBadge variant="secondary" size="sm">
+                  <Trophy className="h-3 w-3" />
+                  {achievements[2].type}
+                </InteractiveBadge>
+              </div>
+              
+              <div className="mb-4">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="p-2 rounded-lg bg-gradient-to-br from-secondary/20 to-accent/20">
+                    <Award className="h-5 w-5 text-secondary" />
                   </div>
-                  
-                  <InteractiveBadge variant="accent" size="sm" className="mb-4">
-                    <Calendar className="h-3 w-3" />
-                    {achievements[2].event}
-                  </InteractiveBadge>
-                  
-                  <p className="text-sm sm:text-base text-foreground/80 leading-relaxed">
-                    {achievements[2].description}
-                  </p>
+                  <h3 className="text-lg sm:text-xl font-semibold">{achievements[2].title}</h3>
                 </div>
-              </GlassCard>
-            </div>
+                
+                <InteractiveBadge variant="secondary" size="sm" className="mb-4">
+                  <Calendar className="h-3 w-3" />
+                  {achievements[2].event}
+                </InteractiveBadge>
+                
+                <p className="text-sm sm:text-base text-foreground/80 leading-relaxed">
+                  {achievements[2].description}
+                </p>
+              </div>
+            </GlassCard>
+
+            {/* Featured Deloitte achievement */}
+            <GlassCard variant="accent" className="p-6 sm:p-8 relative overflow-hidden">
+              <div className="absolute top-4 right-4">
+                <InteractiveBadge variant="accent" size="sm">
+                  <Star className="h-3 w-3" />
+                  Featured
+                </InteractiveBadge>
+              </div>
+              
+              <div className="absolute inset-0 bg-gradient-to-r from-accent/10 to-primary/10 rounded-xl animate-breathe"></div>
+              
+              <div className="relative z-10">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="p-2 rounded-lg bg-gradient-to-br from-accent/20 to-primary/20">
+                    <Award className="h-5 w-5 text-accent" />
+                  </div>
+                  <h3 className="text-lg sm:text-xl font-semibold text-accent">
+                    {achievements[3].title}
+                  </h3>
+                </div>
+                
+                <InteractiveBadge variant="accent" size="sm" className="mb-4">
+                  <Calendar className="h-3 w-3" />
+                  {achievements[3].event}
+                </InteractiveBadge>
+                
+                <p className="text-sm sm:text-base text-foreground/80 leading-relaxed">
+                  {achievements[3].description}
+                </p>
+              </div>
+            </GlassCard>
           </div>
         </div>
       </div>
