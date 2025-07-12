@@ -51,28 +51,31 @@ const ProjectsSection = () => {
   const { ref: gridRef, inView: gridInView } = useScrollAnimation({ threshold: 0.2 });
 
   return (
-    <Section id="projects" className="bg-card/30 relative overflow-hidden" compact>
-      {/* Enhanced gradient backgrounds */}
-      <div className="absolute inset-0 bg-gradient-to-bl from-primary/5 via-background to-secondary/5"></div>
-      <div className="absolute top-20 right-0 w-60 h-60 bg-gradient-radial from-primary/20 via-primary/5 to-transparent rounded-full blur-3xl animate-float-orb"></div>
-      <div className="absolute bottom-10 left-10 w-48 h-48 bg-gradient-radial from-secondary/20 via-secondary/5 to-transparent rounded-full blur-3xl animate-float-orb" style={{ animationDelay: '12s' }}></div>
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-gradient-radial from-accent/15 via-accent/5 to-transparent rounded-full blur-3xl animate-breathe"></div>
+    <Section id="projects" className="bg-gradient-to-br from-card/40 via-background to-card/20 relative overflow-hidden" compact>
+      {/* Enhanced gradient backgrounds with better positioning */}
+      <div className="absolute inset-0 bg-gradient-to-bl from-primary/8 via-background to-secondary/8"></div>
+      <div className="absolute top-20 right-0 w-48 sm:w-60 h-48 sm:h-60 bg-gradient-radial from-primary/25 via-primary/8 to-transparent rounded-full blur-3xl animate-float-orb"></div>
+      <div className="absolute bottom-10 left-10 w-40 sm:w-48 h-40 sm:h-48 bg-gradient-radial from-secondary/25 via-secondary/8 to-transparent rounded-full blur-3xl animate-float-orb" style={{ animationDelay: '12s' }}></div>
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-24 sm:w-32 h-24 sm:h-32 bg-gradient-radial from-accent/20 via-accent/8 to-transparent rounded-full blur-3xl animate-breathe"></div>
       
       <div className="relative z-10">
         <div 
           ref={headerRef}
-          className={`transition-all duration-1000 ease-out ${
+          className={`transition-all duration-1000 ease-out mb-12 ${
             headerInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
           }`}
         >
-          <h2 className="section-title mb-10 text-center">
+          <h2 className="section-title text-center">
             Featured Projects
           </h2>
+          <p className="text-center text-muted-foreground mt-4 text-lg max-w-2xl mx-auto">
+            Explore my portfolio of innovative web applications and software solutions
+          </p>
         </div>
         
         <div 
           ref={gridRef}
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
         >
           {projectsData.map((project, index) => (
             <div

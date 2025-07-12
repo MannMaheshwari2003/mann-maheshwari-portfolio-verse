@@ -11,17 +11,17 @@ const HeroSection = () => {
 
   return (
     <section id="hero" className="min-h-screen flex items-center justify-center relative overflow-hidden pt-16 sm:pt-20 lg:pt-12">
-      {/* Enhanced gradient backgrounds */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 animate-breathe"></div>
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-accent/10 to-primary/10 rounded-full blur-3xl animate-float-orb"></div>
-      <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gradient-to-l from-secondary/10 to-accent/10 rounded-full blur-3xl animate-float-orb" style={{ animationDelay: '10s' }}></div>
+      {/* Enhanced gradient backgrounds with better blending */}
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/8 via-transparent to-secondary/8 animate-breathe"></div>
+      <div className="absolute top-1/4 left-1/4 w-80 sm:w-96 h-80 sm:h-96 bg-gradient-radial from-accent/15 via-primary/8 to-transparent rounded-full blur-3xl animate-float-orb"></div>
+      <div className="absolute bottom-1/4 right-1/4 w-72 sm:w-80 h-72 sm:h-80 bg-gradient-radial from-secondary/15 via-accent/8 to-transparent rounded-full blur-3xl animate-float-orb" style={{ animationDelay: '10s' }}></div>
       
       <BackgroundElements />
 
       <div className="container px-4 md:px-6 relative z-10 w-full">
         <div 
           ref={contentRef}
-          className={`flex flex-col lg:flex-row items-center justify-between gap-6 sm:gap-8 min-h-[calc(100vh-6rem)] sm:min-h-[calc(100vh-8rem)] lg:min-h-[calc(100vh-5rem)] transition-all duration-1000 ease-out ${
+          className={`flex flex-col lg:flex-row items-center justify-between gap-8 sm:gap-12 min-h-[calc(100vh-6rem)] sm:min-h-[calc(100vh-8rem)] lg:min-h-[calc(100vh-5rem)] transition-all duration-1000 ease-out ${
             contentInView 
               ? 'opacity-100 translate-y-0' 
               : 'opacity-0 translate-y-10'

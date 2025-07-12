@@ -78,7 +78,7 @@
       linear-gradient(135deg, rgba(59, 130, 246, 0.03) 0%, transparent 25%, rgba(14, 165, 233, 0.03) 50%, transparent 75%, rgba(251, 146, 60, 0.03) 100%);
     pointer-events: none;
     z-index: -1;
-    animation: breathe 12s ease-in-out infinite;
+    animation: breathe 15s ease-in-out infinite;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -104,7 +104,7 @@
   }
 }
 
-/* Enhanced animations */
+/* Enhanced animations with smoother timing */
 @keyframes breathe {
   0%, 100% {
     transform: scale(1) rotate(0deg);
@@ -234,7 +234,7 @@
 }
 
 .animate-breathe {
-  animation: breathe 12s ease-in-out infinite;
+  animation: breathe 15s ease-in-out infinite;
 }
 
 .animate-float-orb {
@@ -299,16 +299,16 @@
 }
 
 .glass-card {
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   transition: all 0.4s ease;
 }
 
 .glass-card:hover {
-  background: rgba(255, 255, 255, 0.09);
-  border-color: rgba(59, 130, 246, 0.4);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(59, 130, 246, 0.3);
   transform: translateY(-3px);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
 }
@@ -352,21 +352,29 @@
   }
 }
 
+/* Enhanced scrollbar */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
   background: hsl(var(--card));
-  border-radius: 5px;
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb {
   background: linear-gradient(135deg, hsl(var(--primary) / 0.6), hsl(var(--secondary) / 0.6));
-  border-radius: 5px;
+  border-radius: 4px;
   transition: background 0.3s ease;
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(135deg, hsl(var(--primary) / 0.9), hsl(var(--secondary) / 0.9));
+}
+
+/* Smooth focus styles */
+:focus-visible {
+  outline: 2px solid hsl(var(--primary));
+  outline-offset: 2px;
+  border-radius: 4px;
 }

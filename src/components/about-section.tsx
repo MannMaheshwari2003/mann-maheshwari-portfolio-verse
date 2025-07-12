@@ -43,11 +43,11 @@ const AboutSection = () => {
   ];
 
   return (
-    <Section id="about" className="bg-background relative overflow-hidden">
-      {/* Enhanced decorative elements */}
-      <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-gradient-to-br from-primary/8 to-transparent rounded-full blur-3xl animate-float-orb"></div>
-      <div className="absolute bottom-0 left-0 w-1/4 h-1/4 bg-gradient-to-tr from-secondary/8 to-transparent rounded-full blur-3xl animate-float-orb" style={{ animationDelay: '10s' }}></div>
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-accent/5 rounded-full blur-3xl animate-breathe"></div>
+    <Section id="about" className="bg-gradient-to-br from-background via-card/20 to-background relative overflow-hidden">
+      {/* Enhanced decorative elements with better gradients */}
+      <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-gradient-radial from-primary/12 via-primary/4 to-transparent rounded-full blur-3xl animate-float-orb"></div>
+      <div className="absolute bottom-0 left-0 w-1/4 h-1/4 bg-gradient-radial from-secondary/12 via-secondary/4 to-transparent rounded-full blur-3xl animate-float-orb" style={{ animationDelay: '10s' }}></div>
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-gradient-radial from-accent/8 to-transparent rounded-full blur-3xl animate-breathe"></div>
       
       <div className="relative z-10">
         <div 
@@ -64,7 +64,7 @@ const AboutSection = () => {
           />
         </div>
         
-        {/* Stats Section */}
+        {/* Enhanced Stats Section with better styling */}
         <div 
           ref={statsRef}
           className={`grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-16 max-w-4xl mx-auto transition-all duration-1000 ease-out ${
@@ -77,12 +77,12 @@ const AboutSection = () => {
             <GlassCard 
               key={index} 
               variant="primary" 
-              className={`p-4 sm:p-6 text-center hover:scale-105 transition-all duration-500 animate-fade-in-scale group relative overflow-hidden`}
+              className={`p-4 sm:p-6 text-center hover:scale-105 transition-all duration-500 animate-fade-in-scale group relative overflow-hidden border border-primary/20 hover:border-primary/40`}
               style={{ animationDelay: `${index * 100}ms` }}
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-primary/8 to-secondary/8 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               <div className="relative z-10">
-                <div className="text-2xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent mb-2">
+                <div className="text-2xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent mb-2">
                   {statsInView && <AnimatedCounter end={stat.number} suffix={stat.suffix} />}
                 </div>
                 <div className="text-xs sm:text-sm font-medium text-muted-foreground uppercase tracking-wide">
@@ -102,8 +102,8 @@ const AboutSection = () => {
                 : 'opacity-0 -translate-x-10'
             }`}
           >
-            <GlassCard className="p-6 sm:p-8 h-full hover:shadow-2xl hover:shadow-primary/5 transition-all duration-500 group relative overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            <GlassCard className="p-6 sm:p-8 h-full hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500 group relative overflow-hidden border border-primary/20 hover:border-primary/30">
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/8 via-transparent to-secondary/8 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               <div className="relative z-10">
                 <div className="space-y-4 sm:space-y-6 text-base sm:text-lg">
                   <div className="flex items-center gap-3 mb-6">
@@ -111,7 +111,7 @@ const AboutSection = () => {
                       <Trophy className="h-6 w-6 text-white" />
                     </div>
                     <div>
-                      <h3 className="text-xl font-semibold">Mann Maheshwari</h3>
+                      <h3 className="text-xl font-semibold bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text">Mann Maheshwari</h3>
                       <p className="text-muted-foreground">Full Stack Developer</p>
                     </div>
                   </div>
@@ -145,10 +145,10 @@ const AboutSection = () => {
               <GlassCard 
                 key={index}
                 variant={index % 2 === 0 ? "primary" : "secondary"}
-                className={`p-4 sm:p-5 hover:scale-105 transition-all duration-500 hover:shadow-xl hover:shadow-primary/5 animate-fade-in-scale group relative overflow-hidden`}
+                className={`p-4 sm:p-5 hover:scale-105 transition-all duration-500 hover:shadow-xl hover:shadow-primary/10 animate-fade-in-scale group relative overflow-hidden border border-primary/20 hover:border-primary/30`}
                 style={{ animationDelay: `${index * 150}ms` }}
               >
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/8 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 <div className="relative z-10">
                   <div className="flex items-start gap-3 sm:gap-4">
                     <div className="p-2 rounded-lg bg-gradient-to-br from-background to-card flex-shrink-0 border border-white/10 hover:scale-110 transition-transform duration-300 shadow-sm">
