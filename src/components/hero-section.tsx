@@ -7,9 +7,15 @@ import { useScrollAnimation } from "@/hooks/use-scroll-animation";
 
 const HeroSection = () => {
   const { ref: contentRef, inView: contentInView } = useScrollAnimation({ threshold: 0.2 });
+  const { ref: avatarRef, inView: avatarInView } = useScrollAnimation({ threshold: 0.3, delay: 300 });
 
   return (
     <section id="hero" className="min-h-screen flex items-center justify-center relative overflow-hidden pt-16 sm:pt-20 lg:pt-12">
+      {/* Enhanced gradient backgrounds */}
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 animate-breathe"></div>
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-accent/10 to-primary/10 rounded-full blur-3xl animate-float-orb"></div>
+      <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gradient-to-l from-secondary/10 to-accent/10 rounded-full blur-3xl animate-float-orb" style={{ animationDelay: '10s' }}></div>
+      
       <BackgroundElements />
 
       <div className="container px-4 md:px-6 relative z-10 w-full">
@@ -21,8 +27,19 @@ const HeroSection = () => {
               : 'opacity-0 translate-y-10'
           }`}
         >
-          <HeroContent />
-          <HeroAvatar />
+          <div className={`transition-all duration-1200 ease-out ${
+            contentInView ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'
+          }`}>
+            <HeroContent />
+          </div>
+          <div 
+            ref={avatarRef}
+            className={`transition-all duration-1000 ease-out ${
+              avatarInView ? 'opacity-100 translate-x-0 scale-100' : 'opacity-0 translate-x-10 scale-95'
+            }`}
+          >
+            <HeroAvatar />
+          </div>
         </div>
       </div>
       

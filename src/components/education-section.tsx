@@ -4,6 +4,7 @@ import SectionHeader from "./ui/section-header";
 import GlassCard from "./ui/glass-card";
 import InteractiveBadge from "./ui/interactive-badge";
 import { Calendar, GraduationCap, BookOpen, Award } from "lucide-react";
+import { useScrollAnimation } from "@/hooks/use-scroll-animation";
 
 const educationData = [
   {
@@ -49,6 +50,9 @@ const educationData = [
 ];
 
 const EducationSection = () => {
+  const { ref: headerRef, inView: headerInView } = useScrollAnimation({ threshold: 0.3 });
+  const { ref: timelineRef, inView: timelineInView } = useScrollAnimation({ threshold: 0.2 });
+
   const getStatusVariant = (status: string) => {
     return status === "current" ? "accent" : "primary";
   };
@@ -68,35 +72,57 @@ const EducationSection = () => {
 
   return (
     <Section id="education" className="relative overflow-hidden">
-      {/* Enhanced background elements */}
-      <div className="absolute top-40 right-10 sm:right-20 w-24 sm:w-40 h-24 sm:h-40 rounded-full bg-gradient-to-tr from-primary/10 to-transparent blur-3xl animate-float-orb"></div>
-      <div className="absolute bottom-20 left-10 sm:left-20 w-32 sm:w-60 h-32 sm:h-60 rounded-full bg-gradient-to-br from-secondary/10 to-transparent blur-3xl animate-float-orb" style={{ animationDelay: '15s' }}></div>
+      {/* Enhanced gradient backgrounds */}
+      <div className="absolute inset-0 bg-gradient-to-br from-background via-card/30 to-background"></div>
+      <div className="absolute top-40 right-10 sm:right-20 w-24 sm:w-40 h-24 sm:h-40 bg-gradient-radial from-primary/15 via-primary/5 to-transparent rounded-full blur-3xl animate-float-orb"></div>
+      <div className="absolute bottom-20 left-10 sm:left-20 w-32 sm:w-60 h-32 sm:h-60 bg-gradient-radial from-secondary/15 via-secondary/5 to-transparent rounded-full blur-3xl animate-float-orb" style={{ animationDelay: '15s' }}></div>
       
       <div className="relative z-10">
-        <SectionHeader 
-          title="Education" 
-          subtitle="Academic journey and continuous learning path"
-        />
+        <div 
+          ref={headerRef}
+          className={`transition-all duration-1000 ease-out ${
+            headerInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          }`}
+        >
+          <SectionHeader 
+            title="Education" 
+            subtitle="Academic journey and continuous learning path"
+          />
+        </div>
         
         <div className="max-w-4xl mx-auto">
-          <div className="space-y-6 sm:space-y-8">
+          <div 
+            ref={timelineRef}
+            className="space-y-6 sm:space-y-8"
+          >
             {educationData.map((item, index) => (
-              <div key={index} className="relative">
-                {/* Timeline connector */}
+              <div 
+                key={index} 
+                className={`relative transition-all duration-700 ease-out ${
+                  timelineInView 
+                    ? 'opacity-100 translate-y-0 translate-x-0' 
+                    : `opacity-0 translate-y-8 ${index % 2 === 0 ? '-translate-x-8' : 'translate-x-8'}`
+                }`}
+                style={{ transitionDelay: `${index * 150}ms` }}
+              >
+                {/* Timeline connector with gradient */}
                 {index !== educationData.length - 1 && (
-                  <div className="absolute left-4 sm:left-6 top-16 w-px h-16 bg-gradient-to-b from-primary/30 to-transparent"></div>
+                  <div className="absolute left-4 sm:left-6 top-16 w-px h-16 bg-gradient-to-b from-primary/40 via-secondary/30 to-transparent"></div>
                 )}
                 
                 <GlassCard 
                   variant={getStatusVariant(item.status)}
-                  className="p-6 sm:p-8 relative"
+                  className="p-6 sm:p-8 relative overflow-hidden hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500 group"
                 >
-                  {/* Timeline dot */}
-                  <div className="absolute -left-2 top-6 w-4 h-4 rounded-full bg-primary border-4 border-background shadow-lg"></div>
+                  {/* Gradient overlay on hover */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                   
-                  <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
+                  {/* Timeline dot with gradient */}
+                  <div className="absolute -left-2 top-6 w-4 h-4 rounded-full bg-gradient-to-r from-primary to-secondary border-4 border-background shadow-lg"></div>
+                  
+                  <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 relative z-10">
                     <div className="flex items-center gap-3">
-                      <div className="p-2 rounded-lg bg-gradient-to-br from-background to-card border border-white/10">
+                      <div className="p-2 rounded-lg bg-gradient-to-br from-background to-card border border-white/10 shadow-sm">
                         {getLevelIcon(item.level)}
                       </div>
                       <InteractiveBadge variant="primary" size="sm">
@@ -107,7 +133,7 @@ const EducationSection = () => {
                     
                     <div className="flex-1">
                       <div className="flex items-center gap-2 mb-2">
-                        <h3 className="text-lg sm:text-xl font-semibold">{item.title}</h3>
+                        <h3 className="text-lg sm:text-xl font-semibold bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text">{item.title}</h3>
                         {item.status === "current" && (
                           <InteractiveBadge variant="accent" size="sm">
                             Current

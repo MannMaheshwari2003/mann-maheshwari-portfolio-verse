@@ -2,6 +2,7 @@
 import { useState } from "react";
 import Section from "./section";
 import ProjectCard from "./project-card";
+import { useScrollAnimation } from "@/hooks/use-scroll-animation";
 
 const projectsData = [
   {
@@ -46,23 +47,45 @@ const projectsData = [
 ];
 
 const ProjectsSection = () => {
+  const { ref: headerRef, inView: headerInView } = useScrollAnimation({ threshold: 0.3 });
+  const { ref: gridRef, inView: gridInView } = useScrollAnimation({ threshold: 0.2 });
+
   return (
     <Section id="projects" className="bg-card/30 relative overflow-hidden" compact>
-      {/* Decorative elements */}
-      <div className="absolute top-20 right-0 w-60 h-60 rounded-full bg-primary/5 filter blur-3xl"></div>
-      <div className="absolute bottom-10 left-10 w-48 h-48 rounded-full bg-secondary/5 filter blur-3xl"></div>
+      {/* Enhanced gradient backgrounds */}
+      <div className="absolute inset-0 bg-gradient-to-bl from-primary/5 via-background to-secondary/5"></div>
+      <div className="absolute top-20 right-0 w-60 h-60 bg-gradient-radial from-primary/20 via-primary/5 to-transparent rounded-full blur-3xl animate-float-orb"></div>
+      <div className="absolute bottom-10 left-10 w-48 h-48 bg-gradient-radial from-secondary/20 via-secondary/5 to-transparent rounded-full blur-3xl animate-float-orb" style={{ animationDelay: '12s' }}></div>
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-gradient-radial from-accent/15 via-accent/5 to-transparent rounded-full blur-3xl animate-breathe"></div>
       
-      <div className="animate-fade-in">
-        <h2 
-          className="section-title mb-10 text-center animate-fade-in"
-          style={{ animationDelay: '0.2s' }}
+      <div className="relative z-10">
+        <div 
+          ref={headerRef}
+          className={`transition-all duration-1000 ease-out ${
+            headerInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          }`}
         >
-          Featured Projects
-        </h2>
+          <h2 className="section-title mb-10 text-center">
+            Featured Projects
+          </h2>
+        </div>
         
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div 
+          ref={gridRef}
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+        >
           {projectsData.map((project, index) => (
-            <ProjectCard key={index} {...project} index={index} />
+            <div
+              key={index}
+              className={`transition-all duration-800 ease-out ${
+                gridInView 
+                  ? 'opacity-100 translate-y-0 scale-100' 
+                  : 'opacity-0 translate-y-10 scale-95'
+              }`}
+              style={{ transitionDelay: `${index * 200}ms` }}
+            >
+              <ProjectCard {...project} index={index} />
+            </div>
           ))}
         </div>
       </div>
