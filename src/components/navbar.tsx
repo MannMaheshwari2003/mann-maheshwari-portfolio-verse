@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "./theme-toggle";
+import { Menu, X } from "lucide-react";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -38,6 +39,32 @@ const Navbar = () => {
     };
   }, []);
 
+  // Close mobile menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as Element;
+      if (isMenuOpen && !target.closest('.mobile-menu') && !target.closest('.mobile-menu-trigger')) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('click', handleClickOutside);
+    return () => document.removeEventListener('click', handleClickOutside);
+  }, [isMenuOpen]);
+
+  // Prevent scroll when mobile menu is open
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isMenuOpen]);
+
   const navLinks = [
     { href: "#about", label: "About" },
     { href: "#education", label: "Education" },
@@ -47,30 +74,38 @@ const Navbar = () => {
     { href: "#contact", label: "Contact" }
   ];
 
+  const handleNavClick = (href: string) => {
+    setIsMenuOpen(false);
+    const element = document.querySelector(href);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <header 
-      className={`fixed w-full z-50 transition-all duration-300 animate-fade-in ${
-        isScrolled ? 'glass backdrop-blur-xl py-2 sm:py-3' : 'bg-transparent py-3 sm:py-4 lg:py-6'
+      className={`fixed w-full z-50 transition-all duration-500 ease-out animate-fade-in ${
+        isScrolled ? 'glass backdrop-blur-xl py-2 shadow-lg border-b border-border/50' : 'bg-transparent py-3 lg:py-6'
       }`}
       style={{ animationDelay: '0s' }}
     >
       <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
-        <a 
-          href="#hero" 
-          className="text-lg md:text-xl font-bold font-heading animate-fade-in"
+        <button 
+          onClick={() => handleNavClick("#hero")}
+          className="text-lg md:text-xl font-bold font-heading animate-fade-in hover:scale-105 transition-transform duration-300 touch-manipulation"
           style={{ animationDelay: '0.2s' }}
         >
           <span className="text-gradient">Mann</span>
           <span className="mx-2">Maheshwari</span>
-        </a>
+        </button>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center space-x-6 lg:space-x-8">
+        <nav className="hidden lg:flex items-center space-x-6 xl:space-x-8">
           {navLinks.map((link, index) => (
-            <a
+            <button
               key={link.href}
-              href={link.href}
-              className={`text-sm font-medium transition-all duration-300 animated-underline animate-fade-in ${
+              onClick={() => handleNavClick(link.href)}
+              className={`text-sm font-medium transition-all duration-300 animated-underline animate-fade-in hover:scale-105 touch-manipulation ${
                 activeSection === link.href.substring(1) 
                   ? 'text-primary font-semibold' 
                   : 'text-foreground/80 hover:text-foreground'
@@ -78,7 +113,7 @@ const Navbar = () => {
               style={{ animationDelay: `${0.1 + index * 0.1}s` }}
             >
               {link.label}
-            </a>
+            </button>
           ))}
           
           <div
@@ -90,58 +125,50 @@ const Navbar = () => {
         </nav>
 
         {/* Mobile Navigation */}
-        <div className="md:hidden flex items-center space-x-3 sm:space-x-4">
+        <div className="lg:hidden flex items-center space-x-3">
           <ThemeToggle />
           <Button 
             variant="ghost" 
             size="sm" 
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="p-1.5 sm:p-2"
+            className="mobile-menu-trigger p-2 hover:bg-accent/10 touch-manipulation"
             aria-label="Toggle menu"
+            aria-expanded={isMenuOpen}
           >
-            <div className="w-5 h-4 sm:w-6 sm:h-5 relative flex flex-col justify-between">
-              <span 
-                className={`w-full h-0.5 bg-foreground transition-all duration-300 ${
-                  isMenuOpen ? 'rotate-45 translate-y-1.5 sm:translate-y-2' : ''
-                }`}
-              />
-              <span 
-                className={`w-full h-0.5 bg-foreground transition-all duration-300 ${
-                  isMenuOpen ? 'opacity-0' : ''
-                }`}
-              />
-              <span 
-                className={`w-full h-0.5 bg-foreground transition-all duration-300 ${
-                  isMenuOpen ? '-rotate-45 -translate-y-1.5 sm:-translate-y-2' : ''
-                }`}
-              />
-            </div>
+            {isMenuOpen ? (
+              <X className="h-5 w-5 transition-transform duration-300" />
+            ) : (
+              <Menu className="h-5 w-5 transition-transform duration-300" />
+            )}
           </Button>
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu Overlay */}
       {isMenuOpen && (
-        <div 
-          className="md:hidden glass-card shadow-lg fixed left-0 right-0 border-t border-border/50 animate-fade-in"
-          style={{ top: isScrolled ? '56px' : '64px' }}
-        >
-          <div className="container mx-auto py-4 px-4 flex flex-col space-y-2">
-            {navLinks.map((link, index) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className={`text-base font-medium py-3 px-4 rounded-md transition-all duration-300 animate-fade-in ${
-                  activeSection === link.href.substring(1)
-                    ? 'bg-primary/10 text-primary font-semibold' 
-                    : 'hover:bg-foreground/5'
-                }`}
-                onClick={() => setIsMenuOpen(false)}
-                style={{ animationDelay: `${0.1 + index * 0.05}s` }}
-              >
-                {link.label}
-              </a>
-            ))}
+        <div className="lg:hidden fixed inset-0 z-40 bg-background/80 backdrop-blur-md animate-fade-in">
+          <div 
+            className="mobile-menu fixed top-16 left-0 right-0 bottom-0 bg-card/95 backdrop-blur-xl border-t border-border/50 shadow-2xl"
+            style={{ top: isScrolled ? '60px' : '80px' }}
+          >
+            <div className="container mx-auto py-8 px-6 h-full overflow-y-auto">
+              <div className="flex flex-col space-y-6">
+                {navLinks.map((link, index) => (
+                  <button
+                    key={link.href}
+                    onClick={() => handleNavClick(link.href)}
+                    className={`text-left text-lg font-medium py-4 px-6 rounded-xl transition-all duration-300 animate-fade-in touch-manipulation hover:scale-105 ${
+                      activeSection === link.href.substring(1)
+                        ? 'bg-primary/20 text-primary font-semibold border border-primary/30 shadow-lg' 
+                        : 'hover:bg-accent/10 hover:text-foreground border border-transparent'
+                    }`}
+                    style={{ animationDelay: `${0.1 + index * 0.05}s` }}
+                  >
+                    {link.label}
+                  </button>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       )}
