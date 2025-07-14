@@ -7,21 +7,21 @@ const HeroContent = () => {
   return (
     <div className="text-center lg:text-left max-w-2xl">
       <span 
-        className="inline-block py-2 px-4 rounded-full text-xs sm:text-sm font-medium bg-gradient-to-r from-primary/15 to-secondary/15 text-primary border border-primary/20 mb-4 sm:mb-6 animate-fade-in backdrop-blur-sm"
+        className="inline-block py-2 px-4 rounded-full text-xs sm:text-sm font-medium bg-gradient-to-r from-primary/15 to-secondary/15 border border-primary/20 mb-4 sm:mb-6 animate-fade-in backdrop-blur-sm text-primary"
         style={{ animationDelay: '0s' }}
       >
         Full Stack Developer | Future Tech Leader
       </span>
       
       <h1 
-        className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold font-heading mb-4 sm:mb-6 leading-tight animate-fade-in"
+        className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold font-heading mb-4 sm:mb-6 leading-tight animate-fade-in text-foreground"
         style={{ animationDelay: '0.2s' }}
       >
-        Mann <span className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">Maheshwari</span>
+        Mann <span className="text-gradient">Maheshwari</span>
       </h1>
       
       <p 
-        className="text-base sm:text-lg md:text-xl text-foreground/80 mb-6 sm:mb-8 max-w-lg mx-auto lg:mx-0 px-4 sm:px-0 animate-fade-in leading-relaxed"
+        className="text-base sm:text-lg md:text-xl mb-6 sm:mb-8 max-w-lg mx-auto lg:mx-0 px-4 sm:px-0 animate-fade-in leading-relaxed text-muted-foreground"
         style={{ animationDelay: '0.4s' }}
       >
         Creating elegant and performant web experiences with modern technologies and innovative solutions.
