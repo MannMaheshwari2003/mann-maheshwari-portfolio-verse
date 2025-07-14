@@ -1,6 +1,7 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent } from "@/components/ui/card";
 import Section from "./section";
+import SectionHeader from "./ui/section-header";
 import SkillProgress from "./skill-progress";
 import { Code, BrainCircuit, Languages, FileCode } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/use-scroll-animation";
@@ -56,9 +57,11 @@ const SkillsSection = () => {
             headerInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
           }`}
         >
-          <h2 className="section-title mb-8 sm:mb-10 text-center">
-            My Skills
-          </h2>
+          <SectionHeader
+            title="My Skills"
+            subtitle="A comprehensive overview of my technical expertise and professional capabilities that drive successful project outcomes."
+            variant="default"
+          />
         </div>
         
         <div 
@@ -69,10 +72,10 @@ const SkillsSection = () => {
         >
           <Tabs defaultValue="technical" className="w-full max-w-6xl mx-auto">
             <div className="flex justify-center mb-6 sm:mb-8 px-4">
-              <TabsList className="glass p-1 h-auto grid w-full max-w-md grid-cols-2 sm:flex sm:w-auto bg-gradient-to-r from-card/80 to-card/60 backdrop-blur-md">
+              <TabsList className="glass p-1 h-auto grid w-full max-w-md grid-cols-2 sm:flex sm:w-auto bg-gradient-to-r from-card/80 to-card/60 backdrop-blur-md shadow-lg">
                 <TabsTrigger 
                   value="technical" 
-                  className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-primary data-[state=active]:to-secondary data-[state=active]:text-primary-foreground py-2 px-3 sm:px-4 flex items-center gap-2 text-xs sm:text-sm transition-all duration-300"
+                  className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-primary data-[state=active]:to-secondary data-[state=active]:text-primary-foreground py-2 px-3 sm:px-4 flex items-center gap-2 text-xs sm:text-sm transition-all duration-300 hover:scale-105"
                 >
                   <Code className="h-3 w-3 sm:h-4 sm:w-4" />
                   <span className="hidden sm:inline">Technical Skills</span>
@@ -80,7 +83,7 @@ const SkillsSection = () => {
                 </TabsTrigger>
                 <TabsTrigger 
                   value="soft" 
-                  className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-secondary data-[state=active]:to-accent data-[state=active]:text-primary-foreground py-2 px-3 sm:px-4 flex items-center gap-2 text-xs sm:text-sm transition-all duration-300"
+                  className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-secondary data-[state=active]:to-accent data-[state=active]:text-primary-foreground py-2 px-3 sm:px-4 flex items-center gap-2 text-xs sm:text-sm transition-all duration-300 hover:scale-105"
                 >
                   <BrainCircuit className="h-3 w-3 sm:h-4 sm:w-4" />
                   <span className="hidden sm:inline">Soft Skills</span>
@@ -90,10 +93,12 @@ const SkillsSection = () => {
             </div>
             
             <TabsContent value="technical" className="mt-0">
-              <div className="mb-4 text-center px-4">
-                <div className="inline-flex items-center glass px-3 sm:px-4 py-2 rounded-full bg-gradient-to-r from-primary/10 to-secondary/10 backdrop-blur-md">
+              <div className="mb-6 text-center px-4">
+                <div className="inline-flex items-center glass px-4 sm:px-6 py-3 rounded-full bg-gradient-to-r from-primary/10 to-secondary/10 backdrop-blur-md shadow-lg">
                   <FileCode className="h-4 w-4 sm:h-5 sm:w-5 mr-2 text-primary" />
-                  <span className="text-xs sm:text-sm font-medium">Development & Technical Proficiency</span>
+                  <span className="text-sm sm:text-base font-semibold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                    Development & Technical Proficiency
+                  </span>
                 </div>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 px-4 sm:px-0">
@@ -118,10 +123,12 @@ const SkillsSection = () => {
             </TabsContent>
             
             <TabsContent value="soft" className="mt-0">
-              <div className="mb-4 text-center px-4">
-                <div className="inline-flex items-center glass px-3 sm:px-4 py-2 rounded-full bg-gradient-to-r from-secondary/10 to-accent/10 backdrop-blur-md">
+              <div className="mb-6 text-center px-4">
+                <div className="inline-flex items-center glass px-4 sm:px-6 py-3 rounded-full bg-gradient-to-r from-secondary/10 to-accent/10 backdrop-blur-md shadow-lg">
                   <Languages className="h-4 w-4 sm:h-5 sm:w-5 mr-2 text-secondary" />
-                  <span className="text-xs sm:text-sm font-medium">Personal & Professional Attributes</span>
+                  <span className="text-sm sm:text-base font-semibold bg-gradient-to-r from-secondary to-accent bg-clip-text text-transparent">
+                    Personal & Professional Attributes
+                  </span>
                 </div>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 px-4 sm:px-0">

@@ -2,6 +2,7 @@
 import { useState } from "react";
 import Section from "./section";
 import ProjectCard from "./project-card";
+import SectionHeader from "./ui/section-header";
 import { useScrollAnimation } from "@/hooks/use-scroll-animation";
 
 const projectsData = [
@@ -61,16 +62,15 @@ const ProjectsSection = () => {
       <div className="relative z-10">
         <div 
           ref={headerRef}
-          className={`transition-all duration-1000 ease-out mb-12 ${
+          className={`transition-all duration-1000 ease-out ${
             headerInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
           }`}
         >
-          <h2 className="section-title text-center">
-            Featured Projects
-          </h2>
-          <p className="text-center text-muted-foreground mt-4 text-lg max-w-2xl mx-auto">
-            Explore my portfolio of innovative web applications and software solutions
-          </p>
+          <SectionHeader
+            title="Featured Projects"
+            subtitle="Explore my portfolio of innovative web applications and software solutions that showcase modern development practices and creative problem-solving."
+            variant="elegant"
+          />
         </div>
         
         <div 

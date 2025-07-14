@@ -1,6 +1,7 @@
 
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import Section from "./section";
+import SectionHeader from "./ui/section-header";
 import { CalendarIcon, MapPinIcon, Briefcase } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/use-scroll-animation";
 
@@ -49,9 +50,11 @@ const ExperienceSection = () => {
             headerInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
           }`}
         >
-          <h2 className="section-title mb-8 sm:mb-10 text-center">
-            Work Experience
-          </h2>
+          <SectionHeader
+            title="Work Experience"
+            subtitle="Professional journey showcasing leadership, technical expertise, and successful project delivery across diverse development environments."
+            variant="minimal"
+          />
         </div>
         
         <div 
