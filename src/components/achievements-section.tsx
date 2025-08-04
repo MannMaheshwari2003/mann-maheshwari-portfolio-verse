@@ -1,3 +1,4 @@
+
 import Section from "./section";
 import SectionHeader from "./ui/section-header";
 import GlassCard from "./ui/glass-card";
@@ -39,12 +40,12 @@ const AchievementsSection = () => {
   const { ref: secondRowRef, inView: secondRowInView } = useScrollAnimation({ threshold: 0.2, delay: 200 });
 
   return (
-    <Section id="achievements" className="bg-card/30 relative overflow-hidden">
+    <Section id="achievements" className="bg-card/40 relative overflow-hidden">
       {/* Enhanced gradient backgrounds */}
-      <div className="absolute inset-0 bg-gradient-to-br from-background via-primary/5 to-secondary/5"></div>
-      <div className="absolute top-0 left-1/4 w-32 sm:w-64 h-32 sm:h-64 bg-gradient-conic from-primary/25 via-primary/5 to-transparent rounded-full filter blur-3xl animate-float-orb"></div>
-      <div className="absolute bottom-0 right-1/4 w-24 sm:w-40 h-24 sm:h-40 bg-gradient-conic from-secondary/25 via-secondary/5 to-transparent rounded-full filter blur-3xl animate-float-orb" style={{ animationDelay: '10s' }}></div>
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-20 sm:w-32 h-20 sm:w-32 bg-gradient-radial from-accent/20 via-accent/5 to-transparent rounded-full filter blur-3xl animate-breathe"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-background via-primary/8 to-secondary/8"></div>
+      <div className="absolute top-0 left-1/4 w-32 sm:w-64 h-32 sm:h-64 bg-gradient-conic from-primary/30 via-primary/8 to-transparent rounded-full filter blur-3xl animate-float-orb"></div>
+      <div className="absolute bottom-0 right-1/4 w-24 sm:w-40 h-24 sm:h-40 bg-gradient-conic from-secondary/30 via-secondary/8 to-transparent rounded-full filter blur-3xl animate-float-orb" style={{ animationDelay: '10s' }}></div>
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-20 sm:w-32 h-20 sm:w-32 bg-gradient-radial from-accent/25 via-accent/8 to-transparent rounded-full filter blur-3xl animate-breathe"></div>
       
       <div className="relative z-10">
         <div 
@@ -75,9 +76,9 @@ const AchievementsSection = () => {
                 }`}
                 style={{ transitionDelay: `${index * 150}ms` }}
               >
-                <GlassCard variant="primary" className="p-6 sm:p-8 relative overflow-hidden group hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500">
-                  {/* Gradient overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-secondary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <GlassCard variant="primary" className="p-6 sm:p-8 relative overflow-hidden group hover:shadow-2xl hover:shadow-primary/20 transition-all duration-500 bg-card/60 backdrop-blur-md border-primary/30">
+                  {/* Enhanced gradient overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/15 via-transparent to-secondary/15 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                   
                   <div className="absolute top-4 right-4 z-10">
                     <InteractiveBadge variant="primary" size="sm">
@@ -88,10 +89,10 @@ const AchievementsSection = () => {
                   
                   <div className="mb-4 relative z-10">
                     <div className="flex items-center gap-3 mb-3">
-                      <div className="p-2 rounded-lg bg-gradient-to-br from-primary/30 to-secondary/20 shadow-sm">
-                        <Award className="h-5 w-5 text-primary" />
+                      <div className="p-2 rounded-lg bg-gradient-to-br from-primary/40 to-secondary/30 shadow-md">
+                        <Award className="h-5 w-5 text-primary drop-shadow-sm" />
                       </div>
-                      <h3 className="text-lg sm:text-xl font-semibold bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text">{achievement.title}</h3>
+                      <h3 className="text-lg sm:text-xl font-semibold text-foreground font-heading drop-shadow-sm">{achievement.title}</h3>
                     </div>
                     
                     <InteractiveBadge variant="secondary" size="sm" className="mb-4">
@@ -99,7 +100,7 @@ const AchievementsSection = () => {
                       {achievement.event}
                     </InteractiveBadge>
                     
-                    <p className="text-sm sm:text-base text-foreground/80 leading-relaxed">
+                    <p className="text-sm sm:text-base text-foreground/85 leading-relaxed font-medium">
                       {achievement.description}
                     </p>
                   </div>
@@ -122,9 +123,9 @@ const AchievementsSection = () => {
               }`}
               style={{ transitionDelay: '0ms' }}
             >
-              <GlassCard variant="secondary" className="p-6 sm:p-8 relative overflow-hidden group hover:shadow-2xl hover:shadow-secondary/10 transition-all duration-500">
-                {/* Gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-br from-secondary/10 via-transparent to-accent/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <GlassCard variant="secondary" className="p-6 sm:p-8 relative overflow-hidden group hover:shadow-2xl hover:shadow-secondary/20 transition-all duration-500 bg-card/60 backdrop-blur-md border-secondary/30">
+                {/* Enhanced gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-br from-secondary/15 via-transparent to-accent/15 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 
                 <div className="absolute top-4 right-4 z-10">
                   <InteractiveBadge variant="secondary" size="sm">
@@ -135,10 +136,10 @@ const AchievementsSection = () => {
                 
                 <div className="mb-4 relative z-10">
                   <div className="flex items-center gap-3 mb-3">
-                    <div className="p-2 rounded-lg bg-gradient-to-br from-secondary/30 to-accent/20 shadow-sm">
-                      <Award className="h-5 w-5 text-secondary" />
+                    <div className="p-2 rounded-lg bg-gradient-to-br from-secondary/40 to-accent/30 shadow-md">
+                      <Award className="h-5 w-5 text-secondary drop-shadow-sm" />
                     </div>
-                    <h3 className="text-lg sm:text-xl font-semibold bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text">{achievements[2].title}</h3>
+                    <h3 className="text-lg sm:text-xl font-semibold text-foreground font-heading drop-shadow-sm">{achievements[2].title}</h3>
                   </div>
                   
                   <InteractiveBadge variant="secondary" size="sm" className="mb-4">
@@ -146,7 +147,7 @@ const AchievementsSection = () => {
                     {achievements[2].event}
                   </InteractiveBadge>
                   
-                  <p className="text-sm sm:text-base text-foreground/80 leading-relaxed">
+                  <p className="text-sm sm:text-base text-foreground/85 leading-relaxed font-medium">
                     {achievements[2].description}
                   </p>
                 </div>
@@ -162,7 +163,7 @@ const AchievementsSection = () => {
               }`}
               style={{ transitionDelay: '150ms' }}
             >
-              <GlassCard variant="accent" className="p-6 sm:p-8 relative overflow-hidden group hover:shadow-2xl hover:shadow-accent/20 transition-all duration-500">
+              <GlassCard variant="accent" className="p-6 sm:p-8 relative overflow-hidden group hover:shadow-2xl hover:shadow-accent/30 transition-all duration-500 bg-card/60 backdrop-blur-md border-accent/40">
                 <div className="absolute top-4 right-4 z-20">
                   <InteractiveBadge variant="accent" size="sm">
                     <Star className="h-3 w-3" />
@@ -170,14 +171,14 @@ const AchievementsSection = () => {
                   </InteractiveBadge>
                 </div>
                 
-                <div className="absolute inset-0 bg-gradient-to-br from-accent/15 via-accent/5 to-primary/10 rounded-xl animate-breathe"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-accent/20 via-accent/8 to-primary/15 rounded-xl animate-breathe"></div>
                 
                 <div className="relative z-10">
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="p-2 rounded-lg bg-gradient-to-br from-accent/30 to-primary/20 shadow-sm">
-                      <Award className="h-5 w-5 text-accent" />
+                    <div className="p-2 rounded-lg bg-gradient-to-br from-accent/40 to-primary/30 shadow-md">
+                      <Award className="h-5 w-5 text-accent drop-shadow-sm" />
                     </div>
-                    <h3 className="text-lg sm:text-xl font-semibold bg-gradient-to-r from-accent to-accent/80 bg-clip-text">
+                    <h3 className="text-lg sm:text-xl font-semibold text-foreground font-heading drop-shadow-sm">
                       {achievements[3].title}
                     </h3>
                   </div>
@@ -187,7 +188,7 @@ const AchievementsSection = () => {
                     {achievements[3].event}
                   </InteractiveBadge>
                   
-                  <p className="text-sm sm:text-base text-foreground/80 leading-relaxed">
+                  <p className="text-sm sm:text-base text-foreground/85 leading-relaxed font-medium">
                     {achievements[3].description}
                   </p>
                 </div>

@@ -71,13 +71,13 @@ const EducationSection = () => {
     const iconSize = isMobile ? "h-4 w-4" : "h-5 w-5";
     switch (level) {
       case "postgraduate":
-        return <Award className={`${iconSize} text-accent`} />;
+        return <Award className={`${iconSize} text-accent drop-shadow-sm`} />;
       case "diploma":
-        return <BookOpen className={`${iconSize} text-secondary`} />;
+        return <BookOpen className={`${iconSize} text-secondary drop-shadow-sm`} />;
       case "undergraduate":
-        return <GraduationCap className={`${iconSize} text-primary`} />;
+        return <GraduationCap className={`${iconSize} text-primary drop-shadow-sm`} />;
       default:
-        return <BookOpen className={`${iconSize} text-muted-foreground`} />;
+        return <BookOpen className={`${iconSize} text-foreground/80 drop-shadow-sm`} />;
     }
   };
 
@@ -87,21 +87,21 @@ const EducationSection = () => {
       className={`relative overflow-hidden ${getSectionSpacing()}`}
     >
       {/* Enhanced responsive gradient backgrounds */}
-      <div className="absolute inset-0 bg-gradient-to-br from-background via-card/30 to-background"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-background via-card/40 to-background"></div>
       <div className={`absolute ${
         isMobile 
           ? 'top-20 right-5 w-20 h-20' 
           : isTablet 
             ? 'top-30 right-10 w-32 h-32'
             : 'top-40 right-20 w-40 h-40'
-      } bg-gradient-radial from-primary/15 via-primary/5 to-transparent rounded-full blur-3xl animate-float-orb`}></div>
+      } bg-gradient-radial from-primary/20 via-primary/8 to-transparent rounded-full blur-3xl animate-float-orb`}></div>
       <div className={`absolute ${
         isMobile 
           ? 'bottom-10 left-5 w-24 h-24' 
           : isTablet
             ? 'bottom-15 left-10 w-40 h-40'
             : 'bottom-20 left-20 w-60 h-60'
-      } bg-gradient-radial from-secondary/15 via-secondary/5 to-transparent rounded-full blur-3xl animate-float-orb`} 
+      } bg-gradient-radial from-secondary/20 via-secondary/8 to-transparent rounded-full blur-3xl animate-float-orb`} 
       style={{ animationDelay: '15s' }}></div>
       
       <div className="relative z-10">
@@ -141,19 +141,19 @@ const EducationSection = () => {
                   {index !== educationData.length - 1 && (
                     <div className={`absolute ${
                       isMobile ? 'left-3 top-12 w-px h-12' : 'left-6 top-16 w-px h-16'
-                    } bg-gradient-to-b from-primary/40 via-secondary/30 to-transparent`}></div>
+                    } bg-gradient-to-b from-primary/50 via-secondary/40 to-transparent`}></div>
                   )}
                   
                   <GlassCard 
                     variant={getStatusVariant(item.status)}
                     className={`${
                       isMobile ? 'p-4' : isTablet ? 'p-6' : 'p-8'
-                    } relative overflow-hidden hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500 group`}
+                    } relative overflow-hidden hover:shadow-2xl hover:shadow-primary/20 transition-all duration-500 group bg-card/60 backdrop-blur-md border-primary/30`}
                   >
-                    {/* Gradient overlay on hover */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    {/* Enhanced gradient overlay on hover */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-primary/10 via-transparent to-secondary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                     
-                    {/* Responsive timeline dot */}
+                    {/* Enhanced responsive timeline dot */}
                     <div className={`absolute ${
                       isMobile ? '-left-1.5 top-4 w-3 h-3' : '-left-2 top-6 w-4 h-4'
                     } rounded-full bg-gradient-to-r from-primary to-secondary border-4 border-background shadow-lg`}></div>
@@ -166,7 +166,7 @@ const EducationSection = () => {
                       <div className="flex items-center gap-3">
                         <div className={`${
                           isMobile ? 'p-1.5' : 'p-2'
-                        } rounded-lg bg-gradient-to-br from-background to-card border border-white/10 shadow-sm`}>
+                        } rounded-lg bg-gradient-to-br from-card to-card/80 border border-primary/20 shadow-md`}>
                           {getLevelIcon(item.level)}
                         </div>
                         <InteractiveBadge variant="primary" size={isMobile ? "sm" : "md"}>
@@ -179,7 +179,7 @@ const EducationSection = () => {
                         <div className="flex items-center gap-2 mb-2 flex-wrap">
                           <h3 className={`${
                             isMobile ? 'text-base' : isTablet ? 'text-lg' : 'text-xl'
-                          } font-semibold bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text leading-tight`}>
+                          } font-semibold text-foreground font-heading leading-tight drop-shadow-sm`}>
                             {item.title}
                           </h3>
                           {item.status === "current" && (
@@ -191,7 +191,7 @@ const EducationSection = () => {
                         
                         <p className={`${
                           isMobile ? 'text-sm' : 'text-base'
-                        } text-muted-foreground mb-2 leading-relaxed`}>
+                        } text-foreground/85 mb-2 leading-relaxed font-medium drop-shadow-sm`}>
                           {item.subtitle}
                         </p>
                         

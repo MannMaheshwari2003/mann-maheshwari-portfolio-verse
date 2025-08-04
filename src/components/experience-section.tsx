@@ -103,9 +103,9 @@ const ExperienceSection = () => {
                 }`}
                 style={{ transitionDelay: `${index * 200}ms` }}
               >
-                <Card className={`glass-card overflow-hidden border-primary/10 hover:border-primary/30 transition-all duration-500 group relative h-full ${cardLayout.cardPadding}`}>
-                  {/* Gradient overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <Card className={`glass-card overflow-hidden border-primary/20 hover:border-primary/40 transition-all duration-500 group relative h-full ${cardLayout.cardPadding} bg-card/50 backdrop-blur-md`}>
+                  {/* Enhanced gradient overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-primary/10 via-transparent to-secondary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                   
                   <CardHeader className={`${isMobile ? 'pb-3 pt-4' : 'pb-4 pt-6'} relative z-10`}>
                     <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-primary via-secondary to-accent"></div>
@@ -114,38 +114,38 @@ const ExperienceSection = () => {
                       <div className={`flex ${isMobile || orientation === 'portrait' ? 'flex-col gap-3' : 'flex-row justify-between items-start gap-4'}`}>
                         <div className="flex-1">
                           <div className="mb-2 flex items-center">
-                            <div className={`p-2 rounded-md bg-gradient-to-br from-primary/20 to-secondary/10 mr-3 shadow-sm ${
+                            <div className={`p-2 rounded-md bg-gradient-to-br from-primary/30 to-secondary/20 mr-3 shadow-md ${
                               isMobile ? 'p-1.5' : 'p-2'
                             }`}>
-                              <Briefcase className={`${isMobile ? 'h-3 w-3' : 'h-4 w-4'} text-primary`} />
+                              <Briefcase className={`${isMobile ? 'h-3 w-3' : 'h-4 w-4'} text-primary drop-shadow-sm`} />
                             </div>
                             <h3 className={`${
                               isMobile ? 'text-base' : 'text-lg'
-                            } font-heading font-semibold bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text`}>
+                            } font-heading font-bold text-foreground drop-shadow-sm`}>
                               {exp.title}
                             </h3>
                           </div>
                           <p className={`${
                             isMobile ? 'text-sm ml-8' : 'text-base ml-10'
-                          } text-gradient font-medium`}>
+                          } text-primary/90 font-semibold drop-shadow-sm`}>
                             {exp.company}
                           </p>
                         </div>
                         
                         <div className={`flex ${
                           isMobile ? 'flex-row gap-2 ml-8' : 'flex-col lg:flex-row gap-2'
-                        } text-sm text-muted-foreground`}>
+                        } text-sm`}>
                           <div className={`flex items-center glass ${
                             isMobile ? 'py-1 px-2' : 'py-1 px-3'
-                          } rounded-full hover:bg-primary/10 transition-colors duration-300`}>
+                          } rounded-full hover:bg-primary/20 transition-colors duration-300 bg-card/60 border border-primary/20`}>
                             <CalendarIcon className="h-3 w-3 mr-1.5 text-primary" />
-                            <span className="text-xs">{exp.period}</span>
+                            <span className="text-xs text-foreground/90 font-medium">{exp.period}</span>
                           </div>
                           <div className={`flex items-center glass ${
                             isMobile ? 'py-1 px-2' : 'py-1 px-3'
-                          } rounded-full hover:bg-secondary/10 transition-colors duration-300`}>
-                            <MapPinIcon className="h-3 w-3 mr-1.5 text-primary" />
-                            <span className="text-xs">{exp.location}</span>
+                          } rounded-full hover:bg-secondary/20 transition-colors duration-300 bg-card/60 border border-secondary/20`}>
+                            <MapPinIcon className="h-3 w-3 mr-1.5 text-secondary" />
+                            <span className="text-xs text-foreground/90 font-medium">{exp.location}</span>
                           </div>
                         </div>
                       </div>
@@ -156,10 +156,10 @@ const ExperienceSection = () => {
                     <ul className={`space-y-2 ${isMobile ? 'ml-4' : 'ml-6'}`}>
                       {exp.description.map((item, i) => (
                         <li key={i} className="flex items-start gap-3 group/item">
-                          <span className="inline-block h-1.5 w-1.5 rounded-full bg-gradient-to-r from-primary to-secondary mt-2 flex-shrink-0 group-hover/item:scale-125 transition-transform duration-300"></span>
+                          <span className="inline-block h-1.5 w-1.5 rounded-full bg-gradient-to-r from-primary to-secondary mt-2 flex-shrink-0 group-hover/item:scale-125 transition-transform duration-300 shadow-sm"></span>
                           <span className={`${
                             isMobile ? 'text-xs' : 'text-sm'
-                          } group-hover/item:text-foreground transition-colors duration-300 leading-relaxed`}>
+                          } text-foreground/85 group-hover/item:text-foreground transition-colors duration-300 leading-relaxed font-medium`}>
                             {item}
                           </span>
                         </li>

@@ -4,47 +4,47 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Enhanced CSS custom properties for better theming */
+/* Enhanced CSS custom properties for better theming and visibility */
 @layer base {
   :root {
-    /* Core colors */
+    /* Core colors with enhanced contrast */
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
     
-    /* UI components */
-    --card: 222.2 84% 4.9%;
+    /* UI components with better visibility */
+    --card: 222.2 84% 6%;
     --card-foreground: 210 40% 98%;
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
     
-    /* Primary brand colors */
-    --primary: 262 83% 58%;
+    /* Enhanced primary brand colors */
+    --primary: 262 83% 65%;
     --primary-foreground: 210 20% 98%;
     
-    /* Secondary colors */
-    --secondary: 217 32% 17%;
+    /* Enhanced secondary colors */
+    --secondary: 217 32% 20%;
     --secondary-foreground: 210 40% 98%;
     
-    /* Muted variations */
-    --muted: 217 32% 17%;
-    --muted-foreground: 215 20.2% 65.1%;
+    /* Enhanced muted variations */
+    --muted: 217 32% 20%;
+    --muted-foreground: 215 20.2% 70%;
     
-    /* Accent color */
-    --accent: 142 71% 45%;
+    /* Enhanced accent color */
+    --accent: 142 71% 50%;
     --accent-foreground: 210 20% 98%;
     
     /* Semantic colors */
     --destructive: 0 72% 51%;
     --destructive-foreground: 210 20% 98%;
     
-    /* Borders and inputs */
-    --border: 217 32% 17%;
-    --input: 217 32% 17%;
-    --ring: 262 83% 58%;
+    /* Enhanced borders and inputs */
+    --border: 217 32% 20%;
+    --input: 217 32% 20%;
+    --ring: 262 83% 65%;
     
     /* Chart colors */
-    --chart-1: 262 83% 58%;
-    --chart-2: 142 71% 45%;
+    --chart-1: 262 83% 65%;
+    --chart-2: 142 71% 50%;
     --chart-3: 346 77% 49%;
     --chart-4: 203 89% 53%;
     --chart-5: 27 87% 67%;
@@ -69,32 +69,32 @@
   .dark {
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
+    --card: 222.2 84% 6%;
     --card-foreground: 210 40% 98%;
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
-    --primary: 262 83% 58%;
+    --primary: 262 83% 65%;
     --primary-foreground: 210 20% 98%;
-    --secondary: 217 32% 17%;
+    --secondary: 217 32% 20%;
     --secondary-foreground: 210 40% 98%;
-    --muted: 217 32% 17%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 142 71% 45%;
+    --muted: 217 32% 20%;
+    --muted-foreground: 215 20.2% 70%;
+    --accent: 142 71% 50%;
     --accent-foreground: 210 20% 98%;
     --destructive: 0 72% 51%;
     --destructive-foreground: 210 20% 98%;
-    --border: 217 32% 17%;
-    --input: 217 32% 17%;
-    --ring: 262 83% 58%;
-    --chart-1: 262 83% 58%;
-    --chart-2: 142 71% 45%;
+    --border: 217 32% 20%;
+    --input: 217 32% 20%;
+    --ring: 262 83% 65%;
+    --chart-1: 262 83% 65%;
+    --chart-2: 142 71% 50%;
     --chart-3: 346 77% 49%;
     --chart-4: 203 89% 53%;
     --chart-5: 27 87% 67%;
   }
 }
 
-/* Enhanced base styles with better responsive typography */
+/* Enhanced base styles with better responsive typography and visibility */
 @layer base {
   * {
     @apply border-border;
@@ -106,17 +106,21 @@
     @apply bg-background text-foreground font-sans;
     text-rendering: optimizeLegibility;
     overflow-x: hidden;
+    /* Enhanced text contrast */
+    text-shadow: 0 0 1px rgba(255, 255, 255, 0.1);
   }
   
   html {
     scroll-behavior: smooth;
   }
 
-  /* Enhanced responsive typography scale */
+  /* Enhanced responsive typography scale with better visibility */
   .font-heading {
     font-family: 'Space Grotesk', sans-serif;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
     letter-spacing: -0.025em;
+    /* Enhanced text contrast for headings */
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
   }
   
   .font-sans {
@@ -124,45 +128,47 @@
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   }
 
-  /* Responsive text sizing */
+  /* Enhanced responsive text sizing with better contrast */
   @media (max-width: 640px) {
-    h1 { @apply text-2xl; }
-    h2 { @apply text-xl; }
-    h3 { @apply text-lg; }
+    h1 { @apply text-2xl; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2); }
+    h2 { @apply text-xl; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); }
+    h3 { @apply text-lg; text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1); }
     p { @apply text-sm; }
   }
 
   @media (min-width: 641px) and (max-width: 768px) {
-    h1 { @apply text-3xl; }
-    h2 { @apply text-2xl; }
-    h3 { @apply text-xl; }
+    h1 { @apply text-3xl; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); }
+    h2 { @apply text-2xl; text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); }
+    h3 { @apply text-xl; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); }
     p { @apply text-base; }
   }
 }
 
-/* Enhanced utility classes with better responsive support */
+/* Enhanced utility classes with better responsive support and visibility */
 @layer utilities {
-  /* Enhanced glass morphism effects */
+  /* Enhanced glass morphism effects with better visibility */
   .glass {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
   }
   
   .glass-card {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0.08);
     backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
   }
 
-  /* Enhanced gradient utilities */
+  /* Enhanced gradient utilities with better visibility */
   .text-gradient {
     background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--secondary)) 50%, hsl(var(--accent)) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    /* Fallback for better visibility */
+    color: hsl(var(--primary));
   }
   
   .bg-gradient-radial {
@@ -173,7 +179,7 @@
     background: conic-gradient(var(--tw-gradient-stops));
   }
 
-  /* Enhanced responsive animations */
+  /* Enhanced responsive animations with better performance */
   .animate-fade-in {
     animation: fadeIn 0.6s ease-out forwards;
   }
@@ -190,16 +196,18 @@
     animation: floatOrb 20s ease-in-out infinite;
   }
 
-  /* Enhanced hover effects with better touch support */
+  /* Enhanced hover effects with better touch support and visibility */
   .hover-scale {
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
   
   .hover-scale:hover {
     transform: scale(1.05);
+    /* Enhanced shadow for better visibility */
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
   }
   
-  /* Touch device optimizations */
+  /* Touch device optimizations with enhanced feedback */
   @media (hover: none) and (pointer: coarse) {
     .hover-scale:hover {
       transform: none;
@@ -207,10 +215,12 @@
     
     .hover-scale:active {
       transform: scale(0.95);
+      /* Enhanced active state feedback */
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2), 0 4px 6px -2px rgba(0, 0, 0, 0.1);
     }
   }
 
-  /* Enhanced underline animation */
+  /* Enhanced underline animation with better visibility */
   .animated-underline {
     position: relative;
   }
@@ -224,6 +234,8 @@
     left: 0;
     background: linear-gradient(90deg, hsl(var(--primary)), hsl(var(--accent)));
     transition: width 0.3s ease-in-out;
+    /* Enhanced shadow for better visibility */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   }
   
   .animated-underline:hover::after {
@@ -266,13 +278,29 @@
     @apply gap-4 sm:gap-6 lg:gap-8;
   }
 
-  /* Touch-friendly sizing */
+  /* Touch-friendly sizing with enhanced visibility */
   .touch-target {
     @apply min-h-[44px] min-w-[44px];
   }
+
+  /* Enhanced text visibility utilities */
+  .text-high-contrast {
+    color: hsl(var(--foreground));
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  }
+  
+  .text-medium-contrast {
+    color: hsl(var(--foreground) / 0.9);
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  }
+  
+  .text-subtle {
+    color: hsl(var(--foreground) / 0.8);
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  }
 }
 
-/* Enhanced keyframe animations with better performance */
+/* Enhanced keyframe animations with better performance and visibility */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -297,11 +325,11 @@
 
 @keyframes breathe {
   0%, 100% {
-    opacity: 0.6;
+    opacity: 0.7;
     transform: scale(1);
   }
   50% {
-    opacity: 0.8;
+    opacity: 0.9;
     transform: scale(1.05);
   }
 }
@@ -318,7 +346,7 @@
   }
 }
 
-/* Enhanced media queries for better responsive design */
+/* Enhanced media queries for better responsive design and visibility */
 @media (max-width: 640px) {
   .animate-float-orb {
     animation-duration: 15s;
@@ -326,6 +354,12 @@
   
   .glass, .glass-card {
     backdrop-filter: blur(8px);
+    background: rgba(255, 255, 255, 0.1);
+  }
+  
+  /* Enhanced mobile text visibility */
+  body {
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
   }
 }
 
@@ -346,8 +380,14 @@
   
   .glass,
   .glass-card {
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.95);
     backdrop-filter: none;
+  }
+  
+  /* Enhanced print text visibility */
+  * {
+    color: #000 !important;
+    text-shadow: none !important;
   }
 }
 
@@ -365,18 +405,19 @@
   }
 }
 
-/* Enhanced focus styles for accessibility */
+/* Enhanced focus styles for accessibility and visibility */
 :focus-visible {
-  outline: 2px solid hsl(var(--primary));
+  outline: 3px solid hsl(var(--primary));
   outline-offset: 2px;
   border-radius: 4px;
+  box-shadow: 0 0 0 2px hsl(var(--background)), 0 0 0 5px hsl(var(--primary) / 0.3);
 }
 
 /* Enhanced high contrast mode support */
 @media (prefers-contrast: high) {
   .glass,
   .glass-card {
-    background: rgba(0, 0, 0, 0.9);
+    background: rgba(0, 0, 0, 0.95);
     border: 2px solid hsl(var(--primary));
   }
   
@@ -385,5 +426,24 @@
     -webkit-background-clip: unset;
     -webkit-text-fill-color: unset;
     color: hsl(var(--primary));
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  }
+  
+  /* Enhanced high contrast text visibility */
+  * {
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8) !important;
+  }
+}
+
+/* Enhanced dark mode support for better visibility */
+@media (prefers-color-scheme: dark) {
+  body {
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  }
+  
+  .glass,
+  .glass-card {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
   }
 }
