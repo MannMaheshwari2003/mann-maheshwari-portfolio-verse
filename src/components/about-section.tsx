@@ -5,12 +5,27 @@ import GlassCard from "./ui/glass-card";
 import AnimatedCounter from "./ui/animated-counter";
 import { CheckCircle, Code, Lightbulb, Users, Trophy, Calendar } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/use-scroll-animation";
+import { useResponsive } from "@/hooks/use-responsive";
 
 const AboutSection = () => {
   const { ref: headerRef, inView: headerInView } = useScrollAnimation();
   const { ref: statsRef, inView: statsInView } = useScrollAnimation({ delay: 200 });
   const { ref: contentRef, inView: contentInView } = useScrollAnimation({ delay: 400 });
   const { ref: featuresRef, inView: featuresInView } = useScrollAnimation({ delay: 600 });
+  
+  const { isMobile, isTablet, getResponsiveValue } = useResponsive();
+
+  const gridCols = getResponsiveValue({
+    xs: 'grid-cols-2',
+    sm: 'grid-cols-2', 
+    lg: 'grid-cols-4'
+  }) || 'grid-cols-2';
+
+  const spacing = getResponsiveValue({
+    xs: 'gap-4',
+    sm: 'gap-6',
+    lg: 'gap-8'
+  }) || 'gap-4';
 
   const features = [
     {
@@ -64,10 +79,10 @@ const AboutSection = () => {
           />
         </div>
         
-        {/* Enhanced Stats Section with better styling */}
+        {/* Enhanced Stats Section with better responsive styling */}
         <div 
           ref={statsRef}
-          className={`grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-16 max-w-4xl mx-auto transition-all duration-1000 ease-out ${
+          className={`grid ${gridCols} ${spacing} mb-12 sm:mb-16 max-w-4xl mx-auto transition-all duration-1000 ease-out ${
             statsInView 
               ? 'opacity-100 translate-y-0' 
               : 'opacity-0 translate-y-10'
@@ -82,10 +97,14 @@ const AboutSection = () => {
             >
               <div className="absolute inset-0 bg-gradient-to-r from-primary/8 to-secondary/8 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               <div className="relative z-10">
-                <div className="text-2xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent mb-2">
+                <div className={`${
+                  isMobile ? 'text-2xl' : 'text-2xl sm:text-3xl lg:text-4xl'
+                } font-bold bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent mb-2`}>
                   {statsInView && <AnimatedCounter end={stat.number} suffix={stat.suffix} />}
                 </div>
-                <div className="text-xs sm:text-sm font-medium text-muted-foreground uppercase tracking-wide">
+                <div className={`${
+                  isMobile ? 'text-xs' : 'text-xs sm:text-sm'
+                } font-medium text-muted-foreground uppercase tracking-wide`}>
                   {stat.label}
                 </div>
               </div>
@@ -93,10 +112,10 @@ const AboutSection = () => {
           ))}
         </div>
         
-        <div className="grid lg:grid-cols-3 gap-8 sm:gap-12">
+        <div className={`grid ${isMobile ? 'gap-8' : 'lg:grid-cols-3 gap-8 sm:gap-12'}`}>
           <div 
             ref={contentRef}
-            className={`lg:col-span-2 order-2 lg:order-1 transition-all duration-1000 ease-out ${
+            className={`${isMobile ? 'order-2' : 'lg:col-span-2 order-2 lg:order-1'} transition-all duration-1000 ease-out ${
               contentInView 
                 ? 'opacity-100 translate-x-0' 
                 : 'opacity-0 -translate-x-10'
@@ -135,7 +154,7 @@ const AboutSection = () => {
           
           <div 
             ref={featuresRef}
-            className={`space-y-4 sm:space-y-6 order-1 lg:order-2 transition-all duration-1000 ease-out ${
+            className={`space-y-4 sm:space-y-6 ${isMobile ? 'order-1' : 'order-1 lg:order-2'} transition-all duration-1000 ease-out ${
               featuresInView 
                 ? 'opacity-100 translate-x-0' 
                 : 'opacity-0 translate-x-10'

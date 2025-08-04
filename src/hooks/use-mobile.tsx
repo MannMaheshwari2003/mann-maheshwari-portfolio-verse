@@ -40,10 +40,32 @@ export function useDeviceType() {
   const isMobile = useIsMobile()
   const isTablet = useIsTablet()
   
+  const deviceType = React.useMemo(() => {
+    if (isMobile) return 'mobile'
+    if (isTablet) return 'tablet'
+    return 'desktop'
+  }, [isMobile, isTablet])
+  
   return {
     isMobile,
     isTablet,
     isDesktop: !isMobile && !isTablet,
-    deviceType: isMobile ? 'mobile' : isTablet ? 'tablet' : 'desktop'
+    deviceType
   }
+}
+
+export function useTouchDevice() {
+  const [isTouchDevice, setIsTouchDevice] = React.useState(false)
+
+  React.useEffect(() => {
+    const checkTouchDevice = () => {
+      setIsTouchDevice('ontouchstart' in window || navigator.maxTouchPoints > 0)
+    }
+    
+    checkTouchDevice()
+    window.addEventListener('resize', checkTouchDevice)
+    return () => window.removeEventListener('resize', checkTouchDevice)
+  }, [])
+
+  return isTouchDevice
 }

@@ -1,3 +1,4 @@
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
 
 @tailwind base;
@@ -52,6 +53,19 @@
 
   html {
     scroll-behavior: smooth;
+    font-size: 16px;
+  }
+
+  @media (max-width: 640px) {
+    html {
+      font-size: 14px;
+    }
+  }
+
+  @media (min-width: 1536px) {
+    html {
+      font-size: 18px;
+    }
   }
 
   * {
@@ -70,6 +84,8 @@
     /* Improve touch scrolling on mobile */
     -webkit-overflow-scrolling: touch;
     overscroll-behavior: none;
+    /* Prevent zoom on input focus on iOS */
+    -webkit-text-size-adjust: 100%;
   }
 
   /* Enhanced typography hierarchy with better responsive scaling */
@@ -78,10 +94,12 @@
     color: hsl(var(--foreground));
     letter-spacing: -0.02em;
     line-height: 1.1;
+    text-wrap: balance;
   }
 
   h1 {
     @apply text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black;
+    letter-spacing: -0.03em;
   }
 
   h2 {
@@ -107,6 +125,7 @@
   p {
     line-height: 1.7;
     color: hsl(var(--muted-foreground));
+    text-wrap: pretty;
   }
 
   /* Enhanced gradient text effects */
@@ -141,6 +160,7 @@
     animation: gradientShift 8s ease-in-out infinite;
     filter: drop-shadow(0 4px 8px hsl(var(--primary) / 0.15));
     letter-spacing: -0.03em;
+    text-wrap: balance;
   }
 
   .section-title::after {
@@ -171,7 +191,7 @@
   }
 }
 
-/* Enhanced animations */
+/* Enhanced animations with better performance */
 @keyframes breathe {
   0%, 100% {
     transform: scale(1) rotate(0deg);
@@ -300,10 +320,12 @@
   }
 }
 
-/* Enhanced utility classes with touch-friendly interactions */
+/* Enhanced utility classes with better touch support */
 .touch-manipulation {
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .animate-breathe {
@@ -355,7 +377,9 @@
 
 /* Enhanced button styles with better touch targets */
 .btn-gradient {
-  @apply relative overflow-hidden transition-all duration-500 min-h-[44px] min-w-[44px];
+  @apply relative overflow-hidden transition-all duration-500;
+  min-height: 44px;
+  min-width: 44px;
   background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)), hsl(var(--accent)));
   background-size: 300% 300%;
   animation: gradientShift 8s ease-in-out infinite;
@@ -366,6 +390,13 @@
   background-position: 100% 0;
   transform: translateY(-2px) scale(1.02);
   box-shadow: 0 15px 35px hsl(var(--primary) / 0.4);
+}
+
+@media (max-width: 768px) {
+  .btn-gradient {
+    min-height: 48px;
+    min-width: 48px;
+  }
 }
 
 /* Enhanced glass effects with better performance */
@@ -404,18 +435,25 @@
 }
 
 /* Responsive spacing utilities */
-@responsive {
-  .container-padding {
-    @apply px-4 sm:px-6 lg:px-8;
-  }
-  
-  .section-padding {
-    @apply py-12 sm:py-16 lg:py-20 xl:py-24;
-  }
-  
-  .card-padding {
-    @apply p-4 sm:p-6 lg:p-8;
-  }
+.container-padding {
+  @apply px-4 sm:px-6 lg:px-8 xl:px-12;
+}
+
+.section-padding {
+  @apply py-12 sm:py-16 lg:py-20 xl:py-24;
+}
+
+.card-padding {
+  @apply p-4 sm:p-6 lg:p-8;
+}
+
+/* Mobile-first responsive grid utilities */
+.responsive-grid {
+  @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 lg:gap-8;
+}
+
+.responsive-flex {
+  @apply flex flex-col sm:flex-row gap-4 sm:gap-6 lg:gap-8;
 }
 
 /* Performance optimizations and reduced motion */
@@ -456,9 +494,16 @@
     background: hsl(var(--card));
     border-width: 2px;
   }
+  
+  .text-gradient,
+  .text-gradient-2,
+  .section-title {
+    -webkit-text-fill-color: hsl(var(--foreground));
+    color: hsl(var(--foreground));
+  }
 }
 
-/* Enhanced scrollbar */
+/* Enhanced scrollbar with mobile support */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -478,10 +523,44 @@
   background: linear-gradient(135deg, hsl(var(--primary) / 0.9), hsl(var(--secondary) / 0.9));
 }
 
-/* Enhanced focus styles */
+/* Enhanced focus styles for better accessibility */
 :focus-visible {
   outline: 2px solid hsl(var(--primary));
   outline-offset: 2px;
   border-radius: 4px;
   box-shadow: 0 0 0 4px hsl(var(--primary) / 0.1);
+}
+
+/* Mobile touch improvements */
+@media (max-width: 768px) {
+  button, 
+  [role="button"], 
+  input[type="submit"], 
+  input[type="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  a {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+}
+
+/* Safe area padding for mobile devices */
+@supports (padding: max(0px)) {
+  .safe-area-padding {
+    padding-left: max(16px, env(safe-area-inset-left));
+    padding-right: max(16px, env(safe-area-inset-right));
+    padding-bottom: max(16px, env(safe-area-inset-bottom));
+  }
+}
+
+/* Improved text readability on mobile */
+@media (max-width: 640px) {
+  p, li, span {
+    font-size: 16px;
+    line-height: 1.6;
+  }
 }

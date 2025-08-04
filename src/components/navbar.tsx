@@ -3,16 +3,28 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "./theme-toggle";
 import { Menu, X } from "lucide-react";
+import { useResponsive } from "@/hooks/use-responsive";
+import { useTouchDevice } from "@/hooks/use-mobile";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("hero");
+  const { isMobile, isTablet, getResponsiveValue } = useResponsive();
+  const isTouchDevice = useTouchDevice();
+
+  const containerPadding = getResponsiveValue({
+    xs: 'px-4',
+    sm: 'px-6',
+    lg: 'px-8',
+    xl: 'px-12'
+  }) || 'px-4';
 
   useEffect(() => {
     const handleScroll = () => {
       // Update scroll state
-      if (window.scrollY > 50) {
+      const scrollThreshold = isMobile ? 30 : 50;
+      if (window.scrollY > scrollThreshold) {
         setIsScrolled(true);
       } else {
         setIsScrolled(false);
@@ -20,7 +32,7 @@ const Navbar = () => {
       
       // Scroll spy functionality
       const sections = document.querySelectorAll('section[id]');
-      const scrollPosition = window.scrollY + 100;
+      const scrollPosition = window.scrollY + (isMobile ? 80 : 100);
       
       sections.forEach((section) => {
         const sectionId = section.getAttribute('id') as string;
@@ -33,11 +45,11 @@ const Navbar = () => {
       });
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [isMobile]);
 
   // Close mobile menu when clicking outside
   useEffect(() => {
@@ -48,19 +60,15 @@ const Navbar = () => {
       }
     };
 
-    document.addEventListener('click', handleClickOutside);
-    return () => document.removeEventListener('click', handleClickOutside);
-  }, [isMenuOpen]);
-
-  // Prevent scroll when mobile menu is open
-  useEffect(() => {
     if (isMenuOpen) {
+      document.addEventListener('click', handleClickOutside);
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = 'unset';
     }
     
     return () => {
+      document.removeEventListener('click', handleClickOutside);
       document.body.style.overflow = 'unset';
     };
   }, [isMenuOpen]);
@@ -78,21 +86,32 @@ const Navbar = () => {
     setIsMenuOpen(false);
     const element = document.querySelector(href);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      const offset = isMobile ? 80 : 100;
+      const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+      window.scrollTo({
+        top: elementPosition - offset,
+        behavior: 'smooth'
+      });
     }
   };
 
   return (
     <header 
       className={`fixed w-full z-50 transition-all duration-500 ease-out animate-fade-in ${
-        isScrolled ? 'glass backdrop-blur-xl py-2 shadow-lg border-b border-border/50' : 'bg-transparent py-3 lg:py-6'
+        isScrolled 
+          ? 'glass backdrop-blur-xl py-2 shadow-lg border-b border-border/50' 
+          : `bg-transparent ${isMobile ? 'py-3' : 'py-3 lg:py-6'}`
       }`}
       style={{ animationDelay: '0s' }}
     >
-      <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
+      <div className={`container mx-auto ${containerPadding} flex items-center justify-between`}>
         <button 
           onClick={() => handleNavClick("#hero")}
-          className="text-lg md:text-xl font-bold font-heading animate-fade-in hover:scale-105 transition-transform duration-300 touch-manipulation"
+          className={`${
+            isMobile ? 'text-lg' : 'text-lg md:text-xl'
+          } font-bold font-heading animate-fade-in hover:scale-105 transition-transform duration-300 ${
+            isTouchDevice ? 'touch-manipulation' : ''
+          }`}
           style={{ animationDelay: '0.2s' }}
         >
           <span className="text-gradient">Mann</span>
@@ -105,7 +124,9 @@ const Navbar = () => {
             <button
               key={link.href}
               onClick={() => handleNavClick(link.href)}
-              className={`text-sm font-medium transition-all duration-300 animated-underline animate-fade-in hover:scale-105 touch-manipulation ${
+              className={`text-sm font-medium transition-all duration-300 animated-underline animate-fade-in hover:scale-105 ${
+                isTouchDevice ? 'touch-manipulation' : ''
+              } ${
                 activeSection === link.href.substring(1) 
                   ? 'text-primary font-semibold' 
                   : 'text-foreground/80 hover:text-foreground'
@@ -131,7 +152,9 @@ const Navbar = () => {
             variant="ghost" 
             size="sm" 
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="mobile-menu-trigger p-2 hover:bg-accent/10 touch-manipulation"
+            className={`mobile-menu-trigger p-2 hover:bg-accent/10 ${
+              isTouchDevice ? 'touch-manipulation min-h-[44px] min-w-[44px]' : ''
+            }`}
             aria-label="Toggle menu"
             aria-expanded={isMenuOpen}
           >
@@ -146,18 +169,23 @@ const Navbar = () => {
 
       {/* Mobile Menu Overlay */}
       {isMenuOpen && (
-        <div className="lg:hidden fixed inset-0 z-40 bg-background/80 backdrop-blur-md animate-fade-in">
+        <div className="lg:hidden fixed inset-0 z-40 bg-background/95 backdrop-blur-lg animate-fade-in">
           <div 
-            className="mobile-menu fixed top-16 left-0 right-0 bottom-0 bg-card/95 backdrop-blur-xl border-t border-border/50 shadow-2xl"
-            style={{ top: isScrolled ? '60px' : '80px' }}
+            className="mobile-menu fixed left-0 right-0 bottom-0 bg-card/98 backdrop-blur-xl border-t border-border/50 shadow-2xl rounded-t-3xl"
+            style={{ 
+              top: isScrolled ? '68px' : '84px',
+              maxHeight: `calc(100vh - ${isScrolled ? '68px' : '84px'})`
+            }}
           >
-            <div className="container mx-auto py-8 px-6 h-full overflow-y-auto">
-              <div className="flex flex-col space-y-6">
+            <div className="container mx-auto py-6 px-6 h-full overflow-y-auto">
+              <div className="flex flex-col space-y-4">
                 {navLinks.map((link, index) => (
                   <button
                     key={link.href}
                     onClick={() => handleNavClick(link.href)}
-                    className={`text-left text-lg font-medium py-4 px-6 rounded-xl transition-all duration-300 animate-fade-in touch-manipulation hover:scale-105 ${
+                    className={`text-left text-lg font-medium py-4 px-6 rounded-2xl transition-all duration-300 animate-fade-in ${
+                      isTouchDevice ? 'touch-manipulation min-h-[56px]' : ''
+                    } hover:scale-[1.02] ${
                       activeSection === link.href.substring(1)
                         ? 'bg-primary/20 text-primary font-semibold border border-primary/30 shadow-lg' 
                         : 'hover:bg-accent/10 hover:text-foreground border border-transparent'

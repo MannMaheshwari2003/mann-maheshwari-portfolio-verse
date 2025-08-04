@@ -36,6 +36,7 @@ export function useResponsive() {
     }
 
     window.addEventListener('resize', handleResize);
+    handleResize(); // Call once to set initial size
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
@@ -43,6 +44,7 @@ export function useResponsive() {
   const isTablet = windowSize.width >= breakpoints.md && windowSize.width < breakpoints.lg;
   const isDesktop = windowSize.width >= breakpoints.lg;
   const isLargeDesktop = windowSize.width >= breakpoints.xl;
+  const isExtraLarge = windowSize.width >= breakpoints['2xl'];
 
   const getCurrentBreakpoint = (): BreakpointKey => {
     if (windowSize.width >= breakpoints['2xl']) return '2xl';
@@ -57,14 +59,28 @@ export function useResponsive() {
     return windowSize.width >= breakpoints[breakpoint];
   };
 
+  const getResponsiveValue = <T,>(values: Partial<Record<BreakpointKey, T>>): T | undefined => {
+    const currentBreakpoint = getCurrentBreakpoint();
+    const breakpointOrder: BreakpointKey[] = ['2xl', 'xl', 'lg', 'md', 'sm', 'xs'];
+    
+    for (const bp of breakpointOrder) {
+      if (windowSize.width >= breakpoints[bp] && values[bp] !== undefined) {
+        return values[bp];
+      }
+    }
+    return undefined;
+  };
+
   return {
     windowSize,
     isMobile,
     isTablet,
     isDesktop,
     isLargeDesktop,
+    isExtraLarge,
     getCurrentBreakpoint,
     isBreakpoint,
+    getResponsiveValue,
     breakpoints,
   };
 }
