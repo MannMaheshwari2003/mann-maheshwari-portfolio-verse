@@ -5,7 +5,6 @@ import GlassCard from "./ui/glass-card";
 import InteractiveBadge from "./ui/interactive-badge";
 import { Calendar, GraduationCap, BookOpen, Award } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/use-scroll-animation";
-import { useResponsive } from "@/hooks/use-responsive";
 
 const educationData = [
   {
@@ -53,56 +52,30 @@ const educationData = [
 const EducationSection = () => {
   const { ref: headerRef, inView: headerInView } = useScrollAnimation({ threshold: 0.3 });
   const { ref: timelineRef, inView: timelineInView } = useScrollAnimation({ threshold: 0.2 });
-  
-  const { 
-    getContainerClasses, 
-    getSectionSpacing, 
-    isMobile, 
-    isTablet, 
-    orientation,
-    isDesktop
-  } = useResponsive();
 
   const getStatusVariant = (status: string) => {
     return status === "current" ? "accent" : "primary";
   };
 
   const getLevelIcon = (level: string) => {
-    const iconSize = isMobile ? "h-4 w-4" : "h-5 w-5";
     switch (level) {
       case "postgraduate":
-        return <Award className={`${iconSize} text-accent drop-shadow-sm`} />;
+        return <Award className="h-5 w-5 text-accent" />;
       case "diploma":
-        return <BookOpen className={`${iconSize} text-secondary drop-shadow-sm`} />;
+        return <BookOpen className="h-5 w-5 text-secondary" />;
       case "undergraduate":
-        return <GraduationCap className={`${iconSize} text-primary drop-shadow-sm`} />;
+        return <GraduationCap className="h-5 w-5 text-primary" />;
       default:
-        return <BookOpen className={`${iconSize} text-foreground/80 drop-shadow-sm`} />;
+        return <BookOpen className="h-5 w-5 text-muted-foreground" />;
     }
   };
 
   return (
-    <Section 
-      id="education" 
-      className={`relative overflow-hidden ${getSectionSpacing()}`}
-    >
-      {/* Enhanced responsive gradient backgrounds */}
-      <div className="absolute inset-0 bg-gradient-to-br from-background via-card/40 to-background"></div>
-      <div className={`absolute ${
-        isMobile 
-          ? 'top-20 right-5 w-20 h-20' 
-          : isTablet 
-            ? 'top-30 right-10 w-32 h-32'
-            : 'top-40 right-20 w-40 h-40'
-      } bg-gradient-radial from-primary/20 via-primary/8 to-transparent rounded-full blur-3xl animate-float-orb`}></div>
-      <div className={`absolute ${
-        isMobile 
-          ? 'bottom-10 left-5 w-24 h-24' 
-          : isTablet
-            ? 'bottom-15 left-10 w-40 h-40'
-            : 'bottom-20 left-20 w-60 h-60'
-      } bg-gradient-radial from-secondary/20 via-secondary/8 to-transparent rounded-full blur-3xl animate-float-orb`} 
-      style={{ animationDelay: '15s' }}></div>
+    <Section id="education" className="relative overflow-hidden">
+      {/* Enhanced gradient backgrounds */}
+      <div className="absolute inset-0 bg-gradient-to-br from-background via-card/30 to-background"></div>
+      <div className="absolute top-40 right-10 sm:right-20 w-24 sm:w-40 h-24 sm:h-40 bg-gradient-radial from-primary/15 via-primary/5 to-transparent rounded-full blur-3xl animate-float-orb"></div>
+      <div className="absolute bottom-20 left-10 sm:left-20 w-32 sm:w-60 h-32 sm:h-60 bg-gradient-radial from-secondary/15 via-secondary/5 to-transparent rounded-full blur-3xl animate-float-orb" style={{ animationDelay: '15s' }}></div>
       
       <div className="relative z-10">
         <div 
@@ -117,95 +90,71 @@ const EducationSection = () => {
           />
         </div>
         
-        <div className={getContainerClasses()}>
-          <div className="max-w-5xl mx-auto">
-            <div 
-              ref={timelineRef}
-              className={`${
-                isMobile || (isTablet && orientation === 'portrait')
-                  ? 'space-y-4' 
-                  : 'space-y-6 lg:space-y-8'
-              }`}
-            >
-              {educationData.map((item, index) => (
-                <div 
-                  key={index} 
-                  className={`relative transition-all duration-700 ease-out ${
-                    timelineInView 
-                      ? 'opacity-100 translate-y-0 translate-x-0' 
-                      : `opacity-0 translate-y-8 ${index % 2 === 0 ? '-translate-x-8' : 'translate-x-8'}`
-                  }`}
-                  style={{ transitionDelay: `${index * 150}ms` }}
+        <div className="max-w-4xl mx-auto">
+          <div 
+            ref={timelineRef}
+            className="space-y-6 sm:space-y-8"
+          >
+            {educationData.map((item, index) => (
+              <div 
+                key={index} 
+                className={`relative transition-all duration-700 ease-out ${
+                  timelineInView 
+                    ? 'opacity-100 translate-y-0 translate-x-0' 
+                    : `opacity-0 translate-y-8 ${index % 2 === 0 ? '-translate-x-8' : 'translate-x-8'}`
+                }`}
+                style={{ transitionDelay: `${index * 150}ms` }}
+              >
+                {/* Timeline connector with gradient */}
+                {index !== educationData.length - 1 && (
+                  <div className="absolute left-4 sm:left-6 top-16 w-px h-16 bg-gradient-to-b from-primary/40 via-secondary/30 to-transparent"></div>
+                )}
+                
+                <GlassCard 
+                  variant={getStatusVariant(item.status)}
+                  className="p-6 sm:p-8 relative overflow-hidden hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500 group"
                 >
-                  {/* Enhanced responsive timeline connector */}
-                  {index !== educationData.length - 1 && (
-                    <div className={`absolute ${
-                      isMobile ? 'left-3 top-12 w-px h-12' : 'left-6 top-16 w-px h-16'
-                    } bg-gradient-to-b from-primary/50 via-secondary/40 to-transparent`}></div>
-                  )}
+                  {/* Gradient overlay on hover */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                   
-                  <GlassCard 
-                    variant={getStatusVariant(item.status)}
-                    className={`${
-                      isMobile ? 'p-4' : isTablet ? 'p-6' : 'p-8'
-                    } relative overflow-hidden hover:shadow-2xl hover:shadow-primary/20 transition-all duration-500 group bg-card/60 backdrop-blur-md border-primary/30`}
-                  >
-                    {/* Enhanced gradient overlay on hover */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-primary/10 via-transparent to-secondary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                    
-                    {/* Enhanced responsive timeline dot */}
-                    <div className={`absolute ${
-                      isMobile ? '-left-1.5 top-4 w-3 h-3' : '-left-2 top-6 w-4 h-4'
-                    } rounded-full bg-gradient-to-r from-primary to-secondary border-4 border-background shadow-lg`}></div>
-                    
-                    <div className={`flex ${
-                      isMobile || orientation === 'portrait' 
-                        ? 'flex-col gap-3' 
-                        : 'flex-row gap-6'
-                    } relative z-10`}>
-                      <div className="flex items-center gap-3">
-                        <div className={`${
-                          isMobile ? 'p-1.5' : 'p-2'
-                        } rounded-lg bg-gradient-to-br from-card to-card/80 border border-primary/20 shadow-md`}>
-                          {getLevelIcon(item.level)}
-                        </div>
-                        <InteractiveBadge variant="primary" size={isMobile ? "sm" : "md"}>
-                          <Calendar className={isMobile ? "h-2 w-2" : "h-3 w-3"} />
-                          {item.year}
-                        </InteractiveBadge>
+                  {/* Timeline dot with gradient */}
+                  <div className="absolute -left-2 top-6 w-4 h-4 rounded-full bg-gradient-to-r from-primary to-secondary border-4 border-background shadow-lg"></div>
+                  
+                  <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 relative z-10">
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 rounded-lg bg-gradient-to-br from-background to-card border border-white/10 shadow-sm">
+                        {getLevelIcon(item.level)}
                       </div>
-                      
-                      <div className="flex-1">
-                        <div className="flex items-center gap-2 mb-2 flex-wrap">
-                          <h3 className={`${
-                            isMobile ? 'text-base' : isTablet ? 'text-lg' : 'text-xl'
-                          } font-semibold text-foreground font-heading leading-tight drop-shadow-sm`}>
-                            {item.title}
-                          </h3>
-                          {item.status === "current" && (
-                            <InteractiveBadge variant="accent" size="sm">
-                              Current
-                            </InteractiveBadge>
-                          )}
-                        </div>
-                        
-                        <p className={`${
-                          isMobile ? 'text-sm' : 'text-base'
-                        } text-foreground/85 mb-2 leading-relaxed font-medium drop-shadow-sm`}>
-                          {item.subtitle}
-                        </p>
-                        
-                        {item.description && (
-                          <InteractiveBadge variant="secondary" size="sm">
-                            {item.description}
+                      <InteractiveBadge variant="primary" size="sm">
+                        <Calendar className="h-3 w-3" />
+                        {item.year}
+                      </InteractiveBadge>
+                    </div>
+                    
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-2">
+                        <h3 className="text-lg sm:text-xl font-semibold bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text">{item.title}</h3>
+                        {item.status === "current" && (
+                          <InteractiveBadge variant="accent" size="sm">
+                            Current
                           </InteractiveBadge>
                         )}
                       </div>
+                      
+                      <p className="text-sm sm:text-base text-muted-foreground mb-2">
+                        {item.subtitle}
+                      </p>
+                      
+                      {item.description && (
+                        <InteractiveBadge variant="secondary" size="sm">
+                          {item.description}
+                        </InteractiveBadge>
+                      )}
                     </div>
-                  </GlassCard>
-                </div>
-              ))}
-            </div>
+                  </div>
+                </GlassCard>
+              </div>
+            ))}
           </div>
         </div>
       </div>

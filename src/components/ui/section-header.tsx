@@ -33,24 +33,23 @@ const SectionHeader = ({
     <div className={cn("mb-12 sm:mb-16 lg:mb-20", centered && "text-center", className)}>
       <div className="relative inline-block">
         <h2 className={cn(
-          "relative z-10 font-heading mb-4 sm:mb-6 text-foreground",
-          "drop-shadow-lg",
+          "relative z-10 font-heading mb-4 sm:mb-6",
+          "bg-gradient-to-r from-foreground via-primary to-secondary bg-clip-text text-transparent",
+          "drop-shadow-sm",
           getVariantStyles()
         )}>
-          <span className="bg-gradient-to-r from-foreground via-foreground/90 to-foreground/95 bg-clip-text text-transparent">
-            {title}
-          </span>
+          {title}
         </h2>
         
-        {/* Enhanced decorative underline */}
-        <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-16 sm:w-20 h-1 bg-gradient-to-r from-primary via-secondary to-accent rounded-full opacity-90 shadow-lg"></div>
+        {/* Decorative underline */}
+        <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-16 sm:w-20 h-1 bg-gradient-to-r from-primary via-secondary to-accent rounded-full opacity-80"></div>
         
-        {/* Enhanced glow effect */}
-        <div className="absolute inset-0 bg-gradient-to-r from-primary/15 via-secondary/15 to-accent/15 blur-xl -z-10 opacity-40"></div>
+        {/* Subtle glow effect */}
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/10 via-secondary/10 to-accent/10 blur-xl -z-10 opacity-30"></div>
       </div>
       
       {subtitle && (
-        <p className="text-foreground/85 text-base sm:text-lg lg:text-xl max-w-3xl mx-auto mt-4 sm:mt-6 leading-relaxed font-medium drop-shadow-sm">
+        <p className="text-muted-foreground text-base sm:text-lg lg:text-xl max-w-3xl mx-auto mt-4 sm:mt-6 leading-relaxed font-medium">
           {subtitle}
         </p>
       )}

@@ -10,18 +10,19 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("hero");
-  
-  const { 
-    isMobile, 
-    isTablet, 
-    orientation, 
-    getContainerClasses,
-    deviceType 
-  } = useResponsive();
+  const { isMobile, isTablet, getResponsiveValue } = useResponsive();
   const isTouchDevice = useTouchDevice();
+
+  const containerPadding = getResponsiveValue({
+    xs: 'px-4',
+    sm: 'px-6',
+    lg: 'px-8',
+    xl: 'px-12'
+  }) || 'px-4';
 
   useEffect(() => {
     const handleScroll = () => {
+      // Update scroll state
       const scrollThreshold = isMobile ? 30 : 50;
       if (window.scrollY > scrollThreshold) {
         setIsScrolled(true);
@@ -29,7 +30,7 @@ const Navbar = () => {
         setIsScrolled(false);
       }
       
-      // Enhanced scroll spy functionality
+      // Scroll spy functionality
       const sections = document.querySelectorAll('section[id]');
       const scrollPosition = window.scrollY + (isMobile ? 80 : 100);
       
@@ -50,7 +51,7 @@ const Navbar = () => {
     };
   }, [isMobile]);
 
-  // Enhanced mobile menu handling
+  // Close mobile menu when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as Element;
@@ -59,15 +60,8 @@ const Navbar = () => {
       }
     };
 
-    const handleEscape = (event: KeyboardEvent) => {
-      if (event.key === 'Escape' && isMenuOpen) {
-        setIsMenuOpen(false);
-      }
-    };
-
     if (isMenuOpen) {
       document.addEventListener('click', handleClickOutside);
-      document.addEventListener('keydown', handleEscape);
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = 'unset';
@@ -75,7 +69,6 @@ const Navbar = () => {
     
     return () => {
       document.removeEventListener('click', handleClickOutside);
-      document.removeEventListener('keydown', handleEscape);
       document.body.style.overflow = 'unset';
     };
   }, [isMenuOpen]);
@@ -102,26 +95,20 @@ const Navbar = () => {
     }
   };
 
-  const getNavbarPadding = () => {
-    if (isMobile) return 'py-3';
-    if (isTablet) return 'py-4';
-    return isScrolled ? 'py-2' : 'py-6';
-  };
-
   return (
     <header 
       className={`fixed w-full z-50 transition-all duration-500 ease-out animate-fade-in ${
         isScrolled 
-          ? 'glass backdrop-blur-xl shadow-lg border-b border-border/50' 
-          : 'bg-transparent'
-      } ${getNavbarPadding()}`}
+          ? 'glass backdrop-blur-xl py-2 shadow-lg border-b border-border/50' 
+          : `bg-transparent ${isMobile ? 'py-3' : 'py-3 lg:py-6'}`
+      }`}
       style={{ animationDelay: '0s' }}
     >
-      <div className={`${getContainerClasses()} flex items-center justify-between`}>
+      <div className={`container mx-auto ${containerPadding} flex items-center justify-between`}>
         <button 
           onClick={() => handleNavClick("#hero")}
           className={`${
-            isMobile ? 'text-base' : isTablet ? 'text-lg' : 'text-xl'
+            isMobile ? 'text-lg' : 'text-lg md:text-xl'
           } font-bold font-heading animate-fade-in hover:scale-105 transition-transform duration-300 ${
             isTouchDevice ? 'touch-manipulation' : ''
           }`}
@@ -131,7 +118,7 @@ const Navbar = () => {
           <span className="mx-2">Maheshwari</span>
         </button>
 
-        {/* Enhanced desktop navigation */}
+        {/* Desktop Navigation */}
         <nav className="hidden lg:flex items-center space-x-6 xl:space-x-8">
           {navLinks.map((link, index) => (
             <button
@@ -158,7 +145,7 @@ const Navbar = () => {
           </div>
         </nav>
 
-        {/* Enhanced mobile navigation */}
+        {/* Mobile Navigation */}
         <div className="lg:hidden flex items-center space-x-3">
           <ThemeToggle />
           <Button 
@@ -180,29 +167,23 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Enhanced mobile menu overlay with improved responsiveness */}
+      {/* Mobile Menu Overlay */}
       {isMenuOpen && (
         <div className="lg:hidden fixed inset-0 z-40 bg-background/95 backdrop-blur-lg animate-fade-in">
           <div 
-            className={`mobile-menu fixed left-0 right-0 bottom-0 bg-card/98 backdrop-blur-xl border-t border-border/50 shadow-2xl ${
-              isMobile ? 'rounded-t-2xl' : 'rounded-t-3xl'
-            }`}
+            className="mobile-menu fixed left-0 right-0 bottom-0 bg-card/98 backdrop-blur-xl border-t border-border/50 shadow-2xl rounded-t-3xl"
             style={{ 
-              top: isScrolled ? (isMobile ? '64px' : '72px') : (isMobile ? '76px' : '88px'),
-              maxHeight: `calc(100vh - ${isScrolled ? (isMobile ? '64px' : '72px') : (isMobile ? '76px' : '88px')})`
+              top: isScrolled ? '68px' : '84px',
+              maxHeight: `calc(100vh - ${isScrolled ? '68px' : '84px'})`
             }}
           >
-            <div className={`${
-              getContainerClasses()
-            } h-full overflow-y-auto ${isMobile ? 'py-4' : 'py-6'}`}>
-              <div className={`flex flex-col ${isMobile ? 'space-y-2' : 'space-y-4'}`}>
+            <div className="container mx-auto py-6 px-6 h-full overflow-y-auto">
+              <div className="flex flex-col space-y-4">
                 {navLinks.map((link, index) => (
                   <button
                     key={link.href}
                     onClick={() => handleNavClick(link.href)}
-                    className={`text-left ${
-                      isMobile ? 'text-base py-3 px-4' : 'text-lg py-4 px-6'
-                    } font-medium rounded-2xl transition-all duration-300 animate-fade-in ${
+                    className={`text-left text-lg font-medium py-4 px-6 rounded-2xl transition-all duration-300 animate-fade-in ${
                       isTouchDevice ? 'touch-manipulation min-h-[56px]' : ''
                     } hover:scale-[1.02] ${
                       activeSection === link.href.substring(1)
