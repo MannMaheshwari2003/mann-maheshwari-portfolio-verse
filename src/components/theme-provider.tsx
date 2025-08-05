@@ -1,5 +1,5 @@
 
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState, useCallback } from "react";
 
 type Theme = "dark" | "light" | "system";
 
@@ -13,12 +13,14 @@ type ThemeProviderState = {
   theme: Theme;
   setTheme: (theme: Theme) => void;
   actualTheme: "dark" | "light";
+  isSystemTheme: boolean;
 };
 
 const initialState: ThemeProviderState = {
   theme: "system",
   setTheme: () => null,
   actualTheme: "light",
+  isSystemTheme: false,
 };
 
 const ThemeProviderContext = createContext<ThemeProviderState>(initialState);
@@ -29,66 +31,84 @@ export function ThemeProvider({
   storageKey = "vite-ui-theme",
   ...props
 }: ThemeProviderProps) {
-  const [theme, setTheme] = useState<Theme>(
-    () => (localStorage.getItem(storageKey) as Theme) || defaultTheme
-  );
+  const [theme, setTheme] = useState<Theme>(() => {
+    if (typeof window === "undefined") return defaultTheme;
+    
+    const stored = localStorage.getItem(storageKey) as Theme;
+    return stored || defaultTheme;
+  });
 
-  const [actualTheme, setActualTheme] = useState<"dark" | "light">("light");
+  const [actualTheme, setActualTheme] = useState<"dark" | "light">(() => {
+    if (typeof window === "undefined") return "light";
+    
+    const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    const hour = new Date().getHours();
+    const timeBasedTheme = (hour >= 18 || hour < 6) ? "dark" : "light";
+    
+    return theme === "system" ? systemTheme : timeBasedTheme;
+  });
 
-  useEffect(() => {
+  const applyTheme = useCallback((resolvedTheme: "dark" | "light") => {
     const root = window.document.documentElement;
+    
+    // Smooth transition
+    root.style.setProperty('transition', 'background-color 0.3s ease, color 0.3s ease');
+    
     root.classList.remove("light", "dark");
+    root.classList.add(resolvedTheme);
+    
+    setActualTheme(resolvedTheme);
 
+    // Update meta theme color for mobile browsers
+    const metaThemeColor = document.querySelector('meta[name="theme-color"]');
+    if (metaThemeColor) {
+      metaThemeColor.setAttribute('content', resolvedTheme === 'dark' ? 'hsl(222.2 84% 4.9%)' : 'hsl(0 0% 100%)');
+    }
+
+    // Clean up transition after animation
+    setTimeout(() => {
+      root.style.removeProperty('transition');
+    }, 300);
+  }, []);
+
+  // Handle theme changes and system preferences
+  useEffect(() => {
     let resolvedTheme: "dark" | "light";
 
     if (theme === "system") {
-      const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
-        .matches
-        ? "dark"
-        : "light";
+      const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
       resolvedTheme = systemTheme;
-      root.classList.add(systemTheme);
     } else {
       resolvedTheme = theme;
-      root.classList.add(theme);
     }
 
-    setActualTheme(resolvedTheme);
-
-    // Add smooth theme transition
-    root.style.setProperty('--theme-transition', '0.3s ease-in-out');
-    
-    // Enhanced color scheme meta tag
-    const metaThemeColor = document.querySelector('meta[name="theme-color"]');
-    if (metaThemeColor) {
-      metaThemeColor.setAttribute('content', resolvedTheme === 'dark' ? '#0f0f0f' : '#ffffff');
-    }
-  }, [theme]);
+    applyTheme(resolvedTheme);
+  }, [theme, applyTheme]);
 
   // Listen for system theme changes
   useEffect(() => {
-    if (theme === "system") {
-      const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-      const handleChange = () => {
-        const root = window.document.documentElement;
-        root.classList.remove("light", "dark");
-        const systemTheme = mediaQuery.matches ? "dark" : "light";
-        root.classList.add(systemTheme);
-        setActualTheme(systemTheme);
-      };
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    
+    const handleSystemThemeChange = (e: MediaQueryListEvent) => {
+      if (theme === "system") {
+        applyTheme(e.matches ? "dark" : "light");
+      }
+    };
 
-      mediaQuery.addEventListener("change", handleChange);
-      return () => mediaQuery.removeEventListener("change", handleChange);
-    }
-  }, [theme]);
+    mediaQuery.addEventListener("change", handleSystemThemeChange);
+    return () => mediaQuery.removeEventListener("change", handleSystemThemeChange);
+  }, [theme, applyTheme]);
+
+  const optimizedSetTheme = useCallback((newTheme: Theme) => {
+    localStorage.setItem(storageKey, newTheme);
+    setTheme(newTheme);
+  }, [storageKey]);
 
   const value = {
     theme,
     actualTheme,
-    setTheme: (theme: Theme) => {
-      localStorage.setItem(storageKey, theme);
-      setTheme(theme);
-    },
+    isSystemTheme: theme === "system",
+    setTheme: optimizedSetTheme,
   };
 
   return (
