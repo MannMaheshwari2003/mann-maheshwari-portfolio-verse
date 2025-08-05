@@ -46,7 +46,7 @@ const InteractiveBadge = ({
           variant === "accent" && "bg-accent/30",
           variant === "gradient" && "bg-gradient-to-r from-primary/30 via-secondary/30 to-accent/30"
         )} />
-      }
+      )}
       
       <span 
         className={cn(
