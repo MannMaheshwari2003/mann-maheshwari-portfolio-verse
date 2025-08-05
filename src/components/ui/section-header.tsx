@@ -23,7 +23,7 @@ const SectionHeader = ({
       case "elegant":
         return "text-3xl md:text-5xl lg:text-6xl font-light tracking-wide";
       case "minimal":
-        return "text-2xl md:text-3xl lg:text-4xl font-medium";
+        return "text-2xl md:text-3xl lg:text-4xl font-bold";
       default:
         return "text-3xl md:text-5xl lg:text-6xl font-bold";
     }
@@ -32,39 +32,39 @@ const SectionHeader = ({
   return (
     <div className={cn("mb-12 sm:mb-16 lg:mb-20", centered && "text-center", className)}>
       <div className="relative inline-block group">
-        {/* Enhanced main title with better gradient */}
+        {/* Enhanced main title with stronger visibility */}
         <h2 className={cn(
           "relative z-10 font-heading mb-4 sm:mb-6 transition-all duration-500",
           "bg-gradient-to-r from-foreground via-primary to-secondary bg-clip-text text-transparent",
-          "drop-shadow-sm group-hover:drop-shadow-md",
-          "animate-fade-in",
+          "drop-shadow-lg group-hover:drop-shadow-xl",
+          "animate-fade-in font-extrabold",
           getVariantStyles()
         )}>
           {title}
         </h2>
         
-        {/* Enhanced decorative elements */}
-        <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 flex items-center gap-2 opacity-80 group-hover:opacity-100 transition-opacity duration-300">
-          <div className="w-8 sm:w-12 h-1 bg-gradient-to-r from-primary to-secondary rounded-full"></div>
-          <div className="w-2 h-2 bg-gradient-to-r from-secondary to-accent rounded-full animate-pulse"></div>
-          <div className="w-8 sm:w-12 h-1 bg-gradient-to-r from-secondary to-accent rounded-full"></div>
+        {/* Enhanced decorative elements with better visibility */}
+        <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 flex items-center gap-2 opacity-90 group-hover:opacity-100 transition-opacity duration-300">
+          <div className="w-8 sm:w-12 h-1.5 bg-gradient-to-r from-primary to-secondary rounded-full shadow-lg"></div>
+          <div className="w-2.5 h-2.5 bg-gradient-to-r from-secondary to-accent rounded-full animate-pulse shadow-md"></div>
+          <div className="w-8 sm:w-12 h-1.5 bg-gradient-to-r from-secondary to-accent rounded-full shadow-lg"></div>
         </div>
         
-        {/* Enhanced glow effect */}
-        <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 blur-2xl -z-10 opacity-0 group-hover:opacity-40 transition-all duration-500 scale-110"></div>
+        {/* Enhanced glow effect with stronger presence */}
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/30 via-secondary/30 to-accent/30 blur-2xl -z-10 opacity-0 group-hover:opacity-60 transition-all duration-500 scale-110"></div>
         
-        {/* Subtle border glow */}
-        <div className="absolute -inset-1 bg-gradient-to-r from-primary/30 via-secondary/30 to-accent/30 rounded-lg blur-sm opacity-0 group-hover:opacity-20 transition-all duration-500 -z-20"></div>
+        {/* Stronger border glow */}
+        <div className="absolute -inset-1 bg-gradient-to-r from-primary/40 via-secondary/40 to-accent/40 rounded-lg blur-sm opacity-0 group-hover:opacity-30 transition-all duration-500 -z-20"></div>
       </div>
       
       {subtitle && (
         <div className="relative mt-6 sm:mt-8">
-          <p className="text-muted-foreground text-base sm:text-lg lg:text-xl max-w-3xl mx-auto leading-relaxed font-medium animate-fade-in backdrop-blur-sm">
+          <p className="text-muted-foreground text-base sm:text-lg lg:text-xl max-w-3xl mx-auto leading-relaxed font-semibold animate-fade-in backdrop-blur-sm">
             {subtitle}
           </p>
           
-          {/* Subtle highlight for subtitle */}
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/5 to-transparent rounded-lg blur-xl opacity-50"></div>
+          {/* Enhanced highlight for subtitle */}
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/10 to-transparent rounded-lg blur-xl opacity-70"></div>
         </div>
       )}
     </div>
