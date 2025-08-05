@@ -7,66 +7,83 @@
 /* Enhanced CSS custom properties for better theming */
 @layer base {
   :root {
-    /* Core colors */
+    /* Enhanced theme transition */
+    --theme-transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    /* Core colors with better contrast */
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
     
-    /* UI components */
+    /* UI components with enhanced depth */
     --card: 222.2 84% 4.9%;
     --card-foreground: 210 40% 98%;
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
     
-    /* Primary brand colors */
+    /* Primary brand colors with better saturation */
     --primary: 262 83% 58%;
     --primary-foreground: 210 20% 98%;
+    --primary-rgb: 139, 92, 246;
     
     /* Secondary colors */
     --secondary: 217 32% 17%;
     --secondary-foreground: 210 40% 98%;
+    --secondary-rgb: 71, 85, 105;
     
     /* Muted variations */
     --muted: 217 32% 17%;
     --muted-foreground: 215 20.2% 65.1%;
     
-    /* Accent color */
+    /* Accent color with better visibility */
     --accent: 142 71% 45%;
     --accent-foreground: 210 20% 98%;
+    --accent-rgb: 34, 197, 94;
     
     /* Semantic colors */
     --destructive: 0 72% 51%;
     --destructive-foreground: 210 20% 98%;
     
-    /* Borders and inputs */
+    /* Borders and inputs with subtle enhancement */
     --border: 217 32% 17%;
     --input: 217 32% 17%;
     --ring: 262 83% 58%;
     
-    /* Chart colors */
+    /* Chart colors for better data visualization */
     --chart-1: 262 83% 58%;
     --chart-2: 142 71% 45%;
     --chart-3: 346 77% 49%;
     --chart-4: 203 89% 53%;
     --chart-5: 27 87% 67%;
     
-    /* Enhanced responsive breakpoints */
-    --breakpoint-xs: 0px;
-    --breakpoint-sm: 640px;
-    --breakpoint-md: 768px;
-    --breakpoint-lg: 1024px;
-    --breakpoint-xl: 1280px;
-    --breakpoint-2xl: 1536px;
-    
-    /* Enhanced spacing scale */
-    --spacing-xs: 0.25rem;
-    --spacing-sm: 0.5rem;
-    --spacing-md: 1rem;
-    --spacing-lg: 1.5rem;
-    --spacing-xl: 2rem;
-    --spacing-2xl: 3rem;
+    /* Enhanced radius for modern look */
+    --radius: 0.75rem;
+  }
+
+  .light {
+    /* Light mode with enhanced contrast */
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 262 83% 58%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222.2 84% 4.9%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 142 71% 45%;
+    --accent-foreground: 222.2 84% 4.9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 262 83% 58%;
   }
 
   .dark {
+    /* Dark mode colors remain the same as root */
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
     --card: 222.2 84% 4.9%;
@@ -86,33 +103,30 @@
     --border: 217 32% 17%;
     --input: 217 32% 17%;
     --ring: 262 83% 58%;
-    --chart-1: 262 83% 58%;
-    --chart-2: 142 71% 45%;
-    --chart-3: 346 77% 49%;
-    --chart-4: 203 89% 53%;
-    --chart-5: 27 87% 67%;
   }
 }
 
-/* Enhanced base styles with better responsive typography */
+/* Enhanced base styles with better performance */
 @layer base {
   * {
     @apply border-border;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    transition: color var(--theme-transition), background-color var(--theme-transition), border-color var(--theme-transition);
   }
   
   body {
     @apply bg-background text-foreground font-sans;
     text-rendering: optimizeLegibility;
     overflow-x: hidden;
+    scroll-behavior: smooth;
   }
   
   html {
     scroll-behavior: smooth;
   }
 
-  /* Enhanced responsive typography scale */
+  /* Enhanced typography with better hierarchy */
   .font-heading {
     font-family: 'Space Grotesk', sans-serif;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
@@ -124,45 +138,56 @@
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   }
 
-  /* Responsive text sizing */
+  /* Enhanced responsive typography */
   @media (max-width: 640px) {
-    h1 { @apply text-2xl; }
-    h2 { @apply text-xl; }
-    h3 { @apply text-lg; }
-    p { @apply text-sm; }
+    h1 { @apply text-2xl leading-tight; }
+    h2 { @apply text-xl leading-snug; }
+    h3 { @apply text-lg leading-normal; }
+    p { @apply text-sm leading-relaxed; }
   }
 
   @media (min-width: 641px) and (max-width: 768px) {
-    h1 { @apply text-3xl; }
-    h2 { @apply text-2xl; }
-    h3 { @apply text-xl; }
-    p { @apply text-base; }
+    h1 { @apply text-3xl leading-tight; }
+    h2 { @apply text-2xl leading-snug; }
+    h3 { @apply text-xl leading-normal; }
+    p { @apply text-base leading-relaxed; }
+  }
+
+  @media (min-width: 769px) {
+    h1 { @apply text-4xl leading-tight; }
+    h2 { @apply text-3xl leading-snug; }
+    h3 { @apply text-2xl leading-normal; }
+    p { @apply text-lg leading-relaxed; }
   }
 }
 
-/* Enhanced utility classes with better responsive support */
+/* Enhanced utility classes with modern effects */
 @layer utilities {
   /* Enhanced glass morphism effects */
   .glass {
     background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-  }
-  
-  .glass-card {
-    background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(16px);
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    transition: all var(--theme-transition);
+  }
+  
+  .glass-card {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    transition: all var(--theme-transition);
   }
 
-  /* Enhanced gradient utilities */
+  /* Enhanced gradient utilities with better performance */
   .text-gradient {
     background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--secondary)) 50%, hsl(var(--accent)) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    background-size: 200% 200%;
+    animation: gradientShift 3s ease-in-out infinite;
   }
   
   .bg-gradient-radial {
@@ -173,26 +198,10 @@
     background: conic-gradient(var(--tw-gradient-stops));
   }
 
-  /* Enhanced responsive animations */
-  .animate-fade-in {
-    animation: fadeIn 0.6s ease-out forwards;
-  }
-  
-  .animate-fade-in-scale {
-    animation: fadeInScale 0.8s ease-out forwards;
-  }
-  
-  .animate-breathe {
-    animation: breathe 4s ease-in-out infinite;
-  }
-  
-  .animate-float-orb {
-    animation: floatOrb 20s ease-in-out infinite;
-  }
-
   /* Enhanced hover effects with better touch support */
   .hover-scale {
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
   }
   
   .hover-scale:hover {
@@ -207,12 +216,14 @@
     
     .hover-scale:active {
       transform: scale(0.95);
+      transition-duration: 0.1s;
     }
   }
 
-  /* Enhanced underline animation */
+  /* Enhanced underline animation with better performance */
   .animated-underline {
     position: relative;
+    overflow: hidden;
   }
   
   .animated-underline::after {
@@ -223,56 +234,37 @@
     bottom: -4px;
     left: 0;
     background: linear-gradient(90deg, hsl(var(--primary)), hsl(var(--accent)));
-    transition: width 0.3s ease-in-out;
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: width;
   }
   
   .animated-underline:hover::after {
     width: 100%;
   }
 
-  /* Enhanced responsive utilities */
-  .container-responsive {
-    @apply container mx-auto;
-    @apply px-4 sm:px-6 lg:px-8 xl:px-12;
-  }
-  
-  .section-padding {
-    @apply py-12 sm:py-16 lg:py-20 xl:py-24;
-  }
-  
-  .card-padding {
-    @apply p-4 sm:p-6 lg:p-8;
-  }
-
-  /* Enhanced mobile-first grid utilities */
-  .grid-responsive-1 {
-    @apply grid grid-cols-1;
-  }
-  
-  .grid-responsive-2 {
-    @apply grid grid-cols-1 sm:grid-cols-2;
-  }
-  
-  .grid-responsive-3 {
-    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3;
-  }
-  
-  .grid-responsive-4 {
-    @apply grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4;
-  }
-
-  /* Enhanced gap utilities */
-  .gap-responsive {
-    @apply gap-4 sm:gap-6 lg:gap-8;
-  }
-
-  /* Touch-friendly sizing */
-  .touch-target {
-    @apply min-h-[44px] min-w-[44px];
+  /* Enhanced scroll indicator */
+  .scroll-indicator {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, hsl(var(--primary)), hsl(var(--secondary)), hsl(var(--accent)));
+    transform-origin: left;
+    z-index: 9999;
   }
 }
 
 /* Enhanced keyframe animations with better performance */
+@keyframes gradientShift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -287,7 +279,7 @@
 @keyframes fadeInScale {
   from {
     opacity: 0;
-    transform: translateY(20px) scale(0.9);
+    transform: translateY(20px) scale(0.95);
   }
   to {
     opacity: 1;
@@ -318,39 +310,6 @@
   }
 }
 
-/* Enhanced media queries for better responsive design */
-@media (max-width: 640px) {
-  .animate-float-orb {
-    animation-duration: 15s;
-  }
-  
-  .glass, .glass-card {
-    backdrop-filter: blur(8px);
-  }
-}
-
-@media (min-width: 641px) and (max-width: 1024px) {
-  .animate-float-orb {
-    animation-duration: 18s;
-  }
-}
-
-/* Enhanced print styles */
-@media print {
-  .animate-fade-in,
-  .animate-fade-in-scale,
-  .animate-breathe,
-  .animate-float-orb {
-    animation: none;
-  }
-  
-  .glass,
-  .glass-card {
-    background: rgba(255, 255, 255, 0.9);
-    backdrop-filter: none;
-  }
-}
-
 /* Enhanced accessibility improvements */
 @media (prefers-reduced-motion: reduce) {
   * {
@@ -359,9 +318,11 @@
     transition-duration: 0.01ms !important;
   }
   
-  .animate-breathe,
-  .animate-float-orb {
+  .text-gradient {
     animation: none;
+    background: hsl(var(--primary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 }
 
@@ -369,15 +330,16 @@
 :focus-visible {
   outline: 2px solid hsl(var(--primary));
   outline-offset: 2px;
-  border-radius: 4px;
+  border-radius: calc(var(--radius) * 0.5);
 }
 
 /* Enhanced high contrast mode support */
 @media (prefers-contrast: high) {
   .glass,
   .glass-card {
-    background: rgba(0, 0, 0, 0.9);
+    background: hsl(var(--card));
     border: 2px solid hsl(var(--primary));
+    backdrop-filter: none;
   }
   
   .text-gradient {
