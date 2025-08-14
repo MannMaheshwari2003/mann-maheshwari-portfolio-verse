@@ -14,20 +14,14 @@ const Navbar = () => {
   const { 
     isMobile, 
     isTablet, 
-    orientation, 
     getContainerClasses,
-    deviceType 
   } = useResponsive();
   const isTouchDevice = useTouchDevice();
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollThreshold = isMobile ? 30 : 50;
-      if (window.scrollY > scrollThreshold) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
+      const scrollThreshold = isMobile ? 20 : 40;
+      setIsScrolled(window.scrollY > scrollThreshold);
       
       // Enhanced scroll spy functionality
       const sections = document.querySelectorAll('section[id]');
@@ -45,9 +39,7 @@ const Navbar = () => {
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, [isMobile]);
 
   // Enhanced mobile menu handling
@@ -105,14 +97,14 @@ const Navbar = () => {
   const getNavbarPadding = () => {
     if (isMobile) return 'py-3';
     if (isTablet) return 'py-4';
-    return isScrolled ? 'py-2' : 'py-6';
+    return isScrolled ? 'py-3' : 'py-6';
   };
 
   return (
     <header 
       className={`fixed w-full z-50 transition-all duration-500 ease-out animate-fade-in ${
         isScrolled 
-          ? 'glass backdrop-blur-xl shadow-lg border-b border-border/50' 
+          ? 'glass-premium shadow-xl border-b border-border/30' 
           : 'bg-transparent'
       } ${getNavbarPadding()}`}
       style={{ animationDelay: '0s' }}
@@ -121,28 +113,28 @@ const Navbar = () => {
         <button 
           onClick={() => handleNavClick("#hero")}
           className={`${
-            isMobile ? 'text-base' : isTablet ? 'text-lg' : 'text-xl'
-          } font-bold font-heading animate-fade-in hover:scale-105 transition-transform duration-300 ${
+            isMobile ? 'text-lg' : isTablet ? 'text-xl' : 'text-2xl'
+          } font-bold font-heading animate-fade-in hover:scale-105 transition-all duration-300 focus-ring ${
             isTouchDevice ? 'touch-manipulation' : ''
-          }`}
+          } group`}
           style={{ animationDelay: '0.2s' }}
         >
-          <span className="text-gradient">Mann</span>
-          <span className="mx-2">Maheshwari</span>
+          <span className="text-gradient group-hover:animate-pulse">Mann</span>
+          <span className="mx-3 text-foreground/90 group-hover:text-foreground transition-colors">Maheshwari</span>
         </button>
 
         {/* Enhanced desktop navigation */}
-        <nav className="hidden lg:flex items-center space-x-6 xl:space-x-8">
+        <nav className="hidden lg:flex items-center space-x-8 xl:space-x-10">
           {navLinks.map((link, index) => (
             <button
               key={link.href}
               onClick={() => handleNavClick(link.href)}
-              className={`text-sm font-medium transition-all duration-300 animated-underline animate-fade-in hover:scale-105 ${
+              className={`text-sm xl:text-base font-medium transition-all duration-300 animated-underline animate-fade-in hover:scale-105 focus-ring rounded-md px-3 py-2 ${
                 isTouchDevice ? 'touch-manipulation' : ''
               } ${
                 activeSection === link.href.substring(1) 
-                  ? 'text-primary font-semibold' 
-                  : 'text-foreground/80 hover:text-foreground'
+                  ? 'text-primary font-semibold bg-primary/10 border border-primary/20' 
+                  : 'text-foreground/80 hover:text-foreground hover:bg-muted/50'
               }`}
               style={{ animationDelay: `${0.1 + index * 0.1}s` }}
             >
@@ -151,63 +143,62 @@ const Navbar = () => {
           ))}
           
           <div
-            className="animate-fade-in"
-            style={{ animationDelay: '0.7s' }}
+            className="animate-fade-in ml-4"
+            style={{ animationDelay: '0.8s' }}
           >
             <ThemeToggle />
           </div>
         </nav>
 
         {/* Enhanced mobile navigation */}
-        <div className="lg:hidden flex items-center space-x-3">
+        <div className="lg:hidden flex items-center space-x-4">
           <ThemeToggle />
           <Button 
             variant="ghost" 
             size="sm" 
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className={`mobile-menu-trigger p-2 hover:bg-accent/10 ${
-              isTouchDevice ? 'touch-manipulation min-h-[44px] min-w-[44px]' : ''
+            className={`mobile-menu-trigger p-3 hover:bg-accent/10 border border-border/30 hover:border-border/50 rounded-xl focus-ring ${
+              isTouchDevice ? 'touch-manipulation min-h-[48px] min-w-[48px]' : ''
             }`}
             aria-label="Toggle menu"
             aria-expanded={isMenuOpen}
           >
-            {isMenuOpen ? (
-              <X className="h-5 w-5 transition-transform duration-300" />
-            ) : (
-              <Menu className="h-5 w-5 transition-transform duration-300" />
-            )}
+            <div className="relative w-5 h-5">
+              <Menu className={`h-5 w-5 absolute transition-all duration-300 ${isMenuOpen ? 'opacity-0 rotate-90' : 'opacity-100 rotate-0'}`} />
+              <X className={`h-5 w-5 absolute transition-all duration-300 ${isMenuOpen ? 'opacity-100 rotate-0' : 'opacity-0 -rotate-90'}`} />
+            </div>
           </Button>
         </div>
       </div>
 
-      {/* Enhanced mobile menu overlay with improved responsiveness */}
+      {/* Enhanced mobile menu overlay with improved design */}
       {isMenuOpen && (
-        <div className="lg:hidden fixed inset-0 z-40 bg-background/95 backdrop-blur-lg animate-fade-in">
+        <div className="lg:hidden fixed inset-0 z-40 bg-background/98 backdrop-blur-xl animate-fade-in">
           <div 
-            className={`mobile-menu fixed left-0 right-0 bottom-0 bg-card/98 backdrop-blur-xl border-t border-border/50 shadow-2xl ${
-              isMobile ? 'rounded-t-2xl' : 'rounded-t-3xl'
-            }`}
+            className={`mobile-menu fixed left-0 right-0 bottom-0 glass-premium border-t border-border/30 ${
+              isMobile ? 'rounded-t-3xl' : 'rounded-t-[2rem]'
+            } shadow-2xl`}
             style={{ 
-              top: isScrolled ? (isMobile ? '64px' : '72px') : (isMobile ? '76px' : '88px'),
-              maxHeight: `calc(100vh - ${isScrolled ? (isMobile ? '64px' : '72px') : (isMobile ? '76px' : '88px')})`
+              top: isScrolled ? (isMobile ? '72px' : '80px') : (isMobile ? '84px' : '96px'),
+              maxHeight: `calc(100vh - ${isScrolled ? (isMobile ? '72px' : '80px') : (isMobile ? '84px' : '96px')})`
             }}
           >
             <div className={`${
               getContainerClasses()
-            } h-full overflow-y-auto ${isMobile ? 'py-4' : 'py-6'}`}>
-              <div className={`flex flex-col ${isMobile ? 'space-y-2' : 'space-y-4'}`}>
+            } h-full overflow-y-auto ${isMobile ? 'py-6' : 'py-8'}`}>
+              <div className={`flex flex-col ${isMobile ? 'space-y-3' : 'space-y-4'}`}>
                 {navLinks.map((link, index) => (
                   <button
                     key={link.href}
                     onClick={() => handleNavClick(link.href)}
                     className={`text-left ${
-                      isMobile ? 'text-base py-3 px-4' : 'text-lg py-4 px-6'
-                    } font-medium rounded-2xl transition-all duration-300 animate-fade-in ${
-                      isTouchDevice ? 'touch-manipulation min-h-[56px]' : ''
+                      isMobile ? 'text-lg py-4 px-6' : 'text-xl py-5 px-8'
+                    } font-medium rounded-2xl transition-all duration-300 animate-fade-in focus-ring ${
+                      isTouchDevice ? 'touch-manipulation min-h-[64px]' : ''
                     } hover:scale-[1.02] ${
                       activeSection === link.href.substring(1)
-                        ? 'bg-primary/20 text-primary font-semibold border border-primary/30 shadow-lg' 
-                        : 'hover:bg-accent/10 hover:text-foreground border border-transparent'
+                        ? 'bg-primary/15 text-primary font-semibold border-2 border-primary/30 shadow-lg shadow-primary/10' 
+                        : 'hover:bg-accent/10 hover:text-foreground border-2 border-transparent hover:border-border/30'
                     }`}
                     style={{ animationDelay: `${0.1 + index * 0.05}s` }}
                   >
