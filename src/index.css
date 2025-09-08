@@ -218,21 +218,44 @@
     width: 100%;
   }
 
-  /* Enhanced scroll indicator with better visibility */
-  .scroll-indicator {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 4px;
-    background: linear-gradient(90deg, 
-                  hsl(var(--primary)), 
-                  hsl(var(--secondary)), 
-                  hsl(var(--accent)));
-    transform-origin: left;
-    z-index: 9999;
-    box-shadow: 0 2px 4px hsla(var(--primary), 0.4);
+/* Enhanced button gradient class */
+.btn-gradient {
+  @apply bg-gradient-to-r from-primary via-primary/95 to-secondary text-primary-foreground font-semibold;
+  @apply shadow-xl shadow-primary/30 hover:shadow-2xl hover:shadow-primary/40;
+  @apply transition-all duration-500 hover:scale-[1.02] active:scale-[0.98];
+  @apply border-0 backdrop-blur-sm relative overflow-hidden;
+  @apply before:absolute before:inset-0 before:bg-gradient-to-r before:from-white/10 before:to-transparent before:opacity-0 before:transition-opacity before:duration-300 hover:before:opacity-100;
+}
+
+/* Enhanced glass variations */
+.glass-elegant {
+  background: hsla(var(--card), 0.95);
+  backdrop-filter: blur(40px) saturate(220%);
+  border: 1px solid hsla(var(--primary), 0.15);
+  box-shadow: 0 20px 60px 0 hsla(var(--foreground), 0.08),
+              0 0 120px 0 hsla(var(--primary), 0.1),
+              inset 0 1px 0 hsla(var(--border), 0.2);
+  transition: all var(--theme-transition);
+}
+
+/* Enhanced shimmer animation */
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
   }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer 2s ease-in-out infinite;
+}
+
+/* Focus ring utility */
+.focus-ring {
+  @apply focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background;
+}
 
   /* Enhanced focus states */
   .focus-ring {
