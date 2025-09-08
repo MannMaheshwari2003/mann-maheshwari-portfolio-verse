@@ -138,7 +138,7 @@ const ContactSection = () => {
                 : 'opacity-0 -translate-x-10'
             }`}
           >
-            <div className="glass-card rounded-xl sm:rounded-2xl p-6 sm:p-8 border border-primary/10 hover:border-primary/20 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/5">
+            <div className="glass-premium rounded-xl sm:rounded-2xl p-6 sm:p-8 border border-primary/15 hover:border-primary/25 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10 interactive-glow">
               <div className="flex items-center gap-3 mb-6">
                 <div className="p-2 rounded-lg bg-gradient-to-r from-primary/20 to-secondary/20">
                   <Send className="h-5 w-5 text-primary" />
@@ -156,7 +156,7 @@ const ContactSection = () => {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="bg-card/50 border-primary/10 focus:border-primary focus-visible:ring-primary/20 transition-all duration-300 hover:border-primary/20 h-11 sm:h-12"
+                    className="bg-gradient-to-r from-card/60 to-card/40 border-primary/15 focus:border-primary/50 focus-visible:ring-primary/30 transition-all duration-300 hover:border-primary/25 hover:shadow-md hover:shadow-primary/10 h-11 sm:h-12 rounded-lg"
                   />
                 </div>
                 
@@ -170,7 +170,7 @@ const ContactSection = () => {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="bg-card/50 border-primary/10 focus:border-primary focus-visible:ring-primary/20 transition-all duration-300 hover:border-primary/20 h-11 sm:h-12"
+                    className="bg-gradient-to-r from-card/60 to-card/40 border-primary/15 focus:border-primary/50 focus-visible:ring-primary/30 transition-all duration-300 hover:border-primary/25 hover:shadow-md hover:shadow-primary/10 h-11 sm:h-12 rounded-lg"
                   />
                 </div>
                 
@@ -179,7 +179,7 @@ const ContactSection = () => {
                   <Textarea 
                     id="message"
                     placeholder="Type your message here..." 
-                    className="min-h-[120px] sm:min-h-[140px] bg-card/50 border-primary/10 focus:border-primary focus-visible:ring-primary/20 resize-none transition-all duration-300 hover:border-primary/20"
+                    className="min-h-[120px] sm:min-h-[140px] bg-gradient-to-br from-card/60 to-card/40 border-primary/15 focus:border-primary/50 focus-visible:ring-primary/30 resize-none transition-all duration-300 hover:border-primary/25 hover:shadow-md hover:shadow-primary/10 rounded-lg"
                     name="message"
                     value={formData.message}
                     onChange={handleChange}
@@ -234,7 +234,7 @@ const ContactSection = () => {
                 {contactDetails.map((item, index) => (
                   <div
                     key={index}
-                    className="glass rounded-xl p-4 sm:p-6 hover-translate border border-white/5 hover:border-primary/20 transition-all duration-500 hover:shadow-xl hover:shadow-primary/5 group"
+                    className="glass-premium rounded-xl p-4 sm:p-6 hover-translate border border-primary/10 hover:border-primary/25 transition-all duration-500 hover:shadow-xl hover:shadow-primary/10 group interactive-glow hover:scale-[1.02]"
                     style={{ 
                       animationDelay: `${index * 100}ms`,
                       transform: infoInView ? 'none' : 'translateY(20px)',
@@ -264,7 +264,7 @@ const ContactSection = () => {
               </div>
               
               <div className="mt-8 sm:mt-12">
-                <div className="glass-card rounded-xl p-4 sm:p-6 border border-primary/10 text-center hover:border-accent/30 transition-all duration-500 hover:shadow-lg hover:shadow-accent/5">
+                <div className="glass-elegant rounded-xl p-4 sm:p-6 border border-accent/15 text-center hover:border-accent/35 transition-all duration-500 hover:shadow-xl hover:shadow-accent/15 interactive-glow">
                   <p className="text-xs sm:text-sm text-muted-foreground">
                     Interested in working together? Let's turn your ideas into reality!
                   </p>

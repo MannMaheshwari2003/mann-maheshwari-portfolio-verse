@@ -104,7 +104,7 @@ const Navbar = () => {
     <header 
       className={`fixed w-full z-50 transition-all duration-500 ease-out animate-fade-in ${
         isScrolled 
-          ? 'glass-premium shadow-xl border-b border-border/30' 
+          ? 'glass-elegant shadow-2xl border-b border-primary/20 backdrop-blur-xl' 
           : 'bg-transparent'
       } ${getNavbarPadding()}`}
       style={{ animationDelay: '0s' }}
@@ -116,11 +116,11 @@ const Navbar = () => {
             isMobile ? 'text-lg' : isTablet ? 'text-xl' : 'text-2xl'
           } font-bold font-heading animate-fade-in hover:scale-105 transition-all duration-300 focus-ring ${
             isTouchDevice ? 'touch-manipulation' : ''
-          } group`}
+          } group interactive-glow rounded-lg px-2 py-1`}
           style={{ animationDelay: '0.2s' }}
         >
           <span className="text-gradient group-hover:animate-pulse">Mann</span>
-          <span className="mx-3 text-foreground/90 group-hover:text-foreground transition-colors">Maheshwari</span>
+          <span className="mx-2 text-foreground/90 group-hover:text-foreground transition-colors font-medium">Maheshwari</span>
         </button>
 
         {/* Enhanced desktop navigation */}
@@ -129,12 +129,12 @@ const Navbar = () => {
             <button
               key={link.href}
               onClick={() => handleNavClick(link.href)}
-              className={`text-sm xl:text-base font-medium transition-all duration-300 animated-underline animate-fade-in hover:scale-105 focus-ring rounded-md px-3 py-2 ${
+              className={`text-sm xl:text-base font-medium transition-all duration-300 animated-underline animate-fade-in hover:scale-105 focus-ring rounded-lg px-4 py-2 ${
                 isTouchDevice ? 'touch-manipulation' : ''
               } ${
                 activeSection === link.href.substring(1) 
-                  ? 'text-primary font-semibold bg-primary/10 border border-primary/20' 
-                  : 'text-foreground/80 hover:text-foreground hover:bg-muted/50'
+                  ? 'text-primary font-semibold bg-gradient-to-r from-primary/15 to-primary/10 border border-primary/30 shadow-lg shadow-primary/20' 
+                  : 'text-foreground/80 hover:text-foreground hover:bg-gradient-to-r hover:from-muted/60 hover:to-muted/40 border border-transparent hover:border-border/50'
               }`}
               style={{ animationDelay: `${0.1 + index * 0.1}s` }}
             >
@@ -157,9 +157,9 @@ const Navbar = () => {
             variant="ghost" 
             size="sm" 
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className={`mobile-menu-trigger p-3 hover:bg-accent/10 border border-border/30 hover:border-border/50 rounded-xl focus-ring ${
+            className={`mobile-menu-trigger p-3 hover:bg-primary/5 border border-border/30 hover:border-primary/30 rounded-xl focus-ring interactive-glow ${
               isTouchDevice ? 'touch-manipulation min-h-[48px] min-w-[48px]' : ''
-            }`}
+            } transition-all duration-300 hover:shadow-lg hover:shadow-primary/20`}
             aria-label="Toggle menu"
             aria-expanded={isMenuOpen}
           >
