@@ -11,7 +11,7 @@ const ResumeDownloadButton = () => {
     >
       <a 
         href="/resume-mann-maheshwari.pdf" 
-        download="Mann-Maheshwari-Resume.pdf"
+        download="Mann_Maheshwari_CV.pdf"
         className="flex items-center justify-center"
       >
         {/* Enhanced button glow effect */}
