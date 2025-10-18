@@ -2,6 +2,7 @@ import Section from "./section";
 import SectionHeader from "./ui/section-header";
 import GlassCard from "./ui/glass-card";
 import InteractiveBadge from "./ui/interactive-badge";
+import { Badge } from "@/components/ui/badge";
 import { Award, Calendar, Star, Trophy } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/use-scroll-animation";
 
@@ -39,12 +40,9 @@ const AchievementsSection = () => {
   const { ref: secondRowRef, inView: secondRowInView } = useScrollAnimation({ threshold: 0.2, delay: 200 });
 
   return (
-    <Section id="achievements" className="bg-card/30 relative overflow-hidden">
-      {/* Enhanced gradient backgrounds */}
-      <div className="absolute inset-0 bg-gradient-to-br from-background via-primary/5 to-secondary/5"></div>
-      <div className="absolute top-0 left-1/4 w-32 sm:w-64 h-32 sm:h-64 bg-gradient-conic from-primary/25 via-primary/5 to-transparent rounded-full filter blur-3xl animate-float-orb"></div>
-      <div className="absolute bottom-0 right-1/4 w-24 sm:w-40 h-24 sm:h-40 bg-gradient-conic from-secondary/25 via-secondary/5 to-transparent rounded-full filter blur-3xl animate-float-orb" style={{ animationDelay: '10s' }}></div>
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-20 sm:w-32 h-20 sm:w-32 bg-gradient-radial from-accent/20 via-accent/5 to-transparent rounded-full filter blur-3xl animate-breathe"></div>
+    <Section id="achievements" className="bg-muted/20 relative overflow-hidden">
+      {/* Subtle ambient background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-background via-primary/3 to-background"></div>
       
       <div className="relative z-10">
         <div 
@@ -68,42 +66,41 @@ const AchievementsSection = () => {
             {achievements.slice(0, 2).map((achievement, index) => (
               <div
                 key={index}
-                className={`transition-all duration-800 ease-out ${
+                className={`transition-all duration-700 ease-out ${
                   firstRowInView 
-                    ? 'opacity-100 translate-y-0 translate-x-0' 
-                    : `opacity-0 translate-y-8 ${index % 2 === 0 ? '-translate-x-8' : 'translate-x-8'}`
+                    ? 'opacity-100 translate-y-0' 
+                    : `opacity-0 translate-y-6`
                 }`}
-                style={{ transitionDelay: `${index * 150}ms` }}
+                style={{ transitionDelay: `${index * 100}ms` }}
               >
-                <GlassCard variant="primary" className="p-6 sm:p-8 relative overflow-hidden group hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500">
-                  {/* Gradient overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-secondary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="glass border border-border hover:border-primary/20 p-5 sm:p-6 relative overflow-hidden group hover:shadow-lg transition-all duration-300 rounded-lg h-full">
+                  {/* Subtle hover gradient */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   
                   <div className="absolute top-4 right-4 z-10">
-                    <InteractiveBadge variant="primary" size="sm">
-                      <Trophy className="h-3 w-3" />
+                    <Badge variant="secondary" className="text-xs px-2 py-1 bg-primary/10 text-primary border-primary/20">
                       {achievement.type}
-                    </InteractiveBadge>
+                    </Badge>
                   </div>
                   
-                  <div className="mb-4 relative z-10">
+                  <div className="relative z-10">
                     <div className="flex items-center gap-3 mb-3">
-                      <div className="p-2 rounded-lg bg-gradient-to-br from-primary/30 to-secondary/20 shadow-sm">
-                        <Award className="h-5 w-5 text-primary" />
+                      <div className="p-2 rounded-lg bg-primary/10 group-hover:bg-primary/15 transition-colors duration-300">
+                        <Award className="h-4 w-4 text-primary/80" />
                       </div>
-                      <h3 className="text-lg sm:text-xl font-semibold bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text">{achievement.title}</h3>
+                      <h3 className="text-base sm:text-lg font-semibold text-foreground">{achievement.title}</h3>
                     </div>
                     
-                    <InteractiveBadge variant="secondary" size="sm" className="mb-4">
-                      <Calendar className="h-3 w-3" />
-                      {achievement.event}
-                    </InteractiveBadge>
+                    <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-muted/50 border border-border/50 mb-3">
+                      <Calendar className="h-3 w-3 text-muted-foreground" />
+                      <span className="text-xs text-muted-foreground">{achievement.event}</span>
+                    </div>
                     
-                    <p className="text-sm sm:text-base text-foreground/80 leading-relaxed">
+                    <p className="text-sm text-foreground/70 leading-relaxed">
                       {achievement.description}
                     </p>
                   </div>
-                </GlassCard>
+                </div>
               </div>
             ))}
           </div>
@@ -115,83 +112,81 @@ const AchievementsSection = () => {
           >
             {/* Accenture certification */}
             <div
-              className={`transition-all duration-800 ease-out ${
+              className={`transition-all duration-700 ease-out ${
                 secondRowInView 
-                  ? 'opacity-100 translate-y-0 translate-x-0' 
-                  : 'opacity-0 translate-y-8 -translate-x-8'
+                  ? 'opacity-100 translate-y-0' 
+                  : 'opacity-0 translate-y-6'
               }`}
               style={{ transitionDelay: '0ms' }}
             >
-              <GlassCard variant="secondary" className="p-6 sm:p-8 relative overflow-hidden group hover:shadow-2xl hover:shadow-secondary/10 transition-all duration-500">
-                {/* Gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-br from-secondary/10 via-transparent to-accent/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="glass border border-border hover:border-primary/20 p-5 sm:p-6 relative overflow-hidden group hover:shadow-lg transition-all duration-300 rounded-lg h-full">
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 
                 <div className="absolute top-4 right-4 z-10">
-                  <InteractiveBadge variant="secondary" size="sm">
-                    <Trophy className="h-3 w-3" />
+                  <Badge variant="secondary" className="text-xs px-2 py-1 bg-primary/10 text-primary border-primary/20">
                     {achievements[2].type}
-                  </InteractiveBadge>
+                  </Badge>
                 </div>
                 
-                <div className="mb-4 relative z-10">
+                <div className="relative z-10">
                   <div className="flex items-center gap-3 mb-3">
-                    <div className="p-2 rounded-lg bg-gradient-to-br from-secondary/30 to-accent/20 shadow-sm">
-                      <Award className="h-5 w-5 text-secondary" />
+                    <div className="p-2 rounded-lg bg-primary/10 group-hover:bg-primary/15 transition-colors duration-300">
+                      <Award className="h-4 w-4 text-primary/80" />
                     </div>
-                    <h3 className="text-lg sm:text-xl font-semibold bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text">{achievements[2].title}</h3>
+                    <h3 className="text-base sm:text-lg font-semibold text-foreground">{achievements[2].title}</h3>
                   </div>
                   
-                  <InteractiveBadge variant="secondary" size="sm" className="mb-4">
-                    <Calendar className="h-3 w-3" />
-                    {achievements[2].event}
-                  </InteractiveBadge>
+                  <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-muted/50 border border-border/50 mb-3">
+                    <Calendar className="h-3 w-3 text-muted-foreground" />
+                    <span className="text-xs text-muted-foreground">{achievements[2].event}</span>
+                  </div>
                   
-                  <p className="text-sm sm:text-base text-foreground/80 leading-relaxed">
+                  <p className="text-sm text-foreground/70 leading-relaxed">
                     {achievements[2].description}
                   </p>
                 </div>
-              </GlassCard>
+              </div>
             </div>
 
             {/* Featured Deloitte achievement */}
             <div
-              className={`transition-all duration-800 ease-out ${
+              className={`transition-all duration-700 ease-out ${
                 secondRowInView 
-                  ? 'opacity-100 translate-y-0 translate-x-0' 
-                  : 'opacity-0 translate-y-8 translate-x-8'
+                  ? 'opacity-100 translate-y-0' 
+                  : 'opacity-0 translate-y-6'
               }`}
-              style={{ transitionDelay: '150ms' }}
+              style={{ transitionDelay: '100ms' }}
             >
-              <GlassCard variant="accent" className="p-6 sm:p-8 relative overflow-hidden group hover:shadow-2xl hover:shadow-accent/20 transition-all duration-500">
+              <div className="glass border-2 border-primary/30 hover:border-primary/40 p-5 sm:p-6 relative overflow-hidden group hover:shadow-lg transition-all duration-300 rounded-lg h-full">
                 <div className="absolute top-4 right-4 z-20">
-                  <InteractiveBadge variant="accent" size="sm">
-                    <Star className="h-3 w-3" />
+                  <Badge className="text-xs px-2 py-1 bg-accent/90 text-accent-foreground border-0">
+                    <Star className="h-3 w-3 mr-1" />
                     Featured
-                  </InteractiveBadge>
+                  </Badge>
                 </div>
                 
-                <div className="absolute inset-0 bg-gradient-to-br from-accent/15 via-accent/5 to-primary/10 rounded-xl animate-breathe"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/8 via-transparent to-accent/5 group-hover:from-primary/10 group-hover:to-accent/8 transition-all duration-300"></div>
                 
                 <div className="relative z-10">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="p-2 rounded-lg bg-gradient-to-br from-accent/30 to-primary/20 shadow-sm">
-                      <Award className="h-5 w-5 text-accent" />
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="p-2 rounded-lg bg-accent/15 group-hover:bg-accent/20 transition-colors duration-300">
+                      <Award className="h-4 w-4 text-accent/90" />
                     </div>
-                    <h3 className="text-lg sm:text-xl font-semibold bg-gradient-to-r from-accent to-accent/80 bg-clip-text">
+                    <h3 className="text-base sm:text-lg font-semibold text-foreground">
                       {achievements[3].title}
                     </h3>
                   </div>
                   
-                  <InteractiveBadge variant="accent" size="sm" className="mb-4">
-                    <Calendar className="h-3 w-3" />
-                    {achievements[3].event}
-                  </InteractiveBadge>
+                  <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-accent/10 border border-accent/20 mb-3">
+                    <Calendar className="h-3 w-3 text-accent/80" />
+                    <span className="text-xs text-accent/90 font-medium">{achievements[3].event}</span>
+                  </div>
                   
-                  <p className="text-sm sm:text-base text-foreground/80 leading-relaxed">
+                  <p className="text-sm text-foreground/70 leading-relaxed">
                     {achievements[3].description}
                   </p>
                 </div>
-              </GlassCard>
+              </div>
             </div>
           </div>
         </div>
