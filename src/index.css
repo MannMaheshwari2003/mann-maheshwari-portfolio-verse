@@ -20,27 +20,27 @@
     --popover: 222 84% 4%;
     --popover-foreground: 210 40% 96%;
     
-    /* Enhanced primary with perfect visibility */
-    --primary: 263 85% 70%;
+    /* Refined primary - subtle yet distinctive */
+    --primary: 263 70% 65%;
     --primary-foreground: 210 40% 98%;
-    --primary-glow: 263 85% 80%;
-    --primary-rgb: 149, 84, 234;
+    --primary-glow: 263 60% 72%;
+    --primary-rgb: 140, 90, 220;
     
-    /* Refined secondary system with improved contrast */
-    --secondary: 217 33% 20%;
+    /* Professional secondary system */
+    --secondary: 217 25% 22%;
     --secondary-foreground: 210 40% 98%;
-    --secondary-light: 217 33% 85%;
-    --secondary-rgb: 64, 77, 91;
+    --secondary-light: 217 20% 80%;
+    --secondary-rgb: 70, 80, 95;
     
-    /* Enhanced muted variations for superior readability */
-    --muted: 217 33% 16%;
-    --muted-foreground: 215 20% 75%;
+    /* Refined muted tones */
+    --muted: 217 25% 18%;
+    --muted-foreground: 215 16% 70%;
     
-    /* Premium accent with perfect harmony */
-    --accent: 142 76% 45%;
+    /* Sophisticated accent */
+    --accent: 142 65% 50%;
     --accent-foreground: 355 7% 97%;
-    --accent-light: 142 76% 85%;
-    --accent-rgb: 34, 197, 94;
+    --accent-light: 142 60% 82%;
+    --accent-rgb: 45, 185, 95;
     
     /* Semantic enhancements */
     --destructive: 0 72% 58%;
@@ -154,33 +154,33 @@
 
 /* Enhanced utility classes with superior visual effects */
 @layer utilities {
-  /* Advanced glass morphism system with improved performance */
+  /* Refined glass morphism - subtle and elegant */
   .glass {
-    background: hsla(var(--card), 0.85);
-    backdrop-filter: blur(24px) saturate(180%);
-    border: 1px solid hsla(var(--border), 0.4);
-    box-shadow: 0 8px 32px 0 hsla(var(--foreground), 0.08),
-                0 1px 0 0 hsla(var(--border), 0.15) inset;
+    background: hsla(var(--card), 0.7);
+    backdrop-filter: blur(16px) saturate(120%);
+    border: 1px solid hsla(var(--border), 0.3);
+    box-shadow: 0 4px 24px 0 hsla(var(--foreground), 0.04),
+                0 1px 0 0 hsla(var(--border), 0.1) inset;
     transition: all var(--theme-transition);
   }
   
   .glass-premium {
-    background: hsla(var(--card), 0.92);
-    backdrop-filter: blur(32px) saturate(200%);
-    border: 1px solid hsla(var(--border), 0.3);
-    box-shadow: 0 20px 60px 0 hsla(var(--foreground), 0.06),
-                0 0 120px 0 hsla(var(--primary), 0.12),
-                inset 0 1px 0 hsla(var(--border), 0.2);
+    background: hsla(var(--card), 0.8);
+    backdrop-filter: blur(20px) saturate(140%);
+    border: 1px solid hsla(var(--border), 0.25);
+    box-shadow: 0 12px 40px 0 hsla(var(--foreground), 0.04),
+                0 0 1px 0 hsla(var(--primary), 0.06),
+                inset 0 1px 0 hsla(var(--border), 0.15);
     transition: all var(--theme-transition);
   }
 
   .glass-elegant {
-    background: hsla(var(--card), 0.95);
-    backdrop-filter: blur(40px) saturate(220%);
-    border: 1px solid hsla(var(--primary), 0.15);
-    box-shadow: 0 25px 80px 0 hsla(var(--foreground), 0.04),
-                0 0 150px 0 hsla(var(--primary), 0.1),
-                inset 0 2px 0 hsla(var(--primary), 0.1);
+    background: hsla(var(--card), 0.85);
+    backdrop-filter: blur(24px) saturate(160%);
+    border: 1px solid hsla(var(--primary), 0.1);
+    box-shadow: 0 16px 48px 0 hsla(var(--foreground), 0.03),
+                0 0 1px 0 hsla(var(--primary), 0.05),
+                inset 0 1px 0 hsla(var(--primary), 0.08);
     transition: all var(--theme-transition);
   }
 
@@ -217,15 +217,15 @@
     background: conic-gradient(var(--tw-gradient-stops));
   }
 
-  /* Enhanced interactive effects with better feedback */
+  /* Subtle interactive effects */
   .hover-scale {
-    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transition: all 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     will-change: transform;
   }
   
   .hover-scale:hover {
-    transform: scale(1.03) translateY(-2px);
-    box-shadow: 0 12px 32px hsla(var(--foreground), 0.15);
+    transform: scale(1.01) translateY(-1px);
+    box-shadow: 0 8px 24px hsla(var(--foreground), 0.08);
   }
   
   /* Enhanced underline animation with superior smoothness */
@@ -250,14 +250,13 @@
     width: 100%;
   }
 
-/* Enhanced button gradient class with superior design */
+/* Refined button gradient - elegant and professional */
 .btn-gradient {
-  @apply bg-gradient-to-r from-primary via-primary-glow to-accent text-primary-foreground font-semibold;
-  @apply shadow-xl shadow-primary/25 hover:shadow-2xl hover:shadow-primary/35;
-  @apply transition-all duration-500 hover:scale-[1.02] active:scale-[0.98];
-  @apply border-0 backdrop-blur-sm relative overflow-hidden rounded-xl;
-  @apply before:absolute before:inset-0 before:bg-gradient-to-r before:from-white/15 before:via-white/5 before:to-transparent before:opacity-0 before:transition-opacity before:duration-300 hover:before:opacity-100;
-  @apply after:absolute after:inset-0 after:bg-gradient-to-r after:from-transparent after:via-white/10 after:to-transparent after:translate-x-[-100%] after:transition-transform after:duration-700 hover:after:translate-x-[100%];
+  @apply bg-gradient-to-r from-primary via-primary to-primary-glow text-primary-foreground font-medium;
+  @apply shadow-lg shadow-primary/15 hover:shadow-xl hover:shadow-primary/20;
+  @apply transition-all duration-300 hover:scale-[1.01] active:scale-[0.99];
+  @apply border border-primary/20 backdrop-blur-sm relative overflow-hidden rounded-lg;
+  @apply before:absolute before:inset-0 before:bg-gradient-to-r before:from-white/10 before:via-white/5 before:to-transparent before:opacity-0 before:transition-opacity before:duration-300 hover:before:opacity-100;
 }
 
 /* Enhanced gradient backgrounds for better visual hierarchy */

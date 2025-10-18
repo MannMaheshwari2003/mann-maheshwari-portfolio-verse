@@ -102,9 +102,9 @@ const Navbar = () => {
 
   return (
     <header 
-      className={`fixed w-full z-50 transition-all duration-500 ease-out animate-fade-in ${
+      className={`fixed w-full z-50 transition-all duration-300 ease-out animate-fade-in ${
         isScrolled 
-          ? 'glass-elegant shadow-2xl border-b border-primary/20 backdrop-blur-xl' 
+          ? 'glass-premium shadow-lg border-b border-border/50 backdrop-blur-xl' 
           : 'bg-transparent'
       } ${getNavbarPadding()}`}
       style={{ animationDelay: '0s' }}
@@ -114,13 +114,13 @@ const Navbar = () => {
           onClick={() => handleNavClick("#hero")}
           className={`${
             isMobile ? 'text-lg' : isTablet ? 'text-xl' : 'text-2xl'
-          } font-bold font-heading animate-fade-in hover:scale-105 transition-all duration-300 focus-ring ${
+          } font-semibold font-heading animate-fade-in transition-all duration-200 focus-ring ${
             isTouchDevice ? 'touch-manipulation' : ''
-          } group interactive-glow rounded-lg px-2 py-1`}
+          } group rounded-lg px-2 py-1`}
           style={{ animationDelay: '0.2s' }}
         >
-          <span className="text-gradient group-hover:animate-pulse">Mann</span>
-          <span className="mx-2 text-foreground/90 group-hover:text-foreground transition-colors font-medium">Maheshwari</span>
+          <span className="text-gradient">Mann</span>
+          <span className="mx-2 text-foreground/80 group-hover:text-foreground transition-colors font-normal">Maheshwari</span>
         </button>
 
         {/* Enhanced desktop navigation */}
@@ -129,12 +129,12 @@ const Navbar = () => {
             <button
               key={link.href}
               onClick={() => handleNavClick(link.href)}
-              className={`text-sm xl:text-base font-medium transition-all duration-300 animated-underline animate-fade-in hover:scale-105 focus-ring rounded-lg px-4 py-2 ${
+              className={`text-sm xl:text-base font-medium transition-all duration-200 animate-fade-in focus-ring rounded-lg px-3.5 py-2 ${
                 isTouchDevice ? 'touch-manipulation' : ''
               } ${
                 activeSection === link.href.substring(1) 
-                  ? 'text-primary font-semibold bg-gradient-to-r from-primary/15 to-primary/10 border border-primary/30 shadow-lg shadow-primary/20' 
-                  : 'text-foreground/80 hover:text-foreground hover:bg-gradient-to-r hover:from-muted/60 hover:to-muted/40 border border-transparent hover:border-border/50'
+                  ? 'text-primary bg-primary/8 border border-primary/20' 
+                  : 'text-foreground/70 hover:text-foreground hover:bg-muted/40 border border-transparent hover:border-border/30'
               }`}
               style={{ animationDelay: `${0.1 + index * 0.1}s` }}
             >
