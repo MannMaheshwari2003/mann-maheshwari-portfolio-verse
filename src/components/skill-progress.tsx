@@ -23,19 +23,19 @@ const SkillProgress = ({ name, level, index }: SkillProgressProps) => {
   return (
     <div 
       ref={ref}
-      className="glass p-3 rounded-xl hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 animate-fade-in hover-scale"
-      style={{ animationDelay: `${index * 0.1}s` }}
+      className="group bg-card/50 border border-border/50 p-4 rounded-xl hover:border-primary/20 hover:bg-card/80 transition-all duration-300"
+      style={{ animationDelay: `${index * 0.05}s` }}
     >
-      <div className="flex justify-between mb-2 items-center">
-        <span className="font-medium text-sm">{name}</span>
-        <div className="glass text-xs font-bold py-1 px-2 rounded-md min-w-[35px] text-center">
+      <div className="flex justify-between mb-3 items-center">
+        <span className="font-medium text-sm text-foreground">{name}</span>
+        <span className="text-xs font-semibold text-muted-foreground tabular-nums">
           {progress}%
-        </div>
+        </span>
       </div>
       <Progress 
         value={progress} 
-        className="h-2 bg-muted/30" 
-        indicatorClassName="bg-gradient-to-r from-primary to-secondary"
+        className="h-1.5 bg-muted/50" 
+        indicatorClassName="bg-primary transition-all duration-700 ease-out"
       />
     </div>
   );

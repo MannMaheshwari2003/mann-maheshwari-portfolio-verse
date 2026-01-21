@@ -31,19 +31,6 @@ const projectsData = [
       "Detailed reporting and analytics",
       "Employee performance tracking"
     ]
-  },
-  {
-    title: "Face Recognition Attendance System",
-    description: "Automated attendance tracking using facial recognition",
-    technologies: [{ name: "Python" }, { name: "OpenCV" }, { name: "MySQL" }, { name: "TensorFlow" }],
-    longDescription: "This innovative attendance system uses facial recognition technology to automatically record student or employee presence. It eliminates the need for traditional attendance methods, reducing time spent and increasing accuracy.",
-    features: [
-      "Real-time face detection and recognition",
-      "Automatic attendance marking",
-      "Admin dashboard with attendance reports",
-      "User management for adding new faces",
-      "Export options for attendance data"
-    ]
   }
 ];
 
@@ -52,40 +39,39 @@ const ProjectsSection = () => {
   const { ref: gridRef, inView: gridInView } = useScrollAnimation({ threshold: 0.2 });
 
   return (
-    <Section id="projects" className="bg-gradient-to-br from-card/40 via-background to-card/20 relative overflow-hidden" compact>
-      {/* Enhanced gradient backgrounds with better positioning */}
-      <div className="absolute inset-0 bg-gradient-to-bl from-primary/8 via-background to-secondary/8"></div>
-      <div className="absolute top-20 right-0 w-48 sm:w-60 h-48 sm:h-60 bg-gradient-radial from-primary/25 via-primary/8 to-transparent rounded-full blur-3xl animate-float-orb"></div>
-      <div className="absolute bottom-10 left-10 w-40 sm:w-48 h-40 sm:h-48 bg-gradient-radial from-secondary/25 via-secondary/8 to-transparent rounded-full blur-3xl animate-float-orb" style={{ animationDelay: '12s' }}></div>
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-24 sm:w-32 h-24 sm:h-32 bg-gradient-radial from-accent/20 via-accent/8 to-transparent rounded-full blur-3xl animate-breathe"></div>
+    <Section id="projects" className="bg-background relative overflow-hidden" compact>
+      {/* Subtle gradient backgrounds */}
+      <div className="absolute inset-0 bg-gradient-to-b from-muted/20 via-background to-muted/10"></div>
+      <div className="absolute top-20 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-20 left-0 w-72 h-72 bg-secondary/5 rounded-full blur-3xl"></div>
       
       <div className="relative z-10">
         <div 
           ref={headerRef}
-          className={`transition-all duration-1000 ease-out ${
-            headerInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          className={`transition-all duration-700 ease-out ${
+            headerInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
           }`}
         >
           <SectionHeader
             title="Featured Projects"
-            subtitle="Explore my portfolio of innovative web applications and software solutions that showcase modern development practices and creative problem-solving."
+            subtitle="A selection of projects showcasing modern development practices and creative problem-solving."
             variant="elegant"
           />
         </div>
         
         <div 
           ref={gridRef}
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
+          className="grid md:grid-cols-2 gap-6 lg:gap-8 max-w-4xl mx-auto"
         >
           {projectsData.map((project, index) => (
             <div
               key={index}
-              className={`transition-all duration-800 ease-out ${
+              className={`transition-all duration-600 ease-out ${
                 gridInView 
-                  ? 'opacity-100 translate-y-0 scale-100' 
-                  : 'opacity-0 translate-y-10 scale-95'
+                  ? 'opacity-100 translate-y-0' 
+                  : 'opacity-0 translate-y-6'
               }`}
-              style={{ transitionDelay: `${index * 200}ms` }}
+              style={{ transitionDelay: `${index * 150}ms` }}
             >
               <ProjectCard {...project} index={index} />
             </div>
