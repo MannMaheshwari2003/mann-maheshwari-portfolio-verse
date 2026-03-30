@@ -1,5 +1,5 @@
+
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Card, CardContent } from "@/components/ui/card";
 import Section from "./section";
 import SectionHeader from "./ui/section-header";
 import SkillProgress from "./skill-progress";
@@ -38,99 +38,46 @@ const SkillsSection = () => {
   const { ref: tabsRef, inView: tabsInView } = useScrollAnimation({ threshold: 0.2 });
 
   return (
-    <Section id="skills" className="bg-background relative overflow-hidden" compact>
-      {/* Subtle gradient backgrounds */}
-      <div className="absolute inset-0 bg-gradient-to-b from-muted/20 via-background to-muted/10"></div>
-      <div className="absolute inset-0 z-0">
-        <div className="absolute top-20 left-0 w-64 h-64 bg-primary/5 rounded-full filter blur-3xl"></div>
-        <div className="absolute bottom-20 right-0 w-72 h-72 bg-secondary/5 rounded-full filter blur-3xl"></div>
+    <Section id="skills" className="bg-muted/20 relative">
+      <div ref={headerRef} className={`transition-all duration-700 ease-out ${headerInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
+        <SectionHeader title="Skills & Expertise" subtitle="A comprehensive overview of technical proficiency and professional capabilities." />
       </div>
       
-      <div className="relative z-10">
-        <div 
-          ref={headerRef}
-          className={`transition-all duration-700 ease-out ${
-            headerInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
-          }`}
-        >
-          <SectionHeader
-            title="Skills & Expertise"
-            subtitle="A comprehensive overview of my technical proficiency and professional capabilities."
-            variant="default"
-          />
-        </div>
-        
-        <div 
-          ref={tabsRef}
-          className={`transition-all duration-700 ease-out ${
-            tabsInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
-          }`}
-        >
-          <Tabs defaultValue="technical" className="w-full max-w-5xl mx-auto">
-            <div className="flex justify-center mb-8 px-4">
-              <TabsList className="p-1.5 h-auto bg-muted/50 backdrop-blur-sm border border-border/50 rounded-xl">
-                <TabsTrigger 
-                  value="technical" 
-                  className="data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm py-2.5 px-5 flex items-center gap-2 text-sm font-medium transition-all duration-200 rounded-lg"
-                >
-                  <Code className="h-4 w-4" />
-                  <span>Technical</span>
-                </TabsTrigger>
-                <TabsTrigger 
-                  value="soft" 
-                  className="data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm py-2.5 px-5 flex items-center gap-2 text-sm font-medium transition-all duration-200 rounded-lg"
-                >
-                  <BrainCircuit className="h-4 w-4" />
-                  <span>Soft Skills</span>
-                </TabsTrigger>
-              </TabsList>
+      <div ref={tabsRef} className={`transition-all duration-700 ease-out ${tabsInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
+        <Tabs defaultValue="technical" className="w-full max-w-4xl mx-auto">
+          <div className="flex justify-center mb-8">
+            <TabsList className="p-1 h-auto bg-muted/50 border border-border/50 rounded-lg">
+              <TabsTrigger value="technical" className="data-[state=active]:bg-background data-[state=active]:shadow-sm py-2 px-4 flex items-center gap-2 text-sm rounded-md">
+                <Code className="h-4 w-4" />
+                Technical
+              </TabsTrigger>
+              <TabsTrigger value="soft" className="data-[state=active]:bg-background data-[state=active]:shadow-sm py-2 px-4 flex items-center gap-2 text-sm rounded-md">
+                <BrainCircuit className="h-4 w-4" />
+                Soft Skills
+              </TabsTrigger>
+            </TabsList>
+          </div>
+          
+          <TabsContent value="technical" className="mt-0">
+            <div className="grid md:grid-cols-2 gap-3">
+              {technicalSkills.map((skill, index) => (
+                <div key={skill.name} className={`transition-all duration-400 ease-out ${tabsInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`} style={{ transitionDelay: `${index * 30}ms` }}>
+                  <SkillProgress name={skill.name} level={skill.level} index={index} />
+                </div>
+              ))}
             </div>
-            
-            <TabsContent value="technical" className="mt-0 animate-fade-in">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 px-4 sm:px-0">
-                {technicalSkills.map((skill, index) => (
-                  <div
-                    key={skill.name}
-                    className={`transition-all duration-500 ease-out ${
-                      tabsInView 
-                        ? 'opacity-100 translate-y-0' 
-                        : 'opacity-0 translate-y-4'
-                    }`}
-                    style={{ transitionDelay: `${index * 40}ms` }}
-                  >
-                    <SkillProgress
-                      name={skill.name}
-                      level={skill.level}
-                      index={index}
-                    />
-                  </div>
-                ))}
-              </div>
-            </TabsContent>
-            
-            <TabsContent value="soft" className="mt-0 animate-fade-in">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 px-4 sm:px-0">
-                {softSkills.map((skill, index) => (
-                  <div
-                    key={skill.name}
-                    className={`transition-all duration-500 ease-out ${
-                      tabsInView 
-                        ? 'opacity-100 translate-y-0' 
-                        : 'opacity-0 translate-y-4'
-                    }`}
-                    style={{ transitionDelay: `${index * 40}ms` }}
-                  >
-                    <SkillProgress
-                      name={skill.name}
-                      level={skill.level}
-                      index={index}
-                    />
-                  </div>
-                ))}
-              </div>
-            </TabsContent>
-          </Tabs>
-        </div>
+          </TabsContent>
+          
+          <TabsContent value="soft" className="mt-0">
+            <div className="grid md:grid-cols-2 gap-3">
+              {softSkills.map((skill, index) => (
+                <div key={skill.name} className={`transition-all duration-400 ease-out ${tabsInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`} style={{ transitionDelay: `${index * 30}ms` }}>
+                  <SkillProgress name={skill.name} level={skill.level} index={index} />
+                </div>
+              ))}
+            </div>
+          </TabsContent>
+        </Tabs>
       </div>
     </Section>
   );

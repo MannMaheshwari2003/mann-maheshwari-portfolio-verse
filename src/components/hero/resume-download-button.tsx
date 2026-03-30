@@ -6,7 +6,7 @@ const ResumeDownloadButton = () => {
   return (
     <Button 
       size="lg" 
-      className="btn-gradient group relative overflow-hidden transition-all duration-300 focus-ring" 
+      className="w-full sm:w-auto" 
       asChild
     >
       <a 
@@ -14,8 +14,8 @@ const ResumeDownloadButton = () => {
         download="Mann_Maheshwari_CV.pdf"
         className="flex items-center justify-center"
       >
-        <Download className="mr-2.5 h-4.5 w-4.5 transition-all duration-200 relative z-10" />
-        <span className="relative z-10 font-medium text-sm">Download Resume</span>
+        <Download className="mr-2 h-4 w-4" />
+        <span className="font-medium text-sm">Download Resume</span>
       </a>
     </Button>
   );
