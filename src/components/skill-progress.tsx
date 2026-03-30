@@ -10,32 +10,22 @@ interface SkillProgressProps {
 
 const SkillProgress = ({ name, level, index }: SkillProgressProps) => {
   const [progress, setProgress] = useState(0);
-  const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setProgress(level);
-    }, index * 100);
-    
+    const timer = setTimeout(() => setProgress(level), index * 80);
     return () => clearTimeout(timer);
   }, [level, index]);
 
   return (
-    <div 
-      ref={ref}
-      className="group bg-card/50 border border-border/50 p-4 rounded-xl hover:border-primary/20 hover:bg-card/80 transition-all duration-300"
-      style={{ animationDelay: `${index * 0.05}s` }}
-    >
-      <div className="flex justify-between mb-3 items-center">
+    <div className="p-3.5 rounded-lg bg-card/50 border border-border/40 hover:border-primary/15 transition-colors duration-200">
+      <div className="flex justify-between mb-2 items-center">
         <span className="font-medium text-sm text-foreground">{name}</span>
-        <span className="text-xs font-semibold text-muted-foreground tabular-nums">
-          {progress}%
-        </span>
+        <span className="text-xs text-muted-foreground tabular-nums font-mono">{progress}%</span>
       </div>
       <Progress 
         value={progress} 
-        className="h-1.5 bg-muted/50" 
-        indicatorClassName="bg-primary transition-all duration-700 ease-out"
+        className="h-1.5 bg-muted/40" 
+        indicatorClassName="bg-primary/80 transition-all duration-700 ease-out"
       />
     </div>
   );
