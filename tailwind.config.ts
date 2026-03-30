@@ -131,9 +131,9 @@ export default {
 				'float': 'float 3s ease-in-out infinite',
 				'spin-slow': 'spin-slow 15s linear infinite',
 			},
-			fontFamily: {
+		fontFamily: {
 				sans: ['Inter', 'sans-serif'],
-				heading: ['Poppins', 'sans-serif'],
+				heading: ['Space Grotesk', 'sans-serif'],
 			}
 		}
 	},
