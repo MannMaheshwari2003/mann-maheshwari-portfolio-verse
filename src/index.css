@@ -1,62 +1,92 @@
-
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700;900&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* ================================================
+   BAUHAUS DESIGN SYSTEM
+   Form follows function. Pure geometry. Primary color.
+   ================================================ */
+
 @layer base {
   :root {
-    --theme-transition: 0.3s ease;
-    
-    /* Dark mode (default) */
-    --background: 220 20% 4%;
-    --foreground: 210 20% 96%;
-    --card: 220 20% 6%;
-    --card-foreground: 210 20% 96%;
-    --popover: 220 20% 6%;
-    --popover-foreground: 210 20% 96%;
-    --primary: 250 60% 65%;
+    /* Light mode — canonical Bauhaus palette */
+    --background: 0 0% 94%;            /* #F0F0F0 off-white canvas */
+    --foreground: 0 0% 7%;             /* #121212 stark black */
+    --card: 0 0% 100%;                 /* pure white */
+    --card-foreground: 0 0% 7%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 7%;
+
+    /* Primary = Bauhaus Red */
+    --primary: 0 74% 47%;              /* #D02020 */
     --primary-foreground: 0 0% 100%;
-    --primary-glow: 250 55% 72%;
-    --secondary: 220 15% 18%;
-    --secondary-foreground: 210 20% 96%;
-    --secondary-light: 220 15% 80%;
-    --muted: 220 15% 14%;
-    --muted-foreground: 220 10% 55%;
-    --accent: 160 50% 45%;
-    --accent-foreground: 0 0% 100%;
-    --accent-light: 160 45% 80%;
-    --destructive: 0 65% 55%;
+    --primary-glow: 0 74% 47%;
+
+    /* Secondary = Bauhaus Blue */
+    --secondary: 222 85% 41%;          /* #1040C0 */
+    --secondary-foreground: 0 0% 100%;
+    --secondary-light: 222 85% 41%;
+
+    /* Accent = Bauhaus Yellow */
+    --accent: 44 87% 53%;              /* #F0C020 */
+    --accent-foreground: 0 0% 7%;
+    --accent-light: 44 87% 53%;
+
+    --muted: 0 0% 88%;                 /* #E0E0E0 */
+    --muted-foreground: 0 0% 25%;
+
+    --destructive: 0 74% 47%;
     --destructive-foreground: 0 0% 100%;
-    --border: 220 15% 14%;
-    --input: 220 15% 16%;
-    --ring: 250 60% 65%;
-    --radius: 0.75rem;
+
+    --border: 0 0% 7%;                 /* black borders */
+    --input: 0 0% 100%;
+    --ring: 0 0% 7%;
+    --radius: 0px;                     /* binary: 0 or full */
+
+    /* Bauhaus shadow tokens (hard offset, no blur) */
+    --shadow-sm: 3px 3px 0 0 hsl(var(--foreground));
+    --shadow-md: 4px 4px 0 0 hsl(var(--foreground));
+    --shadow-lg: 6px 6px 0 0 hsl(var(--foreground));
+    --shadow-xl: 8px 8px 0 0 hsl(var(--foreground));
   }
 
-  .light {
-    --background: 0 0% 99%;
-    --foreground: 220 20% 10%;
-    --card: 0 0% 100%;
-    --card-foreground: 220 20% 10%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 220 20% 10%;
-    --primary: 250 65% 55%;
+  .dark {
+    /* Dark mode — Bauhaus reversed: black canvas, vivid primaries pop, white borders */
+    --background: 0 0% 7%;             /* #121212 */
+    --foreground: 0 0% 96%;
+    --card: 0 0% 11%;
+    --card-foreground: 0 0% 96%;
+    --popover: 0 0% 11%;
+    --popover-foreground: 0 0% 96%;
+
+    /* Primaries stay vivid in dark mode */
+    --primary: 0 78% 55%;
     --primary-foreground: 0 0% 100%;
-    --primary-glow: 250 65% 62%;
-    --secondary: 220 14% 95%;
-    --secondary-foreground: 220 15% 15%;
-    --secondary-light: 220 14% 98%;
-    --muted: 220 14% 96%;
-    --muted-foreground: 220 10% 45%;
-    --accent: 160 55% 35%;
-    --accent-foreground: 0 0% 100%;
-    --accent-light: 160 50% 95%;
-    --destructive: 0 75% 42%;
+    --primary-glow: 0 78% 55%;
+
+    --secondary: 222 80% 55%;
+    --secondary-foreground: 0 0% 100%;
+    --secondary-light: 222 80% 55%;
+
+    --accent: 44 90% 58%;
+    --accent-foreground: 0 0% 7%;
+    --accent-light: 44 90% 58%;
+
+    --muted: 0 0% 16%;
+    --muted-foreground: 0 0% 70%;
+
+    --destructive: 0 78% 55%;
     --destructive-foreground: 0 0% 100%;
-    --border: 220 12% 90%;
-    --input: 220 12% 92%;
-    --ring: 250 65% 55%;
+
+    --border: 0 0% 96%;                /* white borders on dark */
+    --input: 0 0% 14%;
+    --ring: 0 0% 96%;
+
+    --shadow-sm: 3px 3px 0 0 hsl(var(--border));
+    --shadow-md: 4px 4px 0 0 hsl(var(--border));
+    --shadow-lg: 6px 6px 0 0 hsl(var(--border));
+    --shadow-xl: 8px 8px 0 0 hsl(var(--border));
   }
 }
 
@@ -66,102 +96,116 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
-  
-  body {
-    @apply bg-background text-foreground font-sans;
-    overflow-x: hidden;
-    scroll-behavior: smooth;
-    line-height: 1.6;
-  }
-  
+
   html {
     scroll-behavior: smooth;
   }
 
-  .font-heading {
-    font-family: 'Space Grotesk', sans-serif;
-    letter-spacing: -0.03em;
-  }
-  
-  .font-sans {
-    font-family: 'Inter', sans-serif;
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 500;
+    overflow-x: hidden;
+    line-height: 1.5;
   }
 
-  h1 { 
-    @apply text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.05] tracking-tight text-foreground font-heading; 
+  .font-heading,
+  .font-sans {
+    font-family: 'Outfit', sans-serif;
   }
-  h2 { 
-    @apply text-2xl sm:text-3xl md:text-4xl font-bold leading-tight tracking-tight text-foreground font-heading; 
+
+  /* Typography — extreme contrast, uppercase, tight tracking */
+  h1 {
+    @apply text-5xl sm:text-7xl lg:text-8xl font-black uppercase tracking-tighter leading-[0.9] text-foreground;
   }
-  h3 { 
-    @apply text-xl sm:text-2xl font-semibold leading-snug text-foreground font-heading; 
+  h2 {
+    @apply text-3xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tighter leading-[0.95] text-foreground;
   }
-  p { 
-    @apply text-base leading-relaxed text-foreground/80; 
+  h3 {
+    @apply text-xl sm:text-2xl lg:text-3xl font-bold uppercase tracking-tight leading-tight text-foreground;
+  }
+  p {
+    @apply text-base sm:text-lg leading-relaxed text-foreground font-medium;
   }
 }
 
 @layer utilities {
-  .glass {
-    background: hsla(var(--card), 0.7);
-    backdrop-filter: blur(12px);
-    border: 1px solid hsla(var(--border), 0.5);
+  /* Bauhaus hard shadows */
+  .shadow-bauhaus-sm  { box-shadow: var(--shadow-sm); }
+  .shadow-bauhaus     { box-shadow: var(--shadow-md); }
+  .shadow-bauhaus-lg  { box-shadow: var(--shadow-lg); }
+  .shadow-bauhaus-xl  { box-shadow: var(--shadow-xl); }
+
+  /* Press effect — physical button */
+  .press-effect {
+    transition: transform 150ms ease-out, box-shadow 150ms ease-out;
   }
-  
-  .glass-premium {
-    background: hsla(var(--card), 0.8);
-    backdrop-filter: blur(16px);
-    border: 1px solid hsla(var(--border), 0.4);
+  .press-effect:active {
+    transform: translate(3px, 3px);
+    box-shadow: none !important;
   }
 
-  .text-gradient {
-    background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+  /* Lift on hover */
+  .lift-hover {
+    transition: transform 200ms ease-out;
+  }
+  .lift-hover:hover {
+    transform: translateY(-4px);
   }
 
-  .bg-gradient-radial {
-    background: radial-gradient(ellipse at center, var(--tw-gradient-stops));
+  /* Dot grid pattern */
+  .dot-grid {
+    background-image: radial-gradient(hsl(var(--foreground) / 0.15) 1.5px, transparent 1.5px);
+    background-size: 24px 24px;
+  }
+  .dot-grid-light {
+    background-image: radial-gradient(hsl(var(--background) / 0.4) 2px, transparent 2px);
+    background-size: 20px 20px;
+  }
+
+  /* Triangle clip */
+  .clip-triangle {
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+  }
+
+  /* Diagonal stripes (Bauhaus motif) */
+  .stripes-diag {
+    background-image: repeating-linear-gradient(
+      45deg,
+      hsl(var(--foreground)) 0,
+      hsl(var(--foreground)) 4px,
+      transparent 4px,
+      transparent 12px
+    );
   }
 
   .focus-ring {
-    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background;
+    @apply focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-foreground focus-visible:ring-offset-2 focus-visible:ring-offset-background;
   }
 }
 
-/* Animations */
-@keyframes gradientShift {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(16px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes floatOrb {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-20px); }
-}
-
-@keyframes spin-slow {
+/* Animations — mechanical, snappy */
+@keyframes bauhaus-spin {
   from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  to   { transform: rotate(360deg); }
+}
+@keyframes bauhaus-pulse {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.08); }
+}
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.3; }
 }
 
-.animate-spin-slow {
-  animation: spin-slow 25s linear infinite;
-}
-
-.animate-float-orb {
-  animation: floatOrb 20s ease-in-out infinite;
-}
-
-.animate-fade-in {
-  animation: fadeIn 0.6s ease-out;
-}
+.animate-bauhaus-spin  { animation: bauhaus-spin 18s linear infinite; }
+.animate-bauhaus-pulse { animation: bauhaus-pulse 2.4s ease-in-out infinite; }
+.animate-fade-up       { animation: fade-up 0.5s ease-out both; }
+.animate-blink         { animation: blink 1.6s ease-in-out infinite; }
 
 /* Accessibility */
 @media (prefers-reduced-motion: reduce) {
@@ -172,24 +216,7 @@
   }
 }
 
-@media (prefers-contrast: high) {
-  .glass, .glass-premium {
-    background: hsl(var(--card));
-    border: 2px solid hsl(var(--border));
-    backdrop-filter: none;
-  }
-}
-
 :focus-visible {
-  outline: 2px solid hsl(var(--primary));
-  outline-offset: 2px;
-  border-radius: 4px;
-}
-
-@media print {
-  .glass, .glass-premium {
-    background: white !important;
-    border: 1px solid #ccc !important;
-    backdrop-filter: none !important;
-  }
+  outline: 3px solid hsl(var(--foreground));
+  outline-offset: 3px;
 }

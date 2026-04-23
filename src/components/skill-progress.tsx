@@ -1,32 +1,42 @@
-
-import { useEffect, useRef, useState } from "react";
-import { Progress } from "@/components/ui/progress";
+import { useEffect, useState } from "react";
 
 interface SkillProgressProps {
   name: string;
   level: number;
   index: number;
+  /** Color cycle: red / blue / yellow */
+  variant?: "red" | "blue" | "yellow";
 }
 
-const SkillProgress = ({ name, level, index }: SkillProgressProps) => {
+const fillBg = {
+  red: "bg-[hsl(var(--primary))]",
+  blue: "bg-[hsl(var(--secondary))]",
+  yellow: "bg-[hsl(var(--accent))]",
+};
+
+const SkillProgress = ({ name, level, index, variant }: SkillProgressProps) => {
   const [progress, setProgress] = useState(0);
+  const palette: Array<"red" | "blue" | "yellow"> = ["red", "blue", "yellow"];
+  const v = variant ?? palette[index % 3];
 
   useEffect(() => {
-    const timer = setTimeout(() => setProgress(level), index * 80);
-    return () => clearTimeout(timer);
+    const t = setTimeout(() => setProgress(level), index * 60);
+    return () => clearTimeout(t);
   }, [level, index]);
 
   return (
-    <div className="p-3.5 rounded-lg bg-card/50 border border-border/40 hover:border-primary/15 transition-colors duration-200">
-      <div className="flex justify-between mb-2 items-center">
-        <span className="font-medium text-sm text-foreground">{name}</span>
-        <span className="text-xs text-muted-foreground tabular-nums font-mono">{progress}%</span>
+    <div className="bg-card border-2 md:border-[3px] border-foreground p-3 shadow-bauhaus-sm">
+      <div className="flex items-center justify-between mb-2">
+        <span className="text-xs font-bold uppercase tracking-widest text-foreground truncate pr-2">{name}</span>
+        <span className="text-xs font-black tabular-nums text-foreground">{progress}%</span>
       </div>
-      <Progress 
-        value={progress} 
-        className="h-1.5 bg-muted/40" 
-        indicatorClassName="bg-primary/80 transition-all duration-700 ease-out"
-      />
+      {/* Hard segmented bar inside a black box */}
+      <div className="relative h-3 border-2 border-foreground bg-background overflow-hidden">
+        <div
+          className={`absolute inset-y-0 left-0 ${fillBg[v]} transition-[width] duration-700 ease-out`}
+          style={{ width: `${progress}%` }}
+        />
+      </div>
     </div>
   );
 };

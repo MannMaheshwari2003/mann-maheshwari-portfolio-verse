@@ -1,4 +1,3 @@
-
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Section from "./section";
 import SectionHeader from "./ui/section-header";
@@ -38,40 +37,59 @@ const SkillsSection = () => {
   const { ref: tabsRef, inView: tabsInView } = useScrollAnimation({ threshold: 0.2 });
 
   return (
-    <Section id="skills" className="bg-muted/20 relative">
-      <div ref={headerRef} className={`transition-all duration-700 ease-out ${headerInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
-        <SectionHeader title="Skills & Expertise" subtitle="A comprehensive overview of technical proficiency and professional capabilities." />
+    <Section id="skills" className="bg-[hsl(var(--accent))] text-foreground">
+      {/* dot grid overlay */}
+      <div className="absolute inset-0 opacity-25 pointer-events-none" aria-hidden="true">
+        <div className="absolute inset-0" style={{ backgroundImage: "radial-gradient(hsl(var(--foreground)) 1.5px, transparent 1.5px)", backgroundSize: "24px 24px" }} />
       </div>
-      
-      <div ref={tabsRef} className={`transition-all duration-700 ease-out ${tabsInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
-        <Tabs defaultValue="technical" className="w-full max-w-4xl mx-auto">
-          <div className="flex justify-center mb-8">
-            <TabsList className="p-1 h-auto bg-muted/50 border border-border/50 rounded-lg">
-              <TabsTrigger value="technical" className="data-[state=active]:bg-background data-[state=active]:shadow-sm py-2 px-4 flex items-center gap-2 text-sm rounded-md">
-                <Code className="h-4 w-4" />
+
+      <div ref={headerRef} className={`relative transition-all duration-500 ${headerInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
+        <SectionHeader number="05" accent="red" title="Skills" subtitle="The toolkit, broken into building blocks." />
+      </div>
+
+      <div ref={tabsRef} className={`relative transition-all duration-500 ${tabsInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
+        <Tabs defaultValue="technical" className="w-full max-w-5xl mx-auto">
+          <div className="flex justify-center mb-10">
+            <TabsList className="p-0 h-auto bg-card border-2 md:border-4 border-foreground rounded-none shadow-bauhaus">
+              <TabsTrigger
+                value="technical"
+                className="rounded-none border-r-2 md:border-r-4 border-foreground px-5 py-3 text-xs font-bold uppercase tracking-widest data-[state=active]:bg-foreground data-[state=active]:text-background data-[state=active]:shadow-none flex items-center gap-2"
+              >
+                <Code className="h-4 w-4" strokeWidth={2.75} />
                 Technical
               </TabsTrigger>
-              <TabsTrigger value="soft" className="data-[state=active]:bg-background data-[state=active]:shadow-sm py-2 px-4 flex items-center gap-2 text-sm rounded-md">
-                <BrainCircuit className="h-4 w-4" />
+              <TabsTrigger
+                value="soft"
+                className="rounded-none px-5 py-3 text-xs font-bold uppercase tracking-widest data-[state=active]:bg-foreground data-[state=active]:text-background data-[state=active]:shadow-none flex items-center gap-2"
+              >
+                <BrainCircuit className="h-4 w-4" strokeWidth={2.75} />
                 Soft Skills
               </TabsTrigger>
             </TabsList>
           </div>
-          
+
           <TabsContent value="technical" className="mt-0">
-            <div className="grid md:grid-cols-2 gap-3">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
               {technicalSkills.map((skill, index) => (
-                <div key={skill.name} className={`transition-all duration-400 ease-out ${tabsInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`} style={{ transitionDelay: `${index * 30}ms` }}>
+                <div
+                  key={skill.name}
+                  className={`transition-all duration-400 ${tabsInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
+                  style={{ transitionDelay: `${index * 25}ms` }}
+                >
                   <SkillProgress name={skill.name} level={skill.level} index={index} />
                 </div>
               ))}
             </div>
           </TabsContent>
-          
+
           <TabsContent value="soft" className="mt-0">
-            <div className="grid md:grid-cols-2 gap-3">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
               {softSkills.map((skill, index) => (
-                <div key={skill.name} className={`transition-all duration-400 ease-out ${tabsInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`} style={{ transitionDelay: `${index * 30}ms` }}>
+                <div
+                  key={skill.name}
+                  className={`transition-all duration-400 ${tabsInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
+                  style={{ transitionDelay: `${index * 25}ms` }}
+                >
                   <SkillProgress name={skill.name} level={skill.level} index={index} />
                 </div>
               ))}

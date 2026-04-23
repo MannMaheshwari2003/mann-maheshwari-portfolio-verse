@@ -1,7 +1,10 @@
-
 import { cn } from "@/lib/utils";
 import { ReactNode, CSSProperties } from "react";
 
+/**
+ * Backward-compat shim. Renders Bauhaus-styled card so older imports keep working.
+ * Prefer importing `BauhausCard` directly in new code.
+ */
 interface GlassCardProps {
   children: ReactNode;
   className?: string;
@@ -13,26 +16,13 @@ interface GlassCardProps {
   style?: CSSProperties;
 }
 
-const GlassCard = ({ 
-  children, 
-  className, 
-  variant = "default", 
-  hover = true, 
-  interactive = false,
-  style 
-}: GlassCardProps) => {
+const GlassCard = ({ children, className, hover = true, style }: GlassCardProps) => {
   return (
-    <div 
+    <div
       className={cn(
-        "rounded-xl border bg-card/50 backdrop-blur-sm transition-all duration-300",
-        variant === "default" && "border-border/50 hover:border-border",
-        variant === "primary" && "border-primary/15 hover:border-primary/25",
-        variant === "secondary" && "border-border/50 hover:border-border",
-        variant === "accent" && "border-accent/15 hover:border-accent/25",
-        variant === "premium" && "border-primary/20 hover:border-primary/30",
-        hover && "hover:shadow-lg hover:shadow-foreground/[0.03]",
-        interactive && "cursor-pointer active:scale-[0.98]",
-        className
+        "relative bg-card text-card-foreground border-2 md:border-4 border-foreground shadow-bauhaus-lg transition-transform duration-200",
+        hover && "hover:-translate-y-1",
+        className,
       )}
       style={style}
     >

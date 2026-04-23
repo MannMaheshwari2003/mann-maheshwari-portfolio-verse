@@ -1,17 +1,14 @@
-
+/**
+ * Bauhaus hero composition — overlapping circle, rotated square, triangle.
+ * Pure decoration; behind hero content. All shapes are absolutely-positioned
+ * relative to the parent panel.
+ */
 const BackgroundElements = () => {
   return (
-    <>
-      {/* Subtle grid pattern */}
-      <div className="absolute inset-0 grid-bg opacity-[0.03]" aria-hidden="true" />
-      
-      {/* Single subtle ring */}
-      <div 
-        className="absolute w-[600px] h-[600px] rounded-full border border-border/10"
-        style={{ top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}
-        aria-hidden="true"
-      />
-    </>
+    <div className="absolute inset-0 -z-0 overflow-hidden pointer-events-none" aria-hidden="true">
+      {/* dot grid behind everything */}
+      <div className="absolute inset-0 dot-grid opacity-50" />
+    </div>
   );
 };
 

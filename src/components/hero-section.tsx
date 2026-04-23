@@ -1,42 +1,34 @@
-
 import HeroContent from "./hero/hero-content";
 import HeroAvatar from "./hero/hero-avatar";
 import ScrollIndicator from "./hero/scroll-indicator";
 import BackgroundElements from "./hero/background-elements";
-import { useScrollAnimation } from "@/hooks/use-scroll-animation";
-import { useResponsive } from "@/hooks/use-responsive";
-import { useTouchDevice } from "@/hooks/use-mobile";
 
 const HeroSection = () => {
-  const { ref: contentRef, inView: contentInView } = useScrollAnimation({ threshold: 0.2 });
-  const { isMobile, isTablet, getContainerClasses, getSectionSpacing } = useResponsive();
-  const isTouchDevice = useTouchDevice();
-
   return (
-    <section 
-      id="hero" 
-      className="min-h-screen flex items-center justify-center relative overflow-hidden"
+    <section
+      id="hero"
+      className="relative min-h-screen pt-24 md:pt-28 border-b-2 md:border-b-4 border-foreground overflow-hidden"
       aria-label="Introduction"
     >
       <BackgroundElements />
 
-      <div className={`${getContainerClasses()} relative z-10 w-full max-w-6xl`}>
-        <div 
-          ref={contentRef}
-          className={`flex flex-col lg:flex-row gap-12 lg:gap-16 items-center justify-between min-h-[calc(100vh-8rem)] py-20 transition-all duration-700 ease-out ${
-            contentInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}
-        >
-          <div className={`flex-1 ${isMobile ? 'order-2' : 'order-1'}`}>
-            <HeroContent />
-          </div>
-          <div className={`flex-shrink-0 ${isMobile ? 'order-1' : 'order-2'}`}>
+      <div className="container mx-auto max-w-7xl px-4 md:px-8 grid lg:grid-cols-12 gap-10 lg:gap-12 items-center min-h-[calc(100vh-7rem)] py-12 md:py-20 relative">
+        {/* Content: 7 cols */}
+        <div className="lg:col-span-7 order-2 lg:order-1">
+          <HeroContent />
+        </div>
+
+        {/* Avatar composition: 5 cols, on a blue color-block panel */}
+        <div className="lg:col-span-5 order-1 lg:order-2 relative">
+          <div className="relative bg-[hsl(var(--secondary))] border-2 md:border-4 border-foreground p-6 md:p-10 shadow-bauhaus-xl">
+            {/* dot grid overlay */}
+            <div aria-hidden="true" className="absolute inset-0 dot-grid-light opacity-40 pointer-events-none" />
             <HeroAvatar />
           </div>
         </div>
       </div>
-      
-      {!isTouchDevice && <ScrollIndicator />}
+
+      <ScrollIndicator />
     </section>
   );
 };

@@ -1,7 +1,4 @@
-
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Eye, Code, ExternalLink } from "lucide-react";
 
@@ -14,74 +11,103 @@ interface ProjectCardProps {
   index?: number;
 }
 
+const cornerShapes = [
+  { cls: "rounded-full bg-[hsl(var(--primary))]" },
+  { cls: "bg-[hsl(var(--secondary))]" },
+  { cls: "clip-triangle bg-[hsl(var(--accent))]" },
+];
+
+const headerBg = [
+  "bg-[hsl(var(--accent))] text-foreground",
+  "bg-[hsl(var(--secondary))] text-secondary-foreground",
+];
+
 const ProjectCard = ({ title, description, technologies, longDescription, features, index = 0 }: ProjectCardProps) => {
+  const corner = cornerShapes[index % cornerShapes.length];
+  const header = headerBg[index % headerBg.length];
+
   return (
-    <Card className="group h-full flex flex-col bg-card/80 border-border/50 hover:border-primary/20 transition-all duration-300 hover:shadow-lg hover:shadow-foreground/[0.03] overflow-hidden">
-      <CardHeader className="pb-3 space-y-3">
-        <CardTitle className="text-lg font-semibold text-foreground leading-tight font-heading">
+    <Card className="relative h-full flex flex-col bg-card text-card-foreground border-2 md:border-4 border-foreground rounded-none shadow-bauhaus-lg lift-hover overflow-visible p-0">
+      {/* Corner decoration */}
+      <span aria-hidden="true" className={`absolute -top-3 -right-3 w-6 h-6 border-2 border-foreground ${corner.cls}`} />
+
+      {/* Top color block — index */}
+      <div className={`flex items-center justify-between px-5 py-3 border-b-2 md:border-b-4 border-foreground ${header}`}>
+        <span className="text-[10px] font-bold uppercase tracking-[0.25em]">Project / {String(index + 1).padStart(2, "0")}</span>
+        <Code className="h-4 w-4" strokeWidth={2.75} />
+      </div>
+
+      <CardHeader className="space-y-3 pt-5 pb-3">
+        <CardTitle className="text-xl font-black uppercase tracking-tight leading-tight text-foreground">
           {title}
         </CardTitle>
-        <CardDescription className="text-sm text-muted-foreground leading-relaxed">
+        <CardDescription className="text-sm leading-relaxed text-muted-foreground font-medium">
           {description}
         </CardDescription>
         <div className="flex flex-wrap gap-1.5 pt-1">
           {technologies.map((tech, i) => (
-            <Badge key={i} variant="secondary" className="text-[11px] px-2 py-0.5 bg-muted/50 text-muted-foreground border-border/50 font-normal">
+            <span
+              key={i}
+              className="px-2 py-0.5 border-2 border-foreground bg-card text-foreground text-[10px] font-bold uppercase tracking-widest"
+            >
               {tech.name}
-            </Badge>
+            </span>
           ))}
         </div>
       </CardHeader>
-      
+
       <CardContent className="flex-grow pt-0 pb-4">
         {features && features.length > 0 && (
-          <div className="bg-muted/30 rounded-lg p-3 border border-border/30">
-            <h4 className="font-medium text-foreground mb-2 flex items-center text-xs uppercase tracking-wider text-muted-foreground">
-              <Code className="h-3 w-3 mr-1.5" />
+          <div className="border-2 border-foreground p-3 bg-muted/40">
+            <h4 className="text-[10px] font-bold uppercase tracking-[0.25em] mb-2 text-foreground flex items-center gap-1.5">
+              <span className="w-2 h-2 bg-[hsl(var(--primary))] border border-foreground" />
               Key Features
             </h4>
-            <ul className="space-y-1">
-              {features.slice(0, 3).map((feature, i) => (
-                <li key={i} className="flex items-start gap-2 text-xs text-muted-foreground">
-                  <span className="w-1 h-1 rounded-full bg-primary/50 mt-1.5 flex-shrink-0" />
-                  {feature}
+            <ul className="space-y-1.5">
+              {features.slice(0, 3).map((f, i) => (
+                <li key={i} className="flex items-start gap-2 text-xs text-foreground font-medium leading-relaxed">
+                  <span className="mt-1.5 w-1.5 h-1.5 flex-shrink-0 bg-foreground" />
+                  {f}
                 </li>
               ))}
               {features.length > 3 && (
-                <li className="text-xs text-primary/70 font-medium pt-0.5">
-                  +{features.length - 3} more
+                <li className="pt-0.5 text-[10px] font-bold uppercase tracking-widest text-[hsl(var(--primary))]">
+                  + {features.length - 3} more
                 </li>
               )}
             </ul>
           </div>
         )}
       </CardContent>
-      
-      <CardFooter className="pt-0">
+
+      <CardFooter className="pt-0 pb-5 px-5">
         <Dialog>
           <DialogTrigger asChild>
-            <Button variant="outline" className="w-full text-sm border-border/50 hover:border-primary/25 hover:bg-primary/5">
-              <Eye className="w-3.5 h-3.5 mr-2" />
+            <button
+              type="button"
+              className="press-effect focus-ring w-full inline-flex items-center justify-center gap-2 px-4 py-3 border-2 border-foreground bg-foreground text-background font-bold uppercase tracking-widest text-xs shadow-bauhaus-sm"
+            >
+              <Eye className="h-4 w-4" strokeWidth={2.75} />
               View Details
-            </Button>
+            </button>
           </DialogTrigger>
-          <DialogContent className="sm:max-w-[600px] max-h-[85vh] overflow-y-auto">
+          <DialogContent className="sm:max-w-[640px] max-h-[85vh] overflow-y-auto border-2 md:border-4 border-foreground rounded-none shadow-bauhaus-xl">
             <DialogHeader>
-              <DialogTitle className="text-xl font-heading">{title}</DialogTitle>
+              <DialogTitle className="text-2xl font-black uppercase tracking-tight">{title}</DialogTitle>
             </DialogHeader>
             <DialogDescription asChild>
-              <div className="space-y-4 mt-4">
-                <p className="text-sm text-muted-foreground leading-relaxed">{longDescription}</p>
+              <div className="space-y-5 mt-4">
+                <p className="text-sm text-foreground leading-relaxed font-medium">{longDescription}</p>
                 {features && (
                   <div className="space-y-2">
-                    <h4 className="font-medium text-foreground text-sm flex items-center gap-2">
-                      <ExternalLink className="h-3.5 w-3.5 text-primary" />
+                    <h4 className="text-xs font-bold uppercase tracking-widest flex items-center gap-2">
+                      <ExternalLink className="h-3.5 w-3.5" strokeWidth={2.75} />
                       Features
                     </h4>
                     <div className="space-y-1.5">
                       {features.map((f, i) => (
-                        <div key={i} className="flex items-start gap-2 text-sm text-muted-foreground p-2 rounded-md bg-muted/30">
-                          <span className="w-1 h-1 rounded-full bg-primary/50 mt-2 flex-shrink-0" />
+                        <div key={i} className="flex items-start gap-2 text-sm text-foreground font-medium p-2 border-2 border-foreground bg-muted/40">
+                          <span className="mt-2 w-1.5 h-1.5 flex-shrink-0 bg-[hsl(var(--primary))]" />
                           {f}
                         </div>
                       ))}
@@ -89,10 +115,12 @@ const ProjectCard = ({ title, description, technologies, longDescription, featur
                   </div>
                 )}
                 <div>
-                  <h4 className="font-medium text-foreground text-sm mb-2">Technologies</h4>
+                  <h4 className="text-xs font-bold uppercase tracking-widest mb-2">Technologies</h4>
                   <div className="flex flex-wrap gap-1.5">
                     {technologies.map((t, i) => (
-                      <Badge key={i} variant="outline" className="text-xs font-normal">{t.name}</Badge>
+                      <span key={i} className="px-2 py-0.5 border-2 border-foreground bg-card text-foreground text-[10px] font-bold uppercase tracking-widest">
+                        {t.name}
+                      </span>
                     ))}
                   </div>
                 </div>
