@@ -1,4 +1,3 @@
-
 import Section from "./section";
 import SectionHeader from "./ui/section-header";
 import { CalendarIcon, MapPinIcon, Briefcase } from "lucide-react";
@@ -9,80 +8,91 @@ const experiences = [
     title: "Web Developer",
     company: "Labmentix",
     location: "Bengaluru",
-    period: "Feb 2025 - Apr 2025",
+    period: "Feb 2025 – Apr 2025",
+    accent: "red" as const,
     description: [
       "Managed client projects, ensuring timely delivery and high-quality outcomes",
-      "Analyzed client requirements and executed web solutions to meet their specific needs",
-      "Collaborated with cross-functional teams to ensure seamless implementation",
-      "Utilized modern web technologies to develop robust and scalable applications",
+      "Analyzed client requirements and executed tailored web solutions",
+      "Collaborated with cross-functional teams for seamless implementation",
+      "Built robust, scalable applications with modern web technologies",
     ],
   },
   {
     title: "Frontend Developer & Team Leader",
     company: "Future Core Innovations",
     location: "Delhi",
-    period: "Jun 2024 - Sep 2024",
+    period: "Jun 2024 – Sep 2024",
+    accent: "blue" as const,
     description: [
-      "Led a team of developers to create high-quality web applications",
-      "Developed responsive user interfaces that ensured optimal display across devices",
+      "Led a developer team to ship high-quality web applications",
+      "Crafted responsive UIs ensuring optimal display across devices",
       "Implemented best practices for cross-browser compatibility",
-      "Facilitated team meetings and coordinated development efforts to meet project deadlines",
+      "Facilitated team meetings and coordinated to meet deadlines",
     ],
   },
 ];
+
+const accentBg = {
+  red: "bg-[hsl(var(--primary))] text-primary-foreground",
+  blue: "bg-[hsl(var(--secondary))] text-secondary-foreground",
+};
+const accentBullet = {
+  red: "bg-[hsl(var(--primary))]",
+  blue: "bg-[hsl(var(--secondary))]",
+};
 
 const ExperienceSection = () => {
   const { ref: headerRef, inView: headerInView } = useScrollAnimation({ threshold: 0.3 });
   const { ref: cardsRef, inView: cardsInView } = useScrollAnimation({ threshold: 0.2 });
 
   return (
-    <Section id="experience" className="bg-muted/20 relative">
-      <div ref={headerRef} className={`transition-all duration-700 ease-out ${headerInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-        <SectionHeader title="Work Experience" subtitle="Professional journey showcasing leadership and technical expertise" variant="minimal" />
+    <Section id="experience">
+      <div ref={headerRef} className={`transition-all duration-500 ${headerInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
+        <SectionHeader number="03" accent="yellow" title="Work" subtitle="Where craft meets responsibility." />
       </div>
-      
-      <div ref={cardsRef} className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
-        {experiences.map((exp, index) => (
-          <div 
-            key={index}
-            className={`transition-all duration-600 ease-out ${
-              cardsInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+
+      <div ref={cardsRef} className="grid md:grid-cols-2 gap-6 md:gap-8">
+        {experiences.map((exp, i) => (
+          <article
+            key={i}
+            className={`relative bg-card border-2 md:border-4 border-foreground shadow-bauhaus-lg lift-hover transition-all duration-500 ${
+              cardsInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
             }`}
-            style={{ transitionDelay: `${index * 150}ms` }}
+            style={{ transitionDelay: `${i * 120}ms` }}
           >
-            <div className="h-full rounded-xl border border-border/50 bg-card/80 backdrop-blur-sm p-6 hover:border-primary/20 hover:shadow-lg hover:shadow-foreground/[0.02] transition-all duration-300 group">
-              {/* Left accent */}
-              <div className="flex items-start gap-3 mb-4">
-                <div className="p-2 rounded-lg bg-primary/8">
-                  <Briefcase className="h-4 w-4 text-primary" />
-                </div>
-                <div className="flex-1">
-                  <h3 className="font-semibold text-foreground font-heading text-base">{exp.title}</h3>
-                  <p className="text-sm text-primary font-medium">{exp.company}</p>
-                </div>
+            {/* Header strip */}
+            <div className={`flex items-center gap-3 px-5 py-4 border-b-2 md:border-b-4 border-foreground ${accentBg[exp.accent]}`}>
+              <span className="w-9 h-9 border-2 border-foreground bg-card text-foreground flex items-center justify-center">
+                <Briefcase className="h-4 w-4" strokeWidth={2.5} />
+              </span>
+              <div className="min-w-0">
+                <h3 className="text-base md:text-lg font-black uppercase tracking-tight leading-tight truncate">{exp.title}</h3>
+                <p className="text-xs font-bold uppercase tracking-widest opacity-90 truncate">{exp.company}</p>
               </div>
-              
-              <div className="flex items-center gap-3 mb-4 text-xs text-muted-foreground">
-                <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-muted/50 border border-border/50">
-                  <CalendarIcon className="h-3 w-3" />
+            </div>
+
+            <div className="p-5 md:p-6">
+              <div className="flex items-center gap-2 mb-4 flex-wrap">
+                <span className="inline-flex items-center gap-1.5 px-2 py-1 border-2 border-foreground bg-card text-foreground text-[10px] font-bold uppercase tracking-widest">
+                  <CalendarIcon className="h-3 w-3" strokeWidth={2.75} />
                   {exp.period}
                 </span>
-                <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-muted/50 border border-border/50">
-                  <MapPinIcon className="h-3 w-3" />
+                <span className="inline-flex items-center gap-1.5 px-2 py-1 border-2 border-foreground bg-card text-foreground text-[10px] font-bold uppercase tracking-widest">
+                  <MapPinIcon className="h-3 w-3" strokeWidth={2.75} />
                   {exp.location}
                 </span>
               </div>
-              
-              <ul className="space-y-2">
-                {exp.description.map((item, i) => (
-                  <li key={i} className="flex items-start gap-2.5 text-sm text-muted-foreground leading-relaxed">
-                    <span className="w-1 h-1 rounded-full bg-primary/50 mt-2 flex-shrink-0" />
+
+              <ul className="space-y-2.5">
+                {exp.description.map((item, j) => (
+                  <li key={j} className="flex items-start gap-3 text-sm leading-relaxed text-foreground font-medium">
+                    <span className={`mt-2 w-2 h-2 flex-shrink-0 ${accentBullet[exp.accent]} border border-foreground`} />
                     {item}
                   </li>
                 ))}
               </ul>
             </div>
-          </div>
+          </article>
         ))}
       </div>
     </Section>
